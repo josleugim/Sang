@@ -1,0 +1,1273 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>SÄNG The nordik way of resting</title>
+    <style>
+        /* css for this page */body > h2
+        {
+            margin: 30px 0 15px;
+            text-shadow: 1px 1px 0 white;
+            border-bottom: 2px solid #000000;
+            padding-bottom: 5px;
+        }
+        h1
+        {
+            text-align: center;
+            margin-bottom: 30px;
+            text-shadow: 0px 0px 0 white;
+        }
+        strong + p
+        {
+            margin-top: 0;
+        }
+        dt
+        {
+            font-weight: bold;
+        }
+        dd
+        {
+            margin: 0;
+        }
+        figure1
+        {
+            display: block;
+            width: 100%;
+            height: 100%;
+            margin: 0;
+        }
+        figure
+        {
+            display: block;
+            width: 100%;
+            height: 100%;
+            margin: 0;
+        }
+        figcaption
+        {
+            position: absolute;
+            z-index: 3;
+            color: white;
+            -webkit-border-radius: 0px;
+            -moz-border-radius: 0px;
+            border-radius: 0px;
+            padding-top: 10px;
+            padding-right: 15px;
+            padding-bottom: 10px;
+            padding-left: 23px;
+            left: 20px;
+            top: 0px;
+            right: 0px;
+            bottom: 0px;
+            margin-top: auto;
+            margin-right: auto;
+            margin-bottom: auto;
+            margin-left: 23px;
+        }
+        fndbco
+        {
+            position: absolute;
+            z-index: 3;
+            background: white;
+            background: rgba(0,0,0,0.7);
+            color: white;
+            -webkit-border-radius: 0px;
+            -moz-border-radius: 0px;
+            border-radius: 0px;
+            padding-top: 10px;
+            padding-right: 35px;
+            padding-bottom: 10px;
+            padding-left: 35px;
+            left: 30px;
+            top: 0px;
+            right: 0px;
+            bottom: 0px;
+            margin-top: auto;
+            margin-right: auto;
+            margin-bottom: auto;
+            margin-left: 50px;
+        }
+        #slideshow
+        {
+            width: 640px;
+            height: 263px;
+            background: transparent;
+            position: relative;
+            margin-top: 25px;
+            margin-right: auto;
+            margin-bottom: 0;
+            margin-left: auto;
+        }
+        #slideshow #slidesContainer
+        {
+            margin: 0 auto;
+            width: 500px;
+            height: 263px;
+            overflow: auto; /* allow scrollbar */
+            position: relative;
+        }
+        #slideshow #slidesContainer .products
+        {
+            margin: 0 auto;
+            width: 480px; /* reduce by 20 pixels of #slidesContainer to avoid horizontal scroll */
+            height: 263px;
+        }
+        .products img
+        {
+            margin-top: 0;
+            margin-right: 15px;
+            margin-bottom: 0;
+            margin-left: 35px;
+        }
+        /** 
+ * Slideshow controls style rules.
+ */.control
+        {
+            display: block;
+            width: 39px;
+            height: 263px;
+            text-indent: -10000px;
+            position: absolute;
+            cursor: pointer;
+        }
+        #leftControl
+        {
+            top: 0;
+            left: 0;
+            background: transparent url(img/control_left.png) no-repeat 0 0;
+        }
+        #rightControl
+        {
+            top: 0;
+            right: 0;
+            background: transparent url(img/control_right.png) no-repeat 0 0;
+        }
+        /* Seccion SANG */#slideshow_sang
+        {
+            width: 720px;
+            height: 263px;
+            background: transparent;
+            position: relative;
+            margin-top: 25px;
+            margin-right: auto;
+            margin-bottom: 0;
+            margin-left: auto;
+        }
+        #slideshow_sang #slidesContainer_sang
+        {
+            width: 680px;
+            height: 263px;
+            overflow: auto; /* allow scrollbar */
+            position: relative;
+            margin-top: 0px;
+            margin-right: 20px;
+            margin-bottom: 0px;
+            margin-left: 20px;
+        }
+        #slideshow_sang #slidesContainer_sang .sang
+        {
+            margin: 0 auto;
+            width: 660px; /* reduce by 20 pixels of #slidesContainer to avoid horizontal scroll */
+            height: 263px;
+        }
+        .sang img
+        {
+            display: block;
+            margin-top: 0;
+            margin-right: 15px;
+            margin-bottom: 0;
+            margin-left: 15px;
+        }
+        /** 
+ * Slideshow controls style rules.
+ */.controles
+        {
+            display: block;
+            width: 39px;
+            height: 263px;
+            text-indent: -10000px;
+            position: absolute;
+            cursor: pointer;
+        }
+        #leftControl_sang
+        {
+            top: 0;
+            left: 0;
+            background-color: transparent;
+            background-image: url(img/control_left_sang.png);
+            background-repeat: no-repeat;
+            background-position: 0 0;
+        }
+        #rightControl_sang
+        {
+            top: 0;
+            right: 30px;
+            background: transparent url(img/control_right_sang.png) no-repeat 0 0;
+        }
+    </style>
+    <link rel="stylesheet" type="text/css" href="css/style.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="css/prettyPhoto.css" media="screen" />
+    <link rel="stylesheet" href="css/queryLoader.css" type="text/css" />
+    <link rel="stylesheet" href="css/jScrollPane.css" type="text/css" />
+    <link rel="stylesheet" href="css/jquery.lightbox1-0.5.css" type="text/css" />
+    <link href="css/jquery.fancybox-1.3.1.css" rel="stylesheet" type="text/css"
+        media="screen" />
+    <link href="css/jquery.mCustomScrollbar.css" rel="stylesheet" type="text/css" />
+    <!-- liteAccordion css -->
+    <link href="css/liteaccordion.css" rel="stylesheet" />
+    <!-- syntax highlighter -->
+    <link href="http://alexgorbatchev.com.s3.amazonaws.com/pub/sh/3.0.83/styles/shCore.css"
+        rel="stylesheet" />
+    <link href="http://alexgorbatchev.com.s3.amazonaws.com/pub/sh/3.0.83/styles/shThemeDefault.css"
+        rel="stylesheet" />
+    <!-- jQuery -->
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
+    <script>        document.createElement('nav'); document.createElement('section');</script>
+    <script src="js/jquery.mousewheel.js"></script>
+    <script src="js/jquery.jscrollpane.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="js/lightbox/themes/evolution-dark/jquery.lightbox.css" />
+    <!--[if IE 6]>
+		<link rel="stylesheet" type="text/css" href="js/lightbox/themes/default/jquery.lightbox.ie6.css" />
+		<![endif]-->
+    <script type="text/javascript" src="js/lightbox/jquery.lightbox.min.js"></script>
+    <script type="text/javascript">
+        jQuery(document).ready(function ($) {
+            $('.lightbox').lightbox();
+        });
+    </script>
+    <script type="text/javascript">
+        jQuery(document).ready(function ($) {
+
+            $("#lbsingle").click(function () {
+                $.lightbox("images/galeria_imgGrandes/livet.jpg", {
+                    'width': 700,
+                    'height': 500,
+                    'autoresize': false
+                });
+                return false;
+            });
+
+            $("#lbgallery").click(function () {
+                $.lightbox(["images/galeria_imgGrandes/livet.jpg", "images/galeria_imgGrandes/esp_livet.jpg"]);
+                return false;
+            });
+
+            $("#lbgallery1").click(function () {
+                $.lightbox(["images/galeria_imgGrandes/onskan.jpg", "images/galeria_imgGrandes/esp_onskan.jpg"]);
+                return false;
+            });
+
+        });
+    </script>
+    <!-- easing -->
+    <script src="js/jquery.easing.1.3.js"></script>
+    <!-- liteAccordion js -->
+    <script src="js/liteaccordion.jquery.js"></script>
+    <script type="text/javascript" src='js/redirection_mobile.min.js'></script>
+    <!--[if lt IE 9]>
+            <script>
+                document.createElement('figure');
+                document.createElement('figcaption');           
+            </script>
+        <![endif]-->
+    <!-- Tooltip -->
+    <script type="text/javascript" src="js/tooltip.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var currentPosition = 0;
+            var slideWidth = 500;
+            var slides = $('.products');
+            var numberOfSlides = slides.length;
+
+            // Remove scrollbar in JS
+            $('#slidesContainer').css('overflow', 'hidden');
+
+            // Wrap all .slides with #slideInner div
+            slides
+    .wrapAll('<div id="slideInner"></div>')
+            // Float left to display horizontally, readjust .slides width
+	.css({
+	    'float': 'left',
+	    'width': slideWidth
+	});
+
+            // Set #slideInner width equal to total width of all slides
+            $('#slideInner').css('width', slideWidth * numberOfSlides);
+
+            // Insert controls in the DOM
+            $('#slideshow')
+    .prepend('<span class="control" id="leftControl">Clicking moves left</span>')
+    .append('<span class="control" id="rightControl">Clicking moves right</span>');
+
+            // Hide left arrow control on first load
+            manageControls(currentPosition);
+
+            // Create event listeners for .controls clicks
+            $('.control')
+    .bind('click', function () {
+        // Determine new position
+        currentPosition = ($(this).attr('id') == 'rightControl') ? currentPosition + 1 : currentPosition - 1;
+
+        // Hide / show controls
+        manageControls(currentPosition);
+        // Move slideInner using margin-left
+        $('#slideInner').animate({
+            'marginLeft': slideWidth * (-currentPosition)
+        });
+    });
+
+            // manageControls: Hides and Shows controls depending on currentPosition
+            function manageControls(position) {
+                // Hide left arrow if position is first slide
+                if (position == 0) { $('#leftControl').hide() } else { $('#leftControl').show() }
+                // Hide right arrow if position is last slide
+                if (position == numberOfSlides - 1) { $('#rightControl').hide() } else { $('#rightControl').show() }
+            }
+        });
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var currentPosition = 0;
+            var slideWidth = 680;
+            var slides = $('.sang');
+            var numberOfSlides = slides.length;
+
+            // Remove scrollbar in JS
+            $('#slidesContainer_sang').css('overflow', 'hidden');
+
+            // Wrap all .slides with #slideInner div
+            slides
+    .wrapAll('<div id="slideInner_sang"></div>')
+            // Float left to display horizontally, readjust .slides width
+	.css({
+	    'float': 'left',
+	    'width': slideWidth
+	});
+
+            // Set #slideInner width equal to total width of all slides
+            $('#slideInner_sang').css('width', slideWidth * numberOfSlides);
+
+            // Insert controls in the DOM
+            $('#slideshow_sang')
+    .prepend('<span class="controles" id="leftControl_sang">Clicking moves left</span>')
+    .append('<span class="controles" id="rightControl_sang">Clicking moves right</span>');
+
+            // Hide left arrow control on first load
+            manageControls(currentPosition);
+
+            // Create event listeners for .controls clicks
+            $('.controles')
+    .bind('click', function () {
+        // Determine new position
+        currentPosition = ($(this).attr('id') == 'rightControl_sang') ? currentPosition + 1 : currentPosition - 1;
+
+        // Hide / show controls
+        manageControls(currentPosition);
+        // Move slideInner using margin-left
+        $('#slideInner_sang').animate({
+            'marginLeft': slideWidth * (-currentPosition)
+        });
+    });
+
+            // manageControls: Hides and Shows controls depending on currentPosition
+            function manageControls(position) {
+                // Hide left arrow if position is first slide
+                if (position == 0) { $('#leftControl_sang').hide() } else { $('#leftControl_sang').show() }
+                // Hide right arrow if position is last slide
+                if (position == numberOfSlides - 1) { $('#rightControl_sang').hide() } else { $('#rightControl_sang').show() }
+            }
+        });
+        function MM_preloadImages() { //v3.0
+            var d = document; if (d.images) {
+                if (!d.MM_p) d.MM_p = new Array();
+                var i, j = d.MM_p.length, a = MM_preloadImages.arguments; for (i = 0; i < a.length; i++)
+                    if (a[i].indexOf("#") != 0) { d.MM_p[j] = new Image; d.MM_p[j++].src = a[i]; }
+            }
+        }
+
+        function MM_swapImgRestore() { //v3.0
+            var i, x, a = document.MM_sr; for (i = 0; a && i < a.length && (x = a[i]) && x.oSrc; i++) x.src = x.oSrc;
+        }
+
+        function MM_findObj(n, d) { //v4.01
+            var p, i, x; if (!d) d = document; if ((p = n.indexOf("?")) > 0 && parent.frames.length) {
+                d = parent.frames[n.substring(p + 1)].document; n = n.substring(0, p);
+            }
+            if (!(x = d[n]) && d.all) x = d.all[n]; for (i = 0; !x && i < d.forms.length; i++) x = d.forms[i][n];
+            for (i = 0; !x && d.layers && i < d.layers.length; i++) x = MM_findObj(n, d.layers[i].document);
+            if (!x && d.getElementById) x = d.getElementById(n); return x;
+        }
+
+        function MM_swapImage() { //v3.0
+            var i, j = 0, x, a = MM_swapImage.arguments; document.MM_sr = new Array; for (i = 0; i < (a.length - 2); i += 3)
+                if ((x = MM_findObj(a[i])) != null) { document.MM_sr[j++] = x; if (!x.oSrc) x.oSrc = x.src; x.src = a[i + 2]; }
+        }
+        function MM_validateForm() { //v4.0
+            if (document.getElementById) {
+                var i, p, q, nm, test, num, min, max, errors = '', args = MM_validateForm.arguments;
+                for (i = 0; i < (args.length - 2); i += 3) {
+                    test = args[i + 2]; val = document.getElementById(args[i]);
+                    if (val) {
+                        nm = val.name; if ((val = val.value) != "") {
+                            if (test.indexOf('isEmail') != -1) {
+                                p = val.indexOf('@');
+                                if (p < 1 || p == (val.length - 1)) errors += '- ' + nm + ' debe ser un correo válido.\n';
+                            } else if (test != 'R') {
+                                num = parseFloat(val);
+                                if (isNaN(val)) errors += '- ' + nm + ' must contain a number.\n';
+                                if (test.indexOf('inRange') != -1) {
+                                    p = test.indexOf(':');
+                                    min = test.substring(8, p); max = test.substring(p + 1);
+                                    if (num < min || max < num) errors += '- ' + nm + ' must contain a number between ' + min + ' and ' + max + '.\n';
+                                }
+                            }
+                        } else if (test.charAt(0) == 'R') errors += '- ' + nm + ' es requerido.\n';
+                    }
+                } if (errors) alert('Revisa los siguientes campos:\n' + errors);
+                document.MM_returnValue = (errors == '');
+            }
+        }
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("input[type=button]").button(); $("#ejemplo1").hide();
+            $("#garanty").click(function () {
+                FindRegister();
+            });
+        }); //end-ready
+
+        function FindRegister() {
+            var strResultado = ""; bflag = false;
+            for (var i = 1126; i <= 1685; i++) {
+                if (i == $.trim($("#contactName").val())) {
+                    bflag = true;
+                    $("#ejemplo1").click(function () { return true; }).click();
+                    break;
+                }
+            } //End-for			
+
+            if (bflag == false) {
+                alert("Número incorrecto. \nInténtelo nuevamente.");
+            } //End-if
+        } //End-function
+
+        function ValidaData() {
+            var bflag = false; var strResultado = "Faltan los siguientes datos: \n";
+            if ($("#nombre").val().length <= 0) {
+                bflag = true;
+                strResultado += "[ Nombre ]";
+            } //end-if
+            if ($("#apellidos").val().length <= 0) {
+                bflag = true;
+                strResultado += "[ Apellidos ]";
+            } //end-if
+            if ($("#email").val().length <= 0) {
+                bflag = true;
+                strResultado += "[ E-mail ]";
+            } //end-if	
+
+            if (bflag == true) {
+                alert(strResultado);
+            } else {
+                $.post("sendmail.php", { nombre: $("#nombre").val(), apellidos: $("#apellidos").val(), email: $("#apellidos").val() }, function (data) { nada(data); }, "text");
+            } //end-else
+
+        } //End-function
+        function nada(rs) {
+            eval(rs);
+        }
+    </script>
+    <script type="text/javascript" src="js/xero.forms.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            xeroContactForm();
+        });
+    </script>
+</head>
+<body onload="MM_preloadImages('img-demo/a/0-1.png','img-demo/a/a_diseniadores.png','img-demo/a/a_garantia.png','img-demo/a/a_newsletter.png','img-demo/a/a_productos.png','img-demo/a/a_sang.png','img-demo/a/a_colecciones.jpg')">
+    <div id="wrapper">
+        <div id="top">
+        </div>
+        <div id="contentWrap" class="full-width">
+            <div id="content">
+                <div class="one-third">
+                    <img src="img-demo/a/0-1.png" id="myimage" class=" visible" />
+                </div>
+                <div class="two-third">
+                    <ol>
+                        <li name="disenio">
+                            <h2>
+                                <a href="#disenio" onclick="MM_swapImage('myimage','','img-demo/a/a_diseniadores.png',1)">
+                                    <img src="img-demo/menu/menu_diseniadores.png" width="60" height="500" id="menusang"></a></h2>
+                            <div>
+                                <figure>
+                            <img src="img-demo/bg_images/disenadores.jpg" alt="image" width="800" />
+                            <figcaption>
+                            <br /><br /><br />
+                            <img src="img-demo/disenadores.png" width="200" height="41" style=" padding-top:5px; margin-left:28px">
+                            <br />
+                            
+                            <div id="disenadores_sang">
+    								<div id="disenadores_sangContainer">
+                            
+                            <table class="black_table1" style="margin:0px; padding:0px">
+  								<tr>
+    							<td width="310px" style="color:#575757; margin-top:0px; padding:0px;"></td>
+                                <td style="color:#575757; margin-top:0px; padding-top:5px; font-size:14px; line-height:19px; word-spacing:-1px; text-align:justify;">
+                                <p style="padding-left:77px; color: #575757; font-size: 14px; line-height: 19px; word-spacing: -1px;"><span class="dropcap_disenadores">N</span>ació el descanso de las grandes vidas. No es un colchón, es un sistema de descanso y como tal se tiene que ver. Antes de Säng la gente pensaba que los atributos del descanso eran suave o firme, grande o pequeño pero Säng acaba con esta percepción y le suma una nueva dimensión: el diseño.</p>
+                                <p style="padding-left:77px; color: #575757; font-size: 14px; line-height: 19px; word-spacing: -1px;"><span class="dropcap_disenadores">L</span>os materiales de la mayor calidad, y la tecnología más avanzada, debían tener una piel diferente.</p>
+                                <p style="padding-left:77px; color: #575757; font-size: 14px; line-height: 19px; word-spacing: -1px;"><span style="font-size:16px">Säng lo logró.</span></p>
+                                </td>
+  								</tr>
+							</table>
+                            
+                            		</div>
+                            </div>
+                          </figcaption>
+                      </figure>
+                            </div>
+                        </li>
+                        <li name="garantia">
+                            <h2>
+                                <a href="#garantia" onclick="MM_swapImage('myimage','','img-demo/a/a_garantia.png',1)">
+                                    <img src="img-demo/menu/menu_garantia.png" width="60" height="500" id="menusang"></a></h2>
+                            <div>
+                                <figure><img src="img-demo/bg_images/garantia.jpg" alt="image" width="800" />
+                          <figcaption>
+                            <br /><br /><br />
+                            <img src="img-demo/titulo_garantia.png" width="210" height="55" style=" padding-top:0px">
+                            
+                            <div id="custom_garantia"> 
+    <table>
+     <tr>
+      <td><input type="text" /></td>
+      <td><input type="image" src="images/Boton.png" value="Verificar" /></td>
+     </tr>
+     <tr>
+      <td colspan="2"></td>
+     </tr>
+    </table>
+                                <label for="contactName" class=""><span style="font-size:12px; float:left; color:#FFF">Introduzca su <strong>número de acceso</strong></span></label>
+                                
+							</div>
+                            
+                            <table class="black_table1" style=" margin-top:230px; margin-left:170px">
+                                <tr>
+                                <td align="right" style="font-size:12px">Contacto <strong>01-800-7264000</strong></td>
+                                <td style="font-size:12px"><a href="mailto:servicioalcliente@sang.mx">servicioalcliente@sang.mx</a></td>
+                                </tr>
+                            </table>
+                             
+                              
+                            </figcaption>
+                        </figure>
+                            </div>
+                        </li>
+                        <li name="productos">
+                            <h2>
+                                <a href="#productos" onclick="MM_swapImage('myimage','','img-demo/a/a_productos.png',1)">
+                                    <img src="img-demo/menu/menu_productos.png" width="60" height="500" id="menusang"></a></h2>
+                            <div>
+                                <figure>
+                            <img src="img-demo/bg_images/productos.jpg" alt="image" width="800" />
+                            <figcaption>
+                            <br />
+                            <img src="img-demo/productos.png" width="200" height="46" style=" padding-top:20px">
+                            
+                            <!-- Slideshow HTML -->
+  								<div id="slideshow">
+    								<div id="slidesContainer">
+      									<div class="products">
+       										<a id="lbgallery" style="cursor:pointer"><img src="img-demo/livet.png" alt="LIVET" width="408" height="260" /></a>
+                                        
+                                        </div>
+                                        
+                                  <div class="products">
+       										<a id="lbgallery1" style="cursor:pointer"><img src="img-demo/onskan.png" alt="ÖNSKAN" width="408" height="260" /></a>
+                                      </div>
+    								</div>
+  								</div>
+  							<!-- Slideshow HTML -->
+                            </figcaption>
+                        </figure>
+                            </div>
+                        </li>
+                        <li name="sang">
+                            <h2>
+                                <a href="#sang" onclick="MM_swapImage('myimage','','img-demo/a/a_sang.png',1)">
+                                    <img src="img-demo/menu/menu_sang.png" width="60" height="400" id="menusang"></a></h2>
+                            <div>
+                                <figure>
+                            <img src="img-demo/bg_images/queEsSang.jpg" alt="image" width="800" />
+                            <figcaption>
+                            
+                            <br /><br />
+                            
+                            <img src="img-demo/queEsSang.png" width="200" height="99" style="text-align:center; margin-left:225px; margin-top:20px;">
+							
+                            <!-- Slideshow HTML -->
+  								<div id="slideshow_sang">
+    									<div id="slidesContainer_sang">
+      										<div class="sang">
+       										
+                                            <table class="black_table1" style="margin-top:0px">
+                            	
+  								<tr>
+    							<td style="color:#737373; vertical-align: text-top;" width="50%"><span class="dropcap">S</span><span class="dropcap_sang">äng</span> <span style="font-weight:lighter;">está inspirado en el alto estándar de calidad de vida que se da en la región nórdica. Por sus condiciones geográficas y localización en la Europa Septentrional, esta región experimenta condiciones climáticas extremas que le han llevado a desarrollar soluciones en pro del bienestar de la persona, entre ellas sistemas para el perfecto descanso.</span></td>
+                                
+    							<td style="color:#737373; vertical-align: text-top;" width="50%"><span style="font-weight:lighter;">La colección</span> <span class="dropcap">S</span><span class="dropcap_sang">äng</span> <span style="font-weight:lighter;">es un conjunto de piezas concebidas para los diferentes gustos y estilos de descanso. Son piezas pensadas para usted por que creemos que el confort es una noción muy personal. La audacia e imaginación son esencia  de cada colección rompiendo la monotonía del descanso en su funcionalidad y estética.</span></td>
+  								</tr>
+							</table>
+                                        
+                                        </div>
+                                        
+                                  <div class="sang">
+       										<table class="black_table2" style="margin-top:0px;">
+                            	
+  								<tr>
+    							<td style="color:#737373; font-weight:lighter;">
+                                Säng es la personalización en el diseño cuidando cada detalle, esmerándose en la excelencia del confort, en las formas, la cromática y los contrastes, las texturas y los acabados, todo ello combinado con estampados y tejidos de arte creados en exclusiva por un grupo de diseñadores. 
+                                </td>
+                                </tr>
+                                
+                                <tr>
+    							<td style="color:#737373; font-weight:lighter;">
+                                  <img src="img-demo/queEsSANG-2.png" width="635" height="62" style="margin-left:0px" /></td>
+  								</tr>
+							</table>
+                                      </div>
+    								</div>
+  								</div>
+  							<!-- Slideshow HTML -->
+                            </figcaption>
+                        </figure>
+                            </div>
+                        </li>
+                        <li name="news">
+                            <h2>
+                                <a href="#news" onclick="MM_swapImage('myimage','','img-demo/a/a_newsletter.png',1)">
+                                    <img src="img-demo/menu/6.png" width="60" height="400" id="menusang"></a></h2>
+                            <div>
+                                <figure>
+                            <img src="img-demo/bg_images/newsletter.jpg" alt="image" width="800" />
+                          <figcaption>
+                          
+                          <br />
+                            
+                            <img src="img-demo/newsletter.png" width="200" height="39" style="padding-top:20px; margin-left:33px">
+                            <p style="font-size:12px; color:#4e5960; margin-left:65px">Si desea estar al tanto de la marca, recibir invitaciones y ofertas especiales, llene el siguiente formulario:
+</p>
+                            
+                          <!-- Slideshow HTML -->
+							  <div id="newslettersang">
+    								<div id="newslettersangContainer">
+                                    
+                                    <form id="contact_form" method="post" action="contactform_processor.php" >
+                                    
+                                    <ol>
+                                    
+                                    <table class="black_table_sang" style="margin-top:11px; margin-left:-18px">
+                            	
+  								<tr>
+                                
+                                <td width="25%" >
+                                <li>
+                                <label for="apellidos">Apellidos: *</label>
+                                </li>
+                                </td>
+                                
+                                <td width="25%">
+                                <li>
+                                <input type="text" name="apellidos" class="text_field small required" id="apellidos">
+                                </li>
+                                </td>
+                                
+    							<td width="25%">
+                                <li>
+                                <label for="pais">País:</label>
+                                </li>
+                                </td>
+                                
+                                <td width="25%">
+                                <li>
+                                <select name="pais" style="width:85%" class="newsform" id="pais">
+<option value="No seleccionó ninguna opción">Seleccionar:</option>
+<option value="Afganistan">Afghanistan</option>
+<option value="Albania">Albania</option>
+<option value="Algeria">Algeria</option>
+<option value="American Samoa">American Samoa</option>
+<option value="Andorra">Andorra</option>
+<option value="Angola">Angola</option>
+<option value="Anguilla">Anguilla</option>
+<option value="Antigua &amp; Barbuda">Antigua &amp; Barbuda</option>
+<option value="Argentina">Argentina</option>
+<option value="Armenia">Armenia</option>
+<option value="Aruba">Aruba</option>
+<option value="Australia">Australia</option>
+<option value="Austria">Austria</option>
+<option value="Azerbaijan">Azerbaijan</option>
+<option value="Bahamas">Bahamas</option>
+<option value="Bahrain">Bahrain</option>
+<option value="Bangladesh">Bangladesh</option>
+<option value="Barbados">Barbados</option>
+<option value="Belarus">Belarus</option>
+<option value="Belgium">Belgium</option>
+<option value="Belize">Belize</option>
+<option value="Benin">Benin</option>
+<option value="Bermuda">Bermuda</option>
+<option value="Bhutan">Bhutan</option>
+<option value="Bolivia">Bolivia</option>
+<option value="Bonaire">Bonaire</option>
+<option value="Bosnia &amp; Herzegovina">Bosnia &amp; Herzegovina</option>
+<option value="Botswana">Botswana</option>
+<option value="Brazil">Brazil</option>
+<option value="British Indian Ocean Ter">British Indian Ocean Ter</option>
+<option value="Brunei">Brunei</option>
+<option value="Bulgaria">Bulgaria</option>
+<option value="Burkina Faso">Burkina Faso</option>
+<option value="Burundi">Burundi</option>
+<option value="Cambodia">Cambodia</option>
+<option value="Cameroon">Cameroon</option>
+<option value="Canada">Canada</option>
+<option value="Canary Islands">Canary Islands</option>
+<option value="Cape Verde">Cape Verde</option>
+<option value="Cayman Islands">Cayman Islands</option>
+<option value="Central African Republic">Central African Republic</option>
+<option value="Chad">Chad</option>
+<option value="Channel Islands">Channel Islands</option>
+<option value="Chile">Chile</option>
+<option value="China">China</option>
+<option value="Christmas Island">Christmas Island</option>
+<option value="Cocos Island">Cocos Island</option>
+<option value="Colombia">Colombia</option>
+<option value="Comoros">Comoros</option>
+<option value="Congo">Congo</option>
+<option value="Cook Islands">Cook Islands</option>
+<option value="Costa Rica">Costa Rica</option>
+<option value="Cote DIvoire">Cote D'Ivoire</option>
+<option value="Croatia">Croatia</option>
+<option value="Cuba">Cuba</option>
+<option value="Curaco">Curacao</option>
+<option value="Cyprus">Cyprus</option>
+<option value="Czech Republic">Czech Republic</option>
+<option value="Denmark">Denmark</option>
+<option value="Djibouti">Djibouti</option>
+<option value="Dominica">Dominica</option>
+<option value="Dominican Republic">Dominican Republic</option>
+<option value="East Timor">East Timor</option>
+<option value="Ecuador">Ecuador</option>
+<option value="Egypt">Egypt</option>
+<option value="El Salvador">El Salvador</option>
+<option value="Equatorial Guinea">Equatorial Guinea</option>
+<option value="Eritrea">Eritrea</option>
+<option value="Estonia">Estonia</option>
+<option value="Ethiopia">Ethiopia</option>
+<option value="Falkland Islands">Falkland Islands</option>
+<option value="Faroe Islands">Faroe Islands</option>
+<option value="Fiji">Fiji</option>
+<option value="Finland">Finland</option>
+<option value="France">France</option>
+<option value="French Guiana">French Guiana</option>
+<option value="French Polynesia">French Polynesia</option>
+<option value="French Southern Ter">French Southern Ter</option>
+<option value="Gabon">Gabon</option>
+<option value="Gambia">Gambia</option>
+<option value="Georgia">Georgia</option>
+<option value="Germany">Germany</option>
+<option value="Ghana">Ghana</option>
+<option value="Gibraltar">Gibraltar</option>
+<option value="Great Britain">Great Britain</option>
+<option value="Greece">Greece</option>
+<option value="Greenland">Greenland</option>
+<option value="Grenada">Grenada</option>
+<option value="Guadeloupe">Guadeloupe</option>
+<option value="Guam">Guam</option>
+<option value="Guatemala">Guatemala</option>
+<option value="Guinea">Guinea</option>
+<option value="Guyana">Guyana</option>
+<option value="Haiti">Haiti</option>
+<option value="Hawaii">Hawaii</option>
+<option value="Honduras">Honduras</option>
+<option value="Hong Kong">Hong Kong</option>
+<option value="Hungary">Hungary</option>
+<option value="Iceland">Iceland</option>
+<option value="India">India</option>
+<option value="Indonesia">Indonesia</option>
+<option value="Iran">Iran</option>
+<option value="Iraq">Iraq</option>
+<option value="Ireland">Ireland</option>
+<option value="Isle of Man">Isle of Man</option>
+<option value="Israel">Israel</option>
+<option value="Italy">Italy</option>
+<option value="Jamaica">Jamaica</option>
+<option value="Japan">Japan</option>
+<option value="Jordan">Jordan</option>
+<option value="Kazakhstan">Kazakhstan</option>
+<option value="Kenya">Kenya</option>
+<option value="Kiribati">Kiribati</option>
+<option value="Korea North">Korea North</option>
+<option value="Korea Sout">Korea South</option>
+<option value="Kuwait">Kuwait</option>
+<option value="Kyrgyzstan">Kyrgyzstan</option>
+<option value="Laos">Laos</option>
+<option value="Latvia">Latvia</option>
+<option value="Lebanon">Lebanon</option>
+<option value="Lesotho">Lesotho</option>
+<option value="Liberia">Liberia</option>
+<option value="Libya">Libya</option>
+<option value="Liechtenstein">Liechtenstein</option>
+<option value="Lithuania">Lithuania</option>
+<option value="Luxembourg">Luxembourg</option>
+<option value="Macau">Macau</option>
+<option value="Macedonia">Macedonia</option>
+<option value="Madagascar">Madagascar</option>
+<option value="Malaysia">Malaysia</option>
+<option value="Malawi">Malawi</option>
+<option value="Maldives">Maldives</option>
+<option value="Mali">Mali</option>
+<option value="Malta">Malta</option>
+<option value="Marshall Islands">Marshall Islands</option>
+<option value="Martinique">Martinique</option>
+<option value="Mauritania">Mauritania</option>
+<option value="Mauritius">Mauritius</option>
+<option value="Mayotte">Mayotte</option>
+<option value="Mexico">M&eacute;xico</option>
+<option value="Midway Islands">Midway Islands</option>
+<option value="Moldova">Moldova</option>
+<option value="Monaco">Monaco</option>
+<option value="Mongolia">Mongolia</option>
+<option value="Montserrat">Montserrat</option>
+<option value="Morocco">Morocco</option>
+<option value="Mozambique">Mozambique</option>
+<option value="Myanmar">Myanmar</option>
+<option value="Nambia">Nambia</option>
+<option value="Nauru">Nauru</option>
+<option value="Nepal">Nepal</option>
+<option value="Netherland Antilles">Netherland Antilles</option>
+<option value="Netherlands">Netherlands (Holland, Europe)</option>
+<option value="Nevis">Nevis</option>
+<option value="New Caledonia">New Caledonia</option>
+<option value="New Zealand">New Zealand</option>
+<option value="Nicaragua">Nicaragua</option>
+<option value="Niger">Niger</option>
+<option value="Nigeria">Nigeria</option>
+<option value="Niue">Niue</option>
+<option value="Norfolk Island">Norfolk Island</option>
+<option value="Norway">Norway</option>
+<option value="Oman">Oman</option>
+<option value="Pakistan">Pakistan</option>
+<option value="Palau Island">Palau Island</option>
+<option value="Palestine">Palestine</option>
+<option value="Panama">Panama</option>
+<option value="Papua New Guinea">Papua New Guinea</option>
+<option value="Paraguay">Paraguay</option>
+<option value="Peru">Peru</option>
+<option value="Phillipines">Philippines</option>
+<option value="Pitcairn Island">Pitcairn Island</option>
+<option value="Poland">Poland</option>
+<option value="Portugal">Portugal</option>
+<option value="Puerto Rico">Puerto Rico</option>
+<option value="Qatar">Qatar</option>
+<option value="Republic of Montenegro">Republic of Montenegro</option>
+<option value="Republic of Serbia">Republic of Serbia</option>
+<option value="Reunion">Reunion</option>
+<option value="Romania">Romania</option>
+<option value="Russia">Russia</option>
+<option value="Rwanda">Rwanda</option>
+<option value="St Barthelemy">St Barthelemy</option>
+<option value="St Eustatius">St Eustatius</option>
+<option value="St Helena">St Helena</option>
+<option value="St Kitts-Nevis">St Kitts-Nevis</option>
+<option value="St Lucia">St Lucia</option>
+<option value="St Maarten">St Maarten</option>
+<option value="St Pierre &amp; Miquelon">St Pierre &amp; Miquelon</option>
+<option value="St Vincent &amp; Grenadines">St Vincent &amp; Grenadines</option>
+<option value="Saipan">Saipan</option>
+<option value="Samoa">Samoa</option>
+<option value="Samoa American">Samoa American</option>
+<option value="San Marino">San Marino</option>
+<option value="Sao Tome & Principe">Sao Tome &amp; Principe</option>
+<option value="Saudi Arabia">Saudi Arabia</option>
+<option value="Senegal">Senegal</option>
+<option value="Seychelles">Seychelles</option>
+<option value="Sierra Leone">Sierra Leone</option>
+<option value="Singapore">Singapore</option>
+<option value="Slovakia">Slovakia</option>
+<option value="Slovenia">Slovenia</option>
+<option value="Solomon Islands">Solomon Islands</option>
+<option value="Somalia">Somalia</option>
+<option value="South Africa">South Africa</option>
+<option value="Spain">Spain</option>
+<option value="Sri Lanka">Sri Lanka</option>
+<option value="Sudan">Sudan</option>
+<option value="Suriname">Suriname</option>
+<option value="Swaziland">Swaziland</option>
+<option value="Sweden">Sweden</option>
+<option value="Switzerland">Switzerland</option>
+<option value="Syria">Syria</option>
+<option value="Tahiti">Tahiti</option>
+<option value="Taiwan">Taiwan</option>
+<option value="Tajikistan">Tajikistan</option>
+<option value="Tanzania">Tanzania</option>
+<option value="Thailand">Thailand</option>
+<option value="Togo">Togo</option>
+<option value="Tokelau">Tokelau</option>
+<option value="Tonga">Tonga</option>
+<option value="Trinidad &amp; Tobago">Trinidad &amp; Tobago</option>
+<option value="Tunisia">Tunisia</option>
+<option value="Turkey">Turkey</option>
+<option value="Turkmenistan">Turkmenistan</option>
+<option value="Turks &amp; Caicos Is">Turks &amp; Caicos Is</option>
+<option value="Tuvalu">Tuvalu</option>
+<option value="Uganda">Uganda</option>
+<option value="Ukraine">Ukraine</option>
+<option value="United Arab Erimates">United Arab Emirates</option>
+<option value="United Kingdom">United Kingdom</option>
+<option value="United States of America">United States of America</option>
+<option value="Uraguay">Uruguay</option>
+<option value="Uzbekistan">Uzbekistan</option>
+<option value="Vanuatu">Vanuatu</option>
+<option value="Vatican City State">Vatican City State</option>
+<option value="Venezuela">Venezuela</option>
+<option value="Vietnam">Vietnam</option>
+<option value="Virgin Islands (Brit)">Virgin Islands (Brit)</option>
+<option value="Virgin Islands (USA)">Virgin Islands (USA)</option>
+<option value="Wake Island">Wake Island</option>
+<option value="Wallis &amp; Futana Is">Wallis &amp; Futana Is</option>
+<option value="Yemen">Yemen</option>
+<option value="Zaire">Zaire</option>
+<option value="Zambia">Zambia</option>
+<option value="Zimbabwe">Zimbabwe</option>
+</select>
+                                </li>
+                                </td>
+                                </tr>  <!-- Fin primer renglón -->
+                                
+                                <tr>
+                                <td>
+                                <li>
+                                <label for="nombre">Nombre: *</label>
+                                </li>
+                                </td>
+                                
+                                <td>
+                                <li>
+                                <input type="text" class="text_field small required" id="nombre" name="nombre"/>
+                                </li>
+                                </td>
+                                
+                                <td>
+                                <li>
+                                <label for="idioma">Idioma:</label>
+                                </li>
+                                </td>
+                                
+                                <td>
+                                <li>
+                                <select name="idioma" style="width:85%" class="newsform" id="idioma">
+								  <option value="No seleccionó ninguna opción">Seleccionar:</option>
+								  <option value="Español">Espa&ntilde;ol</option>
+								  <option value="Ingles">Ingl&eacute;s</option>
+								  <option value="Sueco">Sueco</option>
+							    </select>
+                                </li>
+                                </td>>
+                                </tr> <!-- Fin segundo renglón -->
+                                
+                                <tr>
+                                <td>
+                                <li>
+                                <label for="email">E-mail: *</label>
+                                </li>
+                                </td>
+                                
+                                <td>
+                                <li>
+                                <input type="text" name="email" class="text_field small required email" id="email">
+                                
+                                 </li>
+                                </td>
+                                
+                                <td>
+                                <li>
+                                <label for="colpreferida">Colección preferida:</label>
+                                </li>
+                                </td>
+                                
+                                <td>
+                                <li>
+                                 <select name="colpreferida" style="width:85%" class="newsform" id="colpreferida">
+								  <option value="No seleccionó ninguna opción">Seleccionar:</option>
+								  <option value="lyx resten">lyx resten</option>
+								  <option value="Eliten resten">Eliten resten</option>
+								  <option value="Overdel resten">Överdel resten</option>
+							    </select>
+                                 </li>
+                                </td>
+                                </tr> <!-- Fin tercer renglón -->
+                                
+                                <tr>
+                                <td>
+                                <li>
+                                <label for="direccion" >Dirección:</label>
+                                </li>
+                                </td>
+                                
+                                <td>
+                                <li>
+                                <input type="text" class=" newsform" value="" id="direccion" name="direccion"/>
+                                </li>
+                                </td>
+                                
+                                <td>
+                                <li>
+                                <label for="clientedesang">Cliente säng:</label>
+                                </li>
+                                </td>
+                                
+                                <td>
+                                <li>
+                                <label for="clientedesang" style="float:left">Sí</label>
+                                <input type="radio" class="btn" name="clientedesang" value="" id="clientedesang_0" style="margin-right:20px; float:left" />
+                                <label for="clientedesang" style="float:left">No</label>
+                                <input type="radio" class="btn margenizq" name="clientedesang" value="" id="clientedesang_1" />
+                                </li>
+                                </td>
+                                </tr> <!-- Fin cuarto renglón -->
+                                
+                                <tr>
+                                <td>
+                                <li>
+                                <label for="codigopostal" >Código Postal:</label>
+                                </li>
+                                </td>
+                                
+                                <td>
+                                <li>
+                                <input type="text" class=" newsform" value="" id="codigopostal" name="codigopostal"/>
+                                </li>
+                                </td>
+                                
+                                <td>
+                                <li>
+                                <label for="recibirInfo">Recibir información:</label>
+                                </li>
+                                </td>
+                                
+                                 <td>
+                                <li>
+                                <input name="recibirinfo" type="checkbox" value="" id="recibirinfo" />
+                                </li>
+                                </td>
+                                </tr> <!-- Fin quinto renglón -->
+                                
+                                <tr>
+                                <td>
+                                <li>
+                                <label for="delegacion" >Delegación, municipio, ciudad:</label>
+                                </li>
+                                </td>
+                                
+                                <td>
+                                <li>
+                                <input type="text" class=" newsform" value="" id="delegacion" name="delegacion"/>
+                                </li>
+                                </td>
+                                
+                                <td colspan="2" align="right" style="padding-right:60px; padding-top:25px">
+                                
+                                  
+                                  <!--<input name="" onclick="MM_validateForm('apellidos','','R','nombre','','R','email','','RisEmail');return document.MM_returnValue" type="button" value="Enviar" />-->
+                                  	<input type="submit" value="Enviar" id="submit" class="submit">
+									<input type="hidden" name="submitted" id="submitted" value="true" />
+                                  </td>
+                                
+  								</tr> <!-- Fin quinto renglón -->
+							</table>
+                            </ol>
+                            </form>
+                                  
+   								</div>
+							</div>
+  							<!-- Slideshow HTML -->
+                          </figcaption>
+                        </figure>
+                            </div>
+                        </li>
+                        <li name="coleccion">
+                            <h2>
+                                <a href="#coleccion" onclick="MM_swapImage('myimage','','img-demo/a/a_colecciones.jpg',1)">
+                                    <img src="img-demo/menu/menu_colecciones.png" width="60" height="400" id="menusang"></a></h2>
+                            <div>
+                                <figure>
+                          <img src="img-demo/bg_images/colecciones.jpg" alt="image" width="800" />
+                            
+                            <figcaption>
+                            <br /><br />
+                            <img src="img-demo/titulo_colecciones.png" width="228" height="43" style="padding-top:5px; padding-left:25px">
+                            
+                            <br />
+                            
+                            <table class="black_table1" style="margin-top:42px; margin-left:34px; padding:0px">
+                            	
+  								<tr style="padding:0px">
+                                
+                                <td width="21%" style="color:#2a2a2a; vertical-align:top; font-size:20px; font-weight:lighter; padding:0px;">
+                                La única<br />colección<br />que reúne lujo<br /> y descanso.<br /><br /><br />
+                                <img src="img-demo/logo_lixresten.png" width="153" height="36" style="margin-top:45px; padding:0px;" />
+                                </td>
+                                
+    							<td width="20%" style="color:#2a2a2a; vertical-align:top; font-size:20px; font-weight:lighter; padding:0px;">
+                                Diseño especial<br />para un descanso<br />diferente.<br /><br /><br />
+                                <img src="img-demo/logo_elitenresten.png" width="181" height="29" style="margin-top:68px"/>
+                                </td>
+                                
+    							<td width="28%" style="color:#2a2a2a; vertical-align:top; font-size:20px; font-weight:lighter; padding:0px;">
+                                La primera<br />colección,<br />para el primer<br />gran descanso.<br /><br /><br />
+                                <img src="img-demo/logo_overdelresten.png" width="189" height="28" style="margin-top:45px"/>
+                                </td>
+  								
+                                </tr>
+                                
+							</table>
+                            
+                          </figcaption>
+                          
+                        </figure>
+                            </div>
+                        </li>
+                        <li name="iniciar">
+                            <h2>
+                                <a href="#iniciar" onclick="MM_swapImage('myimage','','img-demo/a/0-1.png',1)">
+                                    <img src="img-demo/menu/00.png" width="60" height="400" id="menusang"></a></h2>
+                            <div>
+                                <figure>
+                            <img src="img-demo/bg_images/home.jpg" alt="image" width="800" style="margin-left:55px" />
+                            <figcaption></figcaption>
+                        </figure>
+                            </div>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+            <!-- end content -->
+            <div class="clearfix">
+            </div>
+            <p align="right">
+                <span style="margin-right: 40px; font-size: 9px; color: #999;">© säng | Derechos Reservados</span></p>
+        </div>
+        <!-- end contentwrap -->
+        <div id="custom_controls">
+            <div class="menuizquierda">
+                <a href="#iniciar" onclick="MM_swapImage('myimage','','img-demo/a/0-1.png',1)">
+                    Inicio</a></div>
+            <div class="menus">
+                <a href="#sang" onclick="MM_swapImage('myimage','','img-demo/a/a_sang.png',1)">
+                    Säng</a></div>
+            <div class="menus">
+                <a href="#coleccion" onclick="MM_swapImage('myimage','','img-demo/a/a_colecciones.jpg',1)">
+                    Colecciones</a></div>
+            <div class="menus">
+                <a href="#productos" onclick="MM_swapImage('myimage','','img-demo/a/a_productos.png',1)">
+                    Productos</a></div>
+            <div class="menus">
+                <a href="#disenio" onclick="MM_swapImage('myimage','','img-demo/a/a_diseniadores.png',1)">
+                    Diseñadores</a></div>
+            <div class="menus">
+                <a href="#garantia" onclick="MM_swapImage('myimage','','img-demo/a/a_garantia.png',1)">
+                    Garantía</a></div>
+            <div class="menus">
+                <a href="#news" onclick="MM_swapImage('myimage','','img-demo/a/a_newsletter.png',1)">
+                    Newsletter</a></div>
+            <div class="menubtn">
+                <a href="#">
+                    <img src="img-demo/fbook.png" class="ttip" width="20" height="20" style="border: none;
+                        margin-left: 10px;" title="Síguenos en Facebook" /></a> <a href="#">
+                            <img src="img-demo/twitter.png" class="ttip" width="20" height="20" style="border: none;
+                                margin-left: 10px;" title="Síguenos en Twitter" /></a>
+            </div>
+            <div class="menubtn1">
+                <a href="#">
+                    <img src="img-demo/play.png" width="20" height="20" style="border: none;" /></a>
+                <a href="#">
+                    <img src="img-demo/pause.png" width="20" height="20" style="border: none;
+                        margin-left: 10px; margin-right: 25px;" /></a></div>
+        </div>
+        <div class="clearboth">
+        </div>
+    </div>
+    <!-- liteAccordion demos -->
+    <script>
+        (function ($) {
+            // demos
+            $('.two-third').liteAccordion({
+                onTriggerSlide: function () {
+                    this.find('').fadeOut();
+                },
+                onSlideAnimComplete: function () {
+                    this.find('figcaption').fadeIn();
+                },
+
+                autoPlay: false,
+                pauseOnHover: false,
+                theme: 'stitch',
+                rounded: false,
+                firstSlide: 7,
+                linkable: true,
+                enumerateSlides: false
+            }).find('figcaption:first').show();
+
+
+
+        })(jQuery);  
+    </script>
+    <!-- syntax highlighter -->
+    <script src="http://nicolahibbert.com/demo/liteAccordion/js/shCore.js"></script>
+    <script src="http://alexgorbatchev.com.s3.amazonaws.com/pub/sh/3.0.83/scripts/shBrushXml.js"></script>
+    <script src="http://alexgorbatchev.com.s3.amazonaws.com/pub/sh/3.0.83/scripts/shBrushJScript.js"></script>
+    <script>        SyntaxHighlighter.all();</script>
+    <script>
+        $(window).load(function () {
+            mCustomScrollbars();
+        });
+
+        function mCustomScrollbars() {
+            /* 
+            malihu custom scrollbar function parameters: 
+            1) scroll type (values: "vertical" or "horizontal")
+            2) scroll easing amount (0 for no easing) 
+            3) scroll easing type 
+            4) extra bottom scrolling space for vertical scroll type only (minimum value: 1)
+            5) scrollbar height/width adjustment (values: "auto" or "fixed")
+            6) mouse-wheel support (values: "yes" or "no")
+            7) scrolling via buttons support (values: "yes" or "no")
+            8) buttons scrolling speed (values: 1-20, 1 being the slowest)
+            */
+            $("#mcs_container").mCustomScrollbar("vertical", 300, "easeOutCirc", 1.05, "auto", "yes", "yes", 15);
+            $("#mcs2_container").mCustomScrollbar("vertical", 300, "easeOutCirc", 1.05, "auto", "yes", "yes", 15);
+            $("#mcs3_container").mCustomScrollbar("vertical", 300, "easeOutCirc", 1.05, "auto", "yes", "yes", 15);
+            $("#mcs4_container").mCustomScrollbar("vertical", 300, "easeOutCirc", 1.05, "auto", "yes", "yes", 15);
+            $("#mcs5_container").mCustomScrollbar("vertical", 300, "easeOutCirc", 1.05, "auto", "yes", "yes", 15);
+        }
+
+        /* function to fix the -10000 pixel limit of jquery.animate */
+        $.fx.prototype.cur = function () {
+            if (this.elem[this.prop] != null && (!this.elem.style || this.elem.style[this.prop] == null)) {
+                return this.elem[this.prop];
+            }
+            var r = parseFloat(jQuery.css(this.elem, this.prop));
+            return typeof r == 'undefined' ? 0 : r;
+        }
+
+        /* function to load new content dynamically */
+        function LoadNewContent(id, file) {
+            $("#" + id + " .customScrollBox .content").load(file, function () {
+                mCustomScrollbars();
+            });
+        }
+    </script>
+    <script src="js/jquery.mCustomScrollbar.js"></script>
+</body>
+
+</html>

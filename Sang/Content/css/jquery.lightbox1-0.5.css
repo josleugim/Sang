@@ -1,0 +1,103 @@
+/**
+ * jQuery lightBox plugin
+ * This jQuery plugin was inspired and based on Lightbox 2 by Lokesh Dhakar (http://www.huddletogether.com/projects/cajaluz2/)
+ * and adapted to me for use like a plugin from jQuery.
+ * @name jquery-cajaluz-0.5.css
+ * @author Leandro Vieira Pinho - http://leandrovieira.com
+ * @version 0.5
+ * @date April 11, 2008
+ * @category jQuery plugin
+ * @copyright (c) 2008 Leandro Vieira Pinho (leandrovieira.com)
+ * @license CC Attribution-No Derivative Works 2.5 Brazil - http://creativecommons.org/licenses/by-nd/2.5/br/deed.en_US
+ * @example Visit http://leandrovieira.com/projects/jquery/cajaluz/ for more informations about this jQuery plugin
+ */
+#jquery-overlay {
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 90;
+	width: 100%;
+	height: 500px;
+}
+#jquery-cajaluz {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	z-index: 100;
+	text-align: center;
+	line-height: 0;
+}
+#jquery-cajaluz a img { border: none; }
+#jquery-cajaluz a { border: none; }
+#cajaluz-container-image-box {
+	position: relative;
+	background-color: #1a1b1d;
+	border: 1px solid #727272;
+	width: 780px;
+	height: 500px;
+	margin: 0 auto;
+}
+#cajaluz-container-image { padding: 10px; }
+#cajaluz-loading {
+	position: absolute;
+	top: 40%;
+	left: 0%;
+	height: 25%;
+	width: 100%;
+	text-align: center;
+	line-height: 0;
+}
+#cajaluz-nav {
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	z-index: 10;
+}
+#cajaluz-container-image-box > #cajaluz-nav { left: 0; }
+#cajaluz-nav a { outline: none;}
+#cajaluz-nav-btnPrev, #cajaluz-nav-btnNext {
+	width: 49%;
+	height: 100%;
+	zoom: 1;
+	display: block;
+}
+#cajaluz-nav-btnPrev { 
+	left: 0; 
+	float: left;
+}
+#cajaluz-nav-btnNext { 
+	right: 0; 
+	float: right;
+}
+#cajaluz-container-image-data-box {
+	font: normal 10px/1.2em verdana;
+	background-color: #1a1b1d;
+	margin: 0 auto;
+	line-height: 1.4em;
+	overflow: auto;
+	width: 100%;
+	padding: 0 10px 0;
+}
+#cajaluz-container-image-data {
+	padding: 0 10px; 
+	color: white;
+}
+#cajaluz-container-image-data #cajaluz-image-details { 
+	width: 80%; 
+	float: left; 
+	text-align: left;
+}	
+#cajaluz-image-details-caption { font-weight: bold; text-transform: uppercase;}
+#cajaluz-image-details-currentNumber {
+	display: block; 
+	clear: left; 
+	padding-bottom: 1.0em;
+}			
+#cajaluz-secNav-btnClose {
+	width: 66px; 
+	float: right;
+	padding-bottom: 0.7em;	
+}
