@@ -34,6 +34,8 @@
 
     <%: Html.HiddenFor(model => model.SangUserId) %>
     <%: Html.HiddenFor(model => model.nMattressUsers) %>
+    <%: Html.HiddenFor(model => model.UserType) %>
+    <%: Html.HiddenFor(model => model.HospitalId) %>
 
     <table class="tableCuestion">
      <tr>
@@ -205,6 +207,15 @@
                 </td>
                 <td>
                     <%: Html.ValidationMessageFor(model => model.NewsLetter) %>
+                </td>
+                <td>
+                    <p><%: Html.LabelFor(model => model.PrivacyNotice) %> :</p>
+                </td>
+                <td>
+                    <%: Html.EditorFor(model => model.PrivacyNotice)%>
+                </td>
+                <td>
+                    <%: Html.ValidationMessageFor(model => model.PrivacyNotice)%>
                 </td>
             </tr>
         </table>

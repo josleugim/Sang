@@ -157,3 +157,26 @@ C:\Documents and Settings\MEGA\Sang\Sang\bin\es\System.Web.WebPages.Razor.resour
 C:\Documents and Settings\MEGA\Sang\Sang\obj\Debug\ResolveAssemblyReference.cache
 C:\Documents and Settings\MEGA\Sang\Sang\obj\Debug\Sang.dll
 C:\Documents and Settings\MEGA\Sang\Sang\obj\Debug\Sang.pdb
+C:\Users\josleugim\Sang\Sang\bin\Sang.dll
+C:\Users\josleugim\Sang\Sang\bin\Sang.pdb
+C:\Users\josleugim\Sang\Sang\bin\EntityFramework.dll
+C:\Users\josleugim\Sang\Sang\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\josleugim\Sang\Sang\bin\System.Web.Abstractions.dll
+C:\Users\josleugim\Sang\Sang\bin\System.Web.Helpers.dll
+C:\Users\josleugim\Sang\Sang\bin\System.Web.Mvc.dll
+C:\Users\josleugim\Sang\Sang\bin\System.Web.Razor.dll
+C:\Users\josleugim\Sang\Sang\bin\System.Web.Routing.dll
+C:\Users\josleugim\Sang\Sang\bin\System.Web.WebPages.Deployment.dll
+C:\Users\josleugim\Sang\Sang\bin\System.Web.WebPages.dll
+C:\Users\josleugim\Sang\Sang\bin\System.Web.WebPages.Razor.dll
+C:\Users\josleugim\Sang\Sang\bin\EntityFramework.xml
+C:\Users\josleugim\Sang\Sang\bin\Microsoft.Web.Infrastructure.xml
+C:\Users\josleugim\Sang\Sang\bin\System.Web.Mvc.xml
+C:\Users\josleugim\Sang\Sang\bin\System.Web.Razor.xml
+C:\Users\josleugim\Sang\Sang\bin\System.Web.WebPages.xml
+C:\Users\josleugim\Sang\Sang\bin\System.Web.Helpers.xml
+C:\Users\josleugim\Sang\Sang\bin\System.Web.WebPages.Deployment.xml
+C:\Users\josleugim\Sang\Sang\bin\System.Web.WebPages.Razor.xml
+C:\Users\josleugim\Sang\Sang\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\josleugim\Sang\Sang\obj\Debug\Sang.dll
+C:\Users\josleugim\Sang\Sang\obj\Debug\Sang.pdb
