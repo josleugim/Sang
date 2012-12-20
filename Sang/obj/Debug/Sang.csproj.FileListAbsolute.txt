@@ -127,3 +127,33 @@ C:\Documents and Settings\MEGA\Mis documentos\Downloads\SangWarranty\Sang\bin\es
 C:\Documents and Settings\MEGA\Mis documentos\Downloads\SangWarranty\Sang\obj\Debug\ResolveAssemblyReference.cache
 C:\Documents and Settings\MEGA\Mis documentos\Downloads\SangWarranty\Sang\obj\Debug\Sang.dll
 C:\Documents and Settings\MEGA\Mis documentos\Downloads\SangWarranty\Sang\obj\Debug\Sang.pdb
+C:\Documents and Settings\MEGA\Sang\Sang\bin\Sang.dll
+C:\Documents and Settings\MEGA\Sang\Sang\bin\Sang.pdb
+C:\Documents and Settings\MEGA\Sang\Sang\bin\EntityFramework.dll
+C:\Documents and Settings\MEGA\Sang\Sang\bin\Microsoft.Web.Infrastructure.dll
+C:\Documents and Settings\MEGA\Sang\Sang\bin\System.Web.Abstractions.dll
+C:\Documents and Settings\MEGA\Sang\Sang\bin\System.Web.Helpers.dll
+C:\Documents and Settings\MEGA\Sang\Sang\bin\System.Web.Mvc.dll
+C:\Documents and Settings\MEGA\Sang\Sang\bin\System.Web.Razor.dll
+C:\Documents and Settings\MEGA\Sang\Sang\bin\System.Web.Routing.dll
+C:\Documents and Settings\MEGA\Sang\Sang\bin\System.Web.WebPages.Deployment.dll
+C:\Documents and Settings\MEGA\Sang\Sang\bin\System.Web.WebPages.dll
+C:\Documents and Settings\MEGA\Sang\Sang\bin\System.Web.WebPages.Razor.dll
+C:\Documents and Settings\MEGA\Sang\Sang\bin\EntityFramework.xml
+C:\Documents and Settings\MEGA\Sang\Sang\bin\Microsoft.Web.Infrastructure.xml
+C:\Documents and Settings\MEGA\Sang\Sang\bin\System.Web.Mvc.xml
+C:\Documents and Settings\MEGA\Sang\Sang\bin\System.Web.Razor.xml
+C:\Documents and Settings\MEGA\Sang\Sang\bin\System.Web.WebPages.xml
+C:\Documents and Settings\MEGA\Sang\Sang\bin\System.Web.Helpers.xml
+C:\Documents and Settings\MEGA\Sang\Sang\bin\System.Web.WebPages.Deployment.xml
+C:\Documents and Settings\MEGA\Sang\Sang\bin\System.Web.WebPages.Razor.xml
+C:\Documents and Settings\MEGA\Sang\Sang\bin\es\Microsoft.Web.Infrastructure.resources.dll
+C:\Documents and Settings\MEGA\Sang\Sang\bin\es\System.Web.Mvc.resources.dll
+C:\Documents and Settings\MEGA\Sang\Sang\bin\es\System.Web.Razor.resources.dll
+C:\Documents and Settings\MEGA\Sang\Sang\bin\es\System.Web.WebPages.resources.dll
+C:\Documents and Settings\MEGA\Sang\Sang\bin\es\System.Web.Helpers.resources.dll
+C:\Documents and Settings\MEGA\Sang\Sang\bin\es\System.Web.WebPages.Deployment.resources.dll
+C:\Documents and Settings\MEGA\Sang\Sang\bin\es\System.Web.WebPages.Razor.resources.dll
+C:\Documents and Settings\MEGA\Sang\Sang\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\MEGA\Sang\Sang\obj\Debug\Sang.dll
+C:\Documents and Settings\MEGA\Sang\Sang\obj\Debug\Sang.pdb

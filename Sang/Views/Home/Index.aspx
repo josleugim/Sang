@@ -887,7 +887,7 @@
                     Aviso de privacidad</a></div>
             <div class="menubtn">
                 <a href="#">
-                    <img src="Content/img-demo/fbook.png" class="ttip" width="20" height="20" style="border: none;
+                    <img src="../../Content/images/facebook_dark_small.png" class="ttip" width="20" height="20" style="border: none;
                         margin-left: 10px;" title="Síguenos en Facebook" /></a> <a href="#">
                             <%--<img src="Content/img-demo/twitter.png" class="ttip" width="20" height="20" style="border: none;
                                 margin-left: 10px;" title="Síguenos en Twitter" /></a>--%>
