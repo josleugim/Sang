@@ -33,9 +33,12 @@
     <img style="margin: 10px" src="../../Content/images/Info.png" alt="Imagen" />
 
     <%: Html.HiddenFor(model => model.SangUserId) %>
+    <%: Html.HiddenFor(model => model.SangUser) %>
     <%: Html.HiddenFor(model => model.nMattressUsers) %>
     <%: Html.HiddenFor(model => model.UserType) %>
     <%: Html.HiddenFor(model => model.HospitalId) %>
+    <%: Html.HiddenFor(model => model.Hospital) %>
+    <%: Html.HiddenFor(model => model.RegisterDate) %>
 
     <table class="tableCuestion">
      <tr>
@@ -167,7 +170,7 @@
     </table>
 
         <table>
-            <tr>
+            <%--<tr>
                <td>
                     <p><%: Html.LabelFor(model => model.nMattressUsers) %> :</p>
                 </td>
@@ -176,15 +179,15 @@
                 </td>
                 <td>
                 </td>
-                <%--<td>
+                <td>
                     <p><%: Html.LabelFor(model => model.Age) %> :</p>
                 </td>
                 <td>
                     <%= Html.DropDownList("cAge")%>
                 </td>
                 <td>
-                </td>--%>
-            </tr>
+                </td>
+            </tr>--%>
             <tr>
             <td>
                     <p><%: Html.LabelFor(model => model.Gender) %> :</p>

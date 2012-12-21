@@ -15,9 +15,6 @@ namespace Sang.Models
         [DisplayName("Modelo del colchón")]
         public string ModelName { get; set; }
 
-        [DisplayName("Tamaño del colchón")]
-        public string MattressSize { get; set; }
-
         [DisplayName("Activo")]
         public Boolean IsActived { get; set; }
 
