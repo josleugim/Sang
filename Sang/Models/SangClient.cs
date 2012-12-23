@@ -70,6 +70,10 @@ namespace Sang.Models
         [DisplayName("Estado")]
         public string ShortState { get; set; }
 
+        [StringLength(3)]
+        [DisplayName("Lada")]
+        public string Lada { get; set; }
+
         [DisplayName("Teléfono de casa")]
         public long? HomePhone { get; set; }
 

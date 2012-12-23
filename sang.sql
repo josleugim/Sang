@@ -21,6 +21,7 @@ select * from SangChilds
 select * from ModelMattresses
 select * from Collections
 Select * from Newsletters
+Select * from Hospitals
 
 
 INSERT INTO Warranties(SangClientId,WarrantyCode, NAttempts, IsActived, ExpirationDate, RegisterDate)
