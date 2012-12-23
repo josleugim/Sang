@@ -20,11 +20,13 @@ namespace Sang.Controllers
         }
 
         //
-        // GET: /Collection/Create
+        // GET: /SangClient/Create
 
         public ActionResult Create()
         {
             SangUser users = _db.SangUsers.FirstOrDefault(c => c.Email.Equals(User.Identity.Name));
+            Hospital hosp = _db.Hospitals.FirstOrDefault(h => h.HospitalName.Equals("Hospital ABC, México, D.F."));
+
             SangClient client = _db.SangClients.FirstOrDefault(c => c.SangUser.SangUserID.Equals(users.SangUserID));
             if (client == null)
             {
@@ -42,9 +44,14 @@ namespace Sang.Controllers
                 {
                     SangUserId = users.SangUserID,
                     SangUser = users,
+<<<<<<< HEAD
                     nMattressUsers = 0,
                     UserType = "Mayor de edad",
                     Gender = "Ninguno"
+=======
+                    HospitalId = hosp.HospitalID,
+                    Hospital = hosp,
+>>>>>>> origin
                 };
 
                 return View(model);
@@ -54,7 +61,7 @@ namespace Sang.Controllers
         }
 
         //
-        // POST: /Collection/Create
+        // POST: /SangClient/Create
 
         [HttpPost]
         public ActionResult Create(SangClient sangclient, string cGender)
@@ -76,7 +83,15 @@ namespace Sang.Controllers
                 sangclient.RegisterDate = DateTime.Now;
                 sangclient.SangUser = users;
                 _db.SaveChanges();
-                return RedirectToAction("AdultCuestionary", new { id = sangclient.SangClientID });
+                //return RedirectToAction("AdultCuestionary", new { id = sangclient.SangClientID });
+
+                //Update the client in the warranty
+                Warranty warranty = _db.Warranties.FirstOrDefault(s => s.WarrantyCode.Equals(users.tempWarranty));
+                    UpdateModel(warranty);
+                    warranty.SangClient = sangclient;
+                    _db.SaveChanges();
+
+                return RedirectToAction("Create", "Purchase", new { id = warranty.WarrantyID });
             }
 
             List<int> n = new List<int> { 1, 2 };
@@ -124,7 +139,7 @@ namespace Sang.Controllers
             return View();
         }
 
-        public ActionResult Introduction(string MenorEdad, string nMattress)
+        public ActionResult Introduction(int id, string MenorEdad, string nMattress)
         {
             ViewBag.Message = "Inicio";
             ViewBag.ModelMattressID = new SelectList(_db.ModelMattress, "ModelMattressID", "ModelName");
@@ -351,6 +366,7 @@ namespace Sang.Controllers
                     user.IsActived = true;
                     _db.SaveChanges();
 
+                    //Block the warranty
                     Warranty warranty = _db.Warranties.FirstOrDefault(s => s.WarrantyCode.Equals(user.tempWarranty));
                     UpdateModel(warranty);
                     warranty.IsActived = false;

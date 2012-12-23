@@ -37,10 +37,15 @@
     <%: Html.ValidationSummary(true) %>
 
     <%: Html.HiddenFor(model => model.SangUserId) %>
+    <%: Html.HiddenFor(model => model.SangUser) %>
     <%: Html.HiddenFor(model => model.nMattressUsers) %>
     <%: Html.HiddenFor(model => model.UserType) %>
     <%: Html.HiddenFor(model => model.HospitalId) %>
+<<<<<<< HEAD
     <%: Html.HiddenFor(model => model.Gender) %>
+=======
+    <%: Html.HiddenFor(model => model.Hospital) %>
+>>>>>>> origin
 
     <table>
      <tr>
@@ -92,6 +97,62 @@
      </tr>
     </table>
 
+<<<<<<< HEAD
+=======
+        <table>
+            <%--<tr>
+               <td>
+                    <p><%: Html.LabelFor(model => model.nMattressUsers) %> :</p>
+                </td>
+                <td>
+                    <%= Html.DropDownList("nMattress")%>
+                </td>
+                <td>
+                </td>
+                <td>
+                    <p><%: Html.LabelFor(model => model.Age) %> :</p>
+                </td>
+                <td>
+                    <%= Html.DropDownList("cAge")%>
+                </td>
+                <td>
+                </td>
+            </tr>--%>
+            <tr>
+            <td>
+                    <p><%: Html.LabelFor(model => model.Gender) %> :</p>
+                </td>
+                <td>
+                    <p>
+                        Masculino
+                        <%= Html.RadioButton("cGender", "Masculino")%></p>
+                        <p> Femenino
+                        <%= Html.RadioButton("cGender", "Femenino")%></p>
+                </td>
+                <td>
+                 
+                </td>
+                <td>
+                    <p><%: Html.LabelFor(model => model.NewsLetter) %> :</p>
+                </td>
+                <td>
+                    <%: Html.EditorFor(model => model.NewsLetter) %>
+                </td>
+                <td>
+                    <%: Html.ValidationMessageFor(model => model.NewsLetter) %>
+                </td>
+                <td>
+                    <p><%: Html.LabelFor(model => model.PrivacyNotice) %> :</p>
+                </td>
+                <td>
+                    <%: Html.EditorFor(model => model.PrivacyNotice)%>
+                </td>
+                <td>
+                    <%: Html.ValidationMessageFor(model => model.PrivacyNotice)%>
+                </td>
+            </tr>
+        </table>
+>>>>>>> origin
 
         <%--<div class="editor-label">
             <%: Html.LabelFor(model => model.SangUserId) %>

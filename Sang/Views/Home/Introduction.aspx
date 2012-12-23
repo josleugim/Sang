@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<Sang.Models.ModelMattress>" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<Sang.Models.SangClient>" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
     Introduction
@@ -10,15 +10,21 @@
        { %>
     <div class="evaluacion">
     <img src="../../Content/images/Evaluacion.png" alt="Imagen" />
+
+    <%: Html.HiddenFor(model => model.SangUserId) %>
+    <%: Html.HiddenFor(model => model.nMattressUsers) %>
+    <%: Html.HiddenFor(model => model.UserType) %>
+    <%: Html.HiddenFor(model => model.HospitalId) %>
+
         <table style="margin: 0 auto">
-            <tr>
+            <%--<tr>
                 <th colspan="2">
                     Seleccione un modelo:
                 </th>
                 <td>
                     <%= Html.DropDownList("ModelMattressID")%>
                 </td>
-            </tr>
+            </tr>--%>
             <tr>
                 <th colspan="2">
                     ¿Cuantas personas utilizan el colchon?

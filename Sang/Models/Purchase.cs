@@ -16,14 +16,11 @@ namespace Sang.Models
         [DisplayName("Número de factura")]
         public string BillNumber { get; set; }
 
+        [DisplayName("Tamaño del colchón")]
+        public string MattressSize { get; set; }
+
         [DisplayName("Tienda")]
         public string Store { get; set; }
-
-        [DisplayName("Monto")]
-        public decimal BillAmount { get; set; }
-
-        [DisplayName("Fecha de compra")]
-        public DateTime PurchaseDate { get; set; }
 
         public DateTime RegisterDate { get; set; }
 
