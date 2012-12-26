@@ -1,0 +1,84 @@
+﻿@model Sang.Models.Purchase
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+
+    @Html.HiddenFor(model => model.WarrantyId)
+
+    <fieldset>
+        <legend>Purchase</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ModelMattresstId)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ModelMattresstId)
+            @Html.ValidationMessageFor(model => model.ModelMattresstId)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.WarrantyId, "Warranty")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("WarrantyId", String.Empty)
+            @Html.ValidationMessageFor(model => model.WarrantyId)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.BillNumber)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.BillNumber)
+            @Html.ValidationMessageFor(model => model.BillNumber)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Store)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Store)
+            @Html.ValidationMessageFor(model => model.Store)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.BillAmount)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.BillAmount)
+            @Html.ValidationMessageFor(model => model.BillAmount)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.PurchaseDate)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.PurchaseDate)
+            @Html.ValidationMessageFor(model => model.PurchaseDate)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.RegisterDate)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.RegisterDate)
+            @Html.ValidationMessageFor(model => model.RegisterDate)
+        </div>
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

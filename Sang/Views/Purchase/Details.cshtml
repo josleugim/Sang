@@ -1,0 +1,50 @@
+﻿@model Sang.Models.Purchase
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Purchase</legend>
+
+    <div class="display-label">ModelMattresstId</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ModelMattresstId)
+    </div>
+
+    <div class="display-label">Warranty</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Warranty.WarrantyCode)
+    </div>
+
+    <div class="display-label">BillNumber</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.BillNumber)
+    </div>
+
+    <div class="display-label">Store</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Store)
+    </div>
+
+    <div class="display-label">BillAmount</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.BillAmount)
+    </div>
+
+    <div class="display-label">PurchaseDate</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.PurchaseDate)
+    </div>
+
+    <div class="display-label">RegisterDate</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.RegisterDate)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.PurchaseID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
