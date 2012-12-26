@@ -25,7 +25,7 @@ namespace Sang.Controllers
         public ActionResult Create()
         {
             SangUser users = _db.SangUsers.FirstOrDefault(c => c.Email.Equals(User.Identity.Name));
-            Hospital hosp = _db.Hospitals.FirstOrDefault(h => h.HospitalName.Equals("Hospital ABC, México, D.F."));
+            Hospital hosp = _db.Hospitals.FirstOrDefault(h => h.HospitalName.Equals("Ninguno"));
 
             SangClient client = _db.SangClients.FirstOrDefault(c => c.SangUser.SangUserID.Equals(users.SangUserID));
             if (client == null)
@@ -36,28 +36,22 @@ namespace Sang.Controllers
                 "San Luis Potosí", "Sinaloa", "Sonora", "Tabasco", "Tamaulipas", "Tlaxcala", "Veracruz", "Yucatán", "Zacatecas"};
                 ViewBag.estado = new SelectList(estado);
 
-                List<int> n = new List<int> { 1, 2 };
-                ViewBag.nMattress = new SelectList(n);
-
                 //Set the ID of the relational sanguser
                 var model = new SangClient
                 {
                     SangUserId = users.SangUserID,
                     SangUser = users,
-<<<<<<< HEAD
                     nMattressUsers = 0,
                     UserType = "Mayor de edad",
-                    Gender = "Ninguno"
-=======
+                    Gender = "Ninguno",
                     HospitalId = hosp.HospitalID,
-                    Hospital = hosp,
->>>>>>> origin
+                    Hospital = hosp
                 };
 
                 return View(model);
             }
             else
-                return RedirectToAction("Edit", new { id = client.SangClientID });
+                return RedirectToAction("Create", "Purchase", new { id = client.SangClientID });
         }
 
         //
@@ -66,22 +60,17 @@ namespace Sang.Controllers
         [HttpPost]
         public ActionResult Create(SangClient sangclient, string cGender)
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid && sangclient.PrivacyNotice != false)
             {
-                if (sangclient.PrivacyNotice == false)
-                {
-                    return View(sangclient);
-                }
-
                 SangUser users = _db.SangUsers.FirstOrDefault(c => c.Email.Equals(User.Identity.Name));
+                Hospital hosp = _db.Hospitals.FirstOrDefault(h => h.HospitalName.Equals("Ninguno"));
 
                 _db.SangClients.Add(sangclient);
-                //sangclient.nMattressUsers = Convert.ToInt32(nMattress);
                 sangclient.CompleteName = sangclient.UserName + " " + sangclient.FirstName + " " + sangclient.LastName;
-                //sangclient.Age = Convert.ToInt32(cAge);
                 sangclient.Gender = cGender;
                 sangclient.RegisterDate = DateTime.Now;
                 sangclient.SangUser = users;
+                sangclient.Hospital = hosp;
                 _db.SaveChanges();
                 //return RedirectToAction("AdultCuestionary", new { id = sangclient.SangClientID });
 
@@ -94,18 +83,11 @@ namespace Sang.Controllers
                 return RedirectToAction("Create", "Purchase", new { id = warranty.WarrantyID });
             }
 
-            List<int> n = new List<int> { 1, 2 };
-            ViewBag.nMattress = new SelectList(n);
-
             List<string> estado = new List<string> { "Aguascalientes", "Baja California", "Baja California Sur", "Campeche", 
                     "Chiapas", "Chihuahua", "Coahuila", "Colima", "Durango", "Guanajuato", "Guerrero", "Hidalgo", "Jalisco", "México",
                 "Michoacán de Ocampo", "Morelos", "Nayarit", "Nuevo León", "Oaxaca", "Puebla", "Querétaro", "Quintana Roo",
                 "San Luis Potosí", "Sinaloa", "Sonora", "Tabasco", "Tamaulipas", "Tlaxcala", "Veracruz", "Yucatán", "Zacatecas"};
             ViewBag.estado = new SelectList(estado);
-
-            //List<int> age = new List<int> { 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50,
-            //51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70};
-            //ViewBag.cAge = new SelectList(age);
 
             return View(sangclient);
         }

@@ -1,12 +1,9 @@
 use sangdbadmin
 go
 
-Select * from Warranties
-select * from SangUsers
-
-update SangUsers
-Set Email = 'Notjmiguel@mipipol.com.mx'
-Where SangUserID = 1
+--update SangUsers
+--Set Email = 'Notjmiguel@mipipol.com.mx'
+--Where SangUserID = 1
 
 --Update Warranties
 --Set IsActived = 1
@@ -16,12 +13,27 @@ Where SangUserID = 1
 --Set Email = 'xxxx'
 --Where WarrantyID = 2
 
+Select * from Warranties
+select * from SangUsers
 select * from SangClients
 select * from ModelMattresses
 select * from Collections
 Select * from Newsletters
 Select * from Hospitals
+select * from Purchases
 
+--Delete from SangUsers
+--Delete From ModelMattresses
+--Delete From Collections
+--Delete from Warranties
+
+--drop table Collections
+--drop table ModelMattresses
+--drop table SangUsers
+--drop table SangClients
+--drop table SangChilds
+--drop table Warranties
+--drop table Purchases
 
 INSERT INTO Warranties(SangClientId,WarrantyCode, NAttempts, IsActived, ExpirationDate, RegisterDate)
 Values(null,'TEST1231',0,1,getdate(),getdate())
