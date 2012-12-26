@@ -13,13 +13,14 @@ namespace Sang.Models
         public int ModelMattresstId { get; set; }
         public int WarrantyId { get; set; }
 
+        [Required(ErrorMessage="Requerido")]
         [DisplayName("Número de factura")]
         public string BillNumber { get; set; }
 
         [DisplayName("Tamaño del colchón")]
         public string MattressSize { get; set; }
 
-        [DisplayName("Tienda")]
+        [DisplayName("Lugar de compra")]
         public string Store { get; set; }
 
         public DateTime RegisterDate { get; set; }

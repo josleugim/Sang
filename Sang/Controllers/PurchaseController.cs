@@ -8,7 +8,7 @@ using System.Web.Mvc;
 using Sang.Models;
 
 namespace Sang.Controllers
-{ 
+{
     public class PurchaseController : Controller
     {
         private SangDBContext db = new SangDBContext();
@@ -46,7 +46,7 @@ namespace Sang.Controllers
                 ViewBag.MattressId = new SelectList(db.ModelMattress, "ModelMattressID", "ModelName");
                 List<string> size = new List<string> { "Individual", "Matrimonial", "King Size", "Queen Size" };
                 ViewBag.Size = new SelectList(size);
-                List<string> estado = new List<string> { "Aguascalientes", "Baja California", "Baja California Sur", "Campeche", 
+                List<string> estado = new List<string> { "Aguascalientes", "Baja California", "Baja California Sur", "Campeche",
                     "Chiapas", "Chihuahua", "Coahuila", "Colima", "Durango", "Guanajuato", "Guerrero", "Hidalgo", "Jalisco", "México",
                 "Michoacán de Ocampo", "Morelos", "Nayarit", "Nuevo León", "Oaxaca", "Puebla", "Querétaro", "Quintana Roo",
                 "San Luis Potosí", "Sinaloa", "Sonora", "Tabasco", "Tamaulipas", "Tlaxcala", "Veracruz", "Yucatán", "Zacatecas"};
@@ -100,7 +100,7 @@ namespace Sang.Controllers
             ViewBag.MattressId = new SelectList(db.ModelMattress, "ModelMattressID", "ModelName");
             List<string> size = new List<string> { "Individual", "Matrimonial", "King Size", "Queen Size" };
             ViewBag.Size = new SelectList(size);
-            List<string> estado2 = new List<string> { "Aguascalientes", "Baja California", "Baja California Sur", "Campeche", 
+            List<string> estado2 = new List<string> { "Aguascalientes", "Baja California", "Baja California Sur", "Campeche",
                     "Chiapas", "Chihuahua", "Coahuila", "Colima", "Durango", "Guanajuato", "Guerrero", "Hidalgo", "Jalisco", "México",
                 "Michoacán de Ocampo", "Morelos", "Nayarit", "Nuevo León", "Oaxaca", "Puebla", "Querétaro", "Quintana Roo",
                 "San Luis Potosí", "Sinaloa", "Sonora", "Tabasco", "Tamaulipas", "Tlaxcala", "Veracruz", "Yucatán", "Zacatecas"};

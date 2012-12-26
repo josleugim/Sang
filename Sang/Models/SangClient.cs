@@ -70,6 +70,10 @@ namespace Sang.Models
         [DisplayName("Estado")]
         public string ShortState { get; set; }
 
+        [StringLength(3, ErrorMessage="La lada solo debe tener 3 caracteres")]
+        [DisplayName("Lada")]
+        public string Lada { get; set; }
+
         [DisplayName("Teléfono de casa")]
         public long? HomePhone { get; set; }
 
@@ -80,10 +84,11 @@ namespace Sang.Models
         [DisplayName("¿Menor o mayor de edad?")]
         public string UserType { get; set; }
 
-        [DisplayName("Regístrate a nuestro Newsletter")]
+        [DisplayName("Suscribirse a nuestro Newsletter")]
         public bool NewsLetter { get; set; }
 
-        [DisplayName("Aviso de privacidad")]
+        [Required(ErrorMessage="Requerido")]
+        [DisplayName("He leído y acepto los Términos del Aviso de privacidad")]
         public bool PrivacyNotice { get; set; }
 
         public virtual SangUser SangUser { get; set; }
