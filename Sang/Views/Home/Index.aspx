@@ -462,18 +462,7 @@
         }); //end-ready
 
         function FindRegister() {
-            var strResultado = ""; bflag = false;
-            for (var i = 1126; i <= 1685; i++) {
-                if (i == $.trim($("#contactName").val())) {
-                    bflag = true;
-                    $("#ejemplo1").click(function () { return true; }).click();
-                    break;
-                }
-            } //End-for			
-
-            if (bflag == false) {
-                alert("Número incorrecto. \nInténtelo nuevamente.");
-            } //End-if
+            $("#ejemplo1").click(function () { return true; }).click();
         } //End-function
 
         function ValidaData() {
@@ -566,9 +555,6 @@
                             <div id="custom_garantia"> 
                               <!--<input type="text" tabindex="1" size="22" class="txtfield_garantia" value="" id="garantia" name="garantia"/>-->
                               <%--<input type="text" tabindex="1" size="22" class="txtfield_garantia" value="" id="contactName" name="contactName"/>--%>
-                              
-							  <%--<a href="javascript:void(0)" > <img src="Content/img-demo/zoom_in.png" class="lupa" alt="" id="garanty" /> </a>
-    <a id="ejemplo1" href="Content/garantia/index.html?lightbox[iframe]=true&lightbox[width]=1150&lightbox[height]=600" class="lightbox"><img src="Content/img-demo/zoom_in.png" class="lupa" alt="" id="Img1" /></a>--%>
                               <% using (Html.BeginForm())
                                  { %>
     <table>
@@ -578,6 +564,12 @@
      <tr>
       <td><%= Html.TextBox("SearchString", null, new { style = "background-color:#3D3D3D; border:none; border-radius:3px; -webkit-border-radius: 3px; -moz-border-radius: 3px; opacity:0.8; filter:alpha(opacity=80); height:30px; color:white;" })%></td>
       <td><input type="image" src="../../Content/images/Boton.png" value="Verificar" /></td>
+     </tr>
+     <tr>
+      <td colspan="2">
+       Recomendaciones: <a href="javascript:void(0)"><span id="garanty>Recomendaciones</span></a>
+       <a id="ejemplo1" href="Content/garantia/index.html?lightbox[iframe]=true&lightbox[width]=1150&lightbox[height]=600" class="lightbox"><img src="Content/img-demo/zoom_in.png" class="lupa" alt="" id="Img1" /></a>
+      </td>
      </tr>
      <tr>
       <td colspan="2"><p style="color:Red;"><%= Html.Encode(ViewData["waranty"]) %></p></td>
@@ -887,9 +879,10 @@
                     Aviso de privacidad</a></div>
             <div class="menubtn">
                 <a href="#">
-                    <img src="../../Content/images/facebook_dark_small.png" class="ttip" width="20" height="20" style="border: none;
-                        margin-left: 10px;" title="Síguenos en Facebook" /></a> <a href="#">
-                            <%--<img src="Content/img-demo/twitter.png" class="ttip" width="20" height="20" style="border: none;
+                    <img src="../../Content/images/facebook_dark_small.png" class="ttip" width="20" height="20"
+                        style="border: none; margin-left: 10px;" title="Síguenos en Facebook" /></a>
+                <a href="#">
+                    <%--<img src="Content/img-demo/twitter.png" class="ttip" width="20" height="20" style="border: none;
                                 margin-left: 10px;" title="Síguenos en Twitter" /></a>--%>
             </div>
             <%--<div class="menubtn1">
