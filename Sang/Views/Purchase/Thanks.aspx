@@ -10,6 +10,5 @@
         <img style="margin: 10px" src="../../Content/images/RegistrodeGarantia_small.png"
             alt="Imagen" />
             <h2>Gracias, su garantía se encuentra registrada.</h2>
-            <p>Espere muy pronto las evaluaciones del sueño.</p>
     </div>
 </asp:Content>

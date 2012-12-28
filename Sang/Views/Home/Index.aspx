@@ -568,7 +568,7 @@
                               <%--<input type="text" tabindex="1" size="22" class="txtfield_garantia" value="" id="contactName" name="contactName"/>--%>
                               
 							  <%--<a href="javascript:void(0)" > <img src="Content/img-demo/zoom_in.png" class="lupa" alt="" id="garanty" /> </a>
-    <a id="ejemplo1" href="Content/garantia/index.html?lightbox[iframe]=true&lightbox[width]=1150&lightbox[height]=600" class="lightbox"></a>  --%>  
+    <a id="ejemplo1" href="Content/garantia/index.html?lightbox[iframe]=true&lightbox[width]=1150&lightbox[height]=600" class="lightbox"><img src="Content/img-demo/zoom_in.png" class="lupa" alt="" id="Img1" /></a>--%>
                               <% using (Html.BeginForm())
                                  { %>
     <table>
