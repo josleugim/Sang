@@ -40,22 +40,18 @@ namespace Sang.Models
 
         //
         //Datos de menores de edad
-        [Required(ErrorMessage = "Requerido")]
         [DisplayName("Apellido Paterno")]
         public string ChildFirstName { get; set; }
 
-        [Required(ErrorMessage = "Requerido")]
         [DisplayName("Apellido Materno")]
         public string ChildLastName { get; set; }
 
         [DisplayName("Nombre completo")]
         public string ChildCompleteName { get; set; }
 
-        [Required(ErrorMessage = "Requerido")]
         [DisplayName("Fecha de nacimiento")]
         public DateTime? ChildBirthDate { get; set; }
 
-        [Required(ErrorMessage = "Requerido")]
         [DisplayName("Genero")]
         public string ChildGender { get; set; }
 
