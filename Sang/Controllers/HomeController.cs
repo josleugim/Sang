@@ -26,8 +26,10 @@ namespace Sang.Controllers
         {
             SangUser users = _db.SangUsers.FirstOrDefault(c => c.Email.Equals(User.Identity.Name));
             Hospital hosp = _db.Hospitals.FirstOrDefault(h => h.HospitalName.Equals("Ninguno"));
-
             SangClient client = _db.SangClients.FirstOrDefault(c => c.SangUser.SangUserID.Equals(users.SangUserID));
+
+            //
+            //Si no existe el cliente se crea la cuenta
             if (client == null)
             {
                 List<string> estado = new List<string> { "Aguascalientes", "Baja California", "Baja California Sur", "Campeche", 
@@ -35,6 +37,9 @@ namespace Sang.Controllers
                 "Michoacán de Ocampo", "Morelos", "Nayarit", "Nuevo León", "Oaxaca", "Puebla", "Querétaro", "Quintana Roo",
                 "San Luis Potosí", "Sinaloa", "Sonora", "Tabasco", "Tamaulipas", "Tlaxcala", "Veracruz", "Yucatán", "Zacatecas"};
                 ViewBag.estado = new SelectList(estado);
+
+                List<int> n = new List<int> { 1, 2 };
+                ViewBag.nMattress = new SelectList(n);
 
                 //Set the ID of the relational sanguser
                 var model = new SangClient
@@ -50,15 +55,17 @@ namespace Sang.Controllers
 
                 return View(model);
             }
+            //
+            //Si ya existe la cuenta se envía la garantía
             else
-                return RedirectToAction("Create", "Purchase", new { id = client.SangClientID });
+                return RedirectToAction("Create", "Purchase", new { id = users.tempWarranty });
         }
 
         //
         // POST: /SangClient/Create
 
         [HttpPost]
-        public ActionResult Create(SangClient sangclient, string cGender)
+        public ActionResult Create(SangClient sangclient, string cGender, string nMattress)
         {
             if (ModelState.IsValid && sangclient.PrivacyNotice != false)
             {
@@ -71,16 +78,17 @@ namespace Sang.Controllers
                 sangclient.RegisterDate = DateTime.Now;
                 sangclient.SangUser = users;
                 sangclient.Hospital = hosp;
+                sangclient.nMattressUsers = Convert.ToInt32(nMattress);
                 _db.SaveChanges();
                 //return RedirectToAction("AdultCuestionary", new { id = sangclient.SangClientID });
 
                 //Update the client in the warranty
                 Warranty warranty = _db.Warranties.FirstOrDefault(s => s.WarrantyCode.Equals(users.tempWarranty));
-                    UpdateModel(warranty);
-                    warranty.SangClient = sangclient;
-                    _db.SaveChanges();
+                UpdateModel(warranty);
+                warranty.SangClient = sangclient;
+                _db.SaveChanges();
 
-                return RedirectToAction("Create", "Purchase", new { id = warranty.WarrantyID });
+                return RedirectToAction("Create", "Purchase", new { id = warranty.WarrantyCode });
             }
 
             List<string> estado = new List<string> { "Aguascalientes", "Baja California", "Baja California Sur", "Campeche", 
@@ -88,6 +96,9 @@ namespace Sang.Controllers
                 "Michoacán de Ocampo", "Morelos", "Nayarit", "Nuevo León", "Oaxaca", "Puebla", "Querétaro", "Quintana Roo",
                 "San Luis Potosí", "Sinaloa", "Sonora", "Tabasco", "Tamaulipas", "Tlaxcala", "Veracruz", "Yucatán", "Zacatecas"};
             ViewBag.estado = new SelectList(estado);
+
+            List<int> n = new List<int> { 1, 2 };
+            ViewBag.nMattress = new SelectList(n);
 
             return View(sangclient);
         }
@@ -121,27 +132,31 @@ namespace Sang.Controllers
             return View();
         }
 
-        public ActionResult Introduction(int id, string MenorEdad, string nMattress)
+        public ActionResult Introduction(int id, string menorEdad)
         {
             ViewBag.Message = "Inicio";
             ViewBag.ModelMattressID = new SelectList(_db.ModelMattress, "ModelMattressID", "ModelName");
 
-            List<int> n = new List<int> { 1, 2 };
+            var n = new List<int> { 1, 2 };
             ViewBag.nMattress = new SelectList(n);
+
+            var users = _db.SangUsers.FirstOrDefault(c => c.Email.Equals(User.Identity.Name));
+            var nclient = from u in _db.SangClients
+                          where u.SangUserId == users.SangUserID
+                          select u;
+            SangClient nMattress = _db.SangClients.FirstOrDefault(c => c.SangUser.SangUserID.Equals(users.SangUserID));
+
+            //Verifíco el numero de usuarios del colchon y lo valido con el número de cuentas creadas
+            bool goCuestionary = nMattress != null && nclient.Count() <= nMattress.nMattressUsers;
 
 
             if (Request.HttpMethod == "POST")
             {
-                if (nMattress != "")
+                if (goCuestionary)
                 {
-                    //SangClient client = _db.SangClients.FirstOrDefault(c => c.Email.Equals(User.Identity.Name));
-                    //UpdateModel(client);
-                    //client.nMattressUsers = Convert.ToInt32(nMattress);
-                    //_db.SaveChanges();
-
-                    if (MenorEdad == "Si")
+                    if (menorEdad == "Si")
                         return RedirectToAction("CuestionaryChild", "Home", new { id = Convert.ToInt32(nMattress) });
-                    if (MenorEdad == "No")
+                    if (menorEdad == "No")
                         return RedirectToAction("AdultCuestionary", "Home", new { id = Convert.ToInt32(nMattress) });
                 }
             }

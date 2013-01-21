@@ -34,11 +34,24 @@ namespace Sang.Controllers
         //
         // GET: /Purchase/Create
 
-        public ActionResult Create(int id)
+        public ActionResult Create(string id)
         {
-            //SangUser users = db.SangUsers.FirstOrDefault(c => c.Email.Equals(User.Identity.Name));
-            Warranty warrant = db.Warranties.FirstOrDefault(c => c.WarrantyID.Equals(id));
-            Purchase purchase = db.Purchase.FirstOrDefault(c => c.WarrantyId.Equals(warrant.WarrantyID));
+            //Warranty warrant;
+
+            //if (!String.IsNullOrEmpty(id))
+            //{
+            //    //SangUser users = db.SangUsers.FirstOrDefault(c => c.Email.Equals(User.Identity.Name));
+            //    warrant = db.Warranties.FirstOrDefault(c => c.WarrantyCode.Equals(users.tempWarranty));
+            //}
+            //else
+            //{
+            //    warrant = db.Warranties.FirstOrDefault(c => c.WarrantyID.Equals(id));
+                
+            //}
+
+            var warrant = db.Warranties.FirstOrDefault(c => c.WarrantyCode.Equals(id));
+
+            var purchase = db.Purchase.FirstOrDefault(c => c.WarrantyId.Equals(warrant.WarrantyID));
 
             if (purchase == null)
             {
@@ -52,7 +65,7 @@ namespace Sang.Controllers
                 "San Luis Potosí", "Sinaloa", "Sonora", "Tabasco", "Tamaulipas", "Tlaxcala", "Veracruz", "Yucatán", "Zacatecas"};
                 ViewBag.estado = new SelectList(estado);
 
-                Warranty warr = db.Warranties.Find(id);
+                Warranty warr = db.Warranties.Find(warrant.WarrantyID);
 
                 var model = new Purchase
                 {
@@ -93,7 +106,8 @@ namespace Sang.Controllers
                 client.PostalCode = cp;
                 db.SaveChanges();
 
-                return View("Thanks");
+                //return View("Thanks");
+                return RedirectToAction("Introduction", "Home");
             }
 
             ViewBag.WarrantyId = new SelectList(db.Warranties, "WarrantyID", "WarrantyCode", purchase.WarrantyId);

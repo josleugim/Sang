@@ -17,6 +17,8 @@ namespace Sang.Models
         [Display(Name = "Nombres")]
         public string UserName { get; set; }
 
+        //Datos
+        //Mayores de edad
         [Required(ErrorMessage="Requerido")]
         [DisplayName("Apellido Paterno")]
         public string FirstName { get; set; }
@@ -35,6 +37,27 @@ namespace Sang.Models
         [Required(ErrorMessage = "Requerido")]
         [DisplayName("Genero")]
         public string Gender { get; set; }
+
+        //
+        //Datos de menores de edad
+        [Required(ErrorMessage = "Requerido")]
+        [DisplayName("Apellido Paterno")]
+        public string ChildFirstName { get; set; }
+
+        [Required(ErrorMessage = "Requerido")]
+        [DisplayName("Apellido Materno")]
+        public string ChildLastName { get; set; }
+
+        [DisplayName("Nombre completo")]
+        public string ChildCompleteName { get; set; }
+
+        [Required(ErrorMessage = "Requerido")]
+        [DisplayName("Fecha de nacimiento")]
+        public DateTime? ChildBirthDate { get; set; }
+
+        [Required(ErrorMessage = "Requerido")]
+        [DisplayName("Genero")]
+        public string ChildGender { get; set; }
 
         [DisplayName("Usuarios del colchón")]
         public int? nMattressUsers { get; set; }

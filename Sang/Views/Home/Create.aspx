@@ -135,7 +135,9 @@
                         <%: Html.EditorFor(model => model.NewsLetter) %>
                         <%: Html.LabelFor(model => model.NewsLetter) %></p>
                 </td>
-                <td></td>
+                <td>
+                    <p>¿Número de personas que usan el colchon? <%= Html.DropDownList("nMattress")%></p>
+                </td>
                 <td>
                     <p>
                         <u>

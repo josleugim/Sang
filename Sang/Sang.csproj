@@ -102,6 +102,7 @@
     <Compile Include="Models\SangClient.cs" />
     <Compile Include="Models\SangDBContext.cs" />
     <Compile Include="Models\SangInitializer.cs" />
+    <Compile Include="Models\SangResult.cs" />
     <Compile Include="Models\UserRepository.cs" />
     <Compile Include="Models\SangUser.cs" />
     <Compile Include="Models\Warranty.cs" />
