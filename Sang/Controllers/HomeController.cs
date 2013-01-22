@@ -211,6 +211,12 @@ namespace Sang.Controllers
             return View();
         }
 
+        /// <summary>
+        /// Direcciona al exámen dependiendo de la edad.
+        /// </summary>
+        /// <param name="menorEdad">The menor edad.</param>
+        /// <param name="id">The id.</param>
+        /// <returns></returns>
         public ActionResult Introduction(string menorEdad, int id)
         {
             ViewBag.Message = "Inicio";
@@ -224,37 +230,10 @@ namespace Sang.Controllers
                 var users = _db.SangUsers.FirstOrDefault(c => c.Email.Equals(User.Identity.Name));
                 var nMattress = _db.SangClients.FirstOrDefault(c => c.SangUser.SangUserID.Equals(users.SangUserID));
 
-                //Verifíco el numero de usuarios del colchon y lo valido con el número de cuentas creadas
-                if (nMattress != null)
-                {
-                    switch (nMattress.nMattressUsers)
-                    {
-                        case 1:
-                            if (menorEdad == "Si")
-                                return RedirectToAction("CuestionaryChild", "Home", new { id = Convert.ToInt32(nMattress.SangClientID) });
-                            if (menorEdad == "No")
-                                return RedirectToAction("AdultCuestionary", "Home", new { id = Convert.ToInt32(nMattress.SangClientID) });
-                            break;
-                        case 2:
-                            var nclient = from u in _db.SangClients
-                                          where u.SangUserId == users.SangUserID
-                                          select u;
-                            if (nclient.Count() == 1)
-                            {
-                                if (menorEdad == "No")
-                                    return RedirectToAction("CreateSecond", "Home");
-                            }
-                            if (nclient.Count() == 2)
-                            {
-                                if (menorEdad == "Si")
-                                    return RedirectToAction("CuestionaryChild", "Home", new { id = Convert.ToInt32(nMattress.SangClientID) });
-                                if (menorEdad == "No")
-                                    return RedirectToAction("AdultCuestionary", "Home", new { id = Convert.ToInt32(nMattress.SangClientID) });
-                            }
-                            break;
-                    }
-                    //bool goCuestionary = nMattress != null && nclient.Count() <= nMattress.nMattressUsers;
-                }
+                if (menorEdad == "Si")
+                    return RedirectToAction("CuestionaryChild", "Home", new { id = Convert.ToInt32(nMattress.SangClientID) });
+                if (menorEdad == "No")
+                    return RedirectToAction("AdultCuestionary", "Home", new { id = Convert.ToInt32(nMattress.SangClientID) });
             }
 
             return View();
