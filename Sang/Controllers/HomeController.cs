@@ -239,7 +239,6 @@ namespace Sang.Controllers
             return View();
         }
 
-
         //Create Child Cuestionary
         public ActionResult CuestionaryChild(int id)
         {
