@@ -34,34 +34,35 @@ namespace Sang.Controllers
         //
         // GET: /Purchase/Create
 
-        public ActionResult Create(int id)
+        public ActionResult Create(string id)
         {
-            //SangUser users = db.SangUsers.FirstOrDefault(c => c.Email.Equals(User.Identity.Name));
-            Warranty warrant = db.Warranties.FirstOrDefault(c => c.WarrantyID.Equals(id));
-            Purchase purchase = db.Purchase.FirstOrDefault(c => c.WarrantyId.Equals(warrant.WarrantyID));
+            var warrant = db.Warranties.FirstOrDefault(c => c.WarrantyCode.Equals(id));
+            var purchase = db.Purchase.FirstOrDefault(c => c.WarrantyId.Equals(warrant.WarrantyID));
 
             if (purchase == null)
             {
                 ViewBag.WarrantyId = new SelectList(db.Warranties, "WarrantyID", "WarrantyCode");
                 ViewBag.MattressId = new SelectList(db.ModelMattress, "ModelMattressID", "ModelName");
-                List<string> size = new List<string> { "Individual", "Matrimonial", "King Size", "Queen Size" };
+                var size = new List<string> { "Individual", "Matrimonial", "King Size", "Queen Size" };
                 ViewBag.Size = new SelectList(size);
-                List<string> estado = new List<string> { "Aguascalientes", "Baja California", "Baja California Sur", "Campeche",
+                var estado = new List<string> { "Aguascalientes", "Baja California", "Baja California Sur", "Campeche",
                     "Chiapas", "Chihuahua", "Coahuila", "Colima", "Durango", "Guanajuato", "Guerrero", "Hidalgo", "Jalisco", "México",
                 "Michoacán de Ocampo", "Morelos", "Nayarit", "Nuevo León", "Oaxaca", "Puebla", "Querétaro", "Quintana Roo",
                 "San Luis Potosí", "Sinaloa", "Sonora", "Tabasco", "Tamaulipas", "Tlaxcala", "Veracruz", "Yucatán", "Zacatecas"};
                 ViewBag.estado = new SelectList(estado);
 
-                Warranty warr = db.Warranties.Find(id);
+                Warranty warr = db.Warranties.Find(warrant.WarrantyID);
 
                 var model = new Purchase
                 {
                     WarrantyId = warr.WarrantyID
                 };
+
                 return View(model);
             }
             else
-                return View("Thanks");
+                return RedirectToAction("Introduction", "Home", new {id = warrant.SangClientId});
+                //return View("Thanks");
         }
 
         //
@@ -73,7 +74,7 @@ namespace Sang.Controllers
             if (ModelState.IsValid)
             {
                 int tempId = Convert.ToInt32(MattressId);
-                ModelMattress matt = db.ModelMattress.FirstOrDefault(m => m.ModelMattressID.Equals(tempId));
+                var matt = db.ModelMattress.FirstOrDefault(m => m.ModelMattressID.Equals(tempId));
                 db.Purchase.Add(purchase);
                 purchase.RegisterDate = DateTime.Now;
                 purchase.MattressSize = Size;
@@ -82,9 +83,11 @@ namespace Sang.Controllers
                 db.SaveChanges();
 
                 //Update the client address
-                Warranty warr = db.Warranties.FirstOrDefault(s => s.WarrantyID.Equals(purchase.WarrantyId));
+                var warr = db.Warranties.FirstOrDefault(s => s.WarrantyID.Equals(purchase.WarrantyId));
                 int tempId2 = Convert.ToInt32(warr.SangClientId);
-                SangClient client = db.SangClients.FirstOrDefault(c => c.SangClientID.Equals(tempId2));
+
+                var client = db.SangClients.FirstOrDefault(c => c.SangClientID.Equals(tempId2));
+
                 UpdateModel(client);
                 client.Address = calle + ", número exterior " + nExt + " " + nInt;
                 client.Colony = colonia;
@@ -93,19 +96,22 @@ namespace Sang.Controllers
                 client.PostalCode = cp;
                 db.SaveChanges();
 
-                return View("Thanks");
+                return RedirectToAction("Introduction", "Home", new {id = client.SangClientID});
+                //return View("Thanks");
             }
 
             ViewBag.WarrantyId = new SelectList(db.Warranties, "WarrantyID", "WarrantyCode", purchase.WarrantyId);
             ViewBag.MattressId = new SelectList(db.ModelMattress, "ModelMattressID", "ModelName");
-            List<string> size = new List<string> { "Individual", "Matrimonial", "King Size", "Queen Size" };
+            var size = new List<string> { "Individual", "Matrimonial", "King Size", "Queen Size" };
             ViewBag.Size = new SelectList(size);
-            List<string> estado2 = new List<string> { "Aguascalientes", "Baja California", "Baja California Sur", "Campeche",
+            var estado2 = new List<string> { "Aguascalientes", "Baja California", "Baja California Sur", "Campeche",
                     "Chiapas", "Chihuahua", "Coahuila", "Colima", "Durango", "Guanajuato", "Guerrero", "Hidalgo", "Jalisco", "México",
                 "Michoacán de Ocampo", "Morelos", "Nayarit", "Nuevo León", "Oaxaca", "Puebla", "Querétaro", "Quintana Roo",
                 "San Luis Potosí", "Sinaloa", "Sonora", "Tabasco", "Tamaulipas", "Tlaxcala", "Veracruz", "Yucatán", "Zacatecas"};
             ViewBag.estado = new SelectList(estado2);
-            return View(purchase);
+
+            //return View(purchase);
+            return View();
         }
 
         public ViewResult Thanks()

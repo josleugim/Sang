@@ -11,10 +11,10 @@
     <div class="evaluacion">
     <img src="../../Content/images/Evaluacion.png" alt="Imagen" />
 
-    <%: Html.HiddenFor(model => model.SangUserId) %>
+    <%--<%: Html.HiddenFor(model => model.SangUserId) %>
     <%: Html.HiddenFor(model => model.nMattressUsers) %>
     <%: Html.HiddenFor(model => model.UserType) %>
-    <%: Html.HiddenFor(model => model.HospitalId) %>
+    <%: Html.HiddenFor(model => model.HospitalId) %>--%>
 
         <table style="margin: 0 auto">
             <%--<tr>
@@ -25,14 +25,14 @@
                     <%= Html.DropDownList("ModelMattressID")%>
                 </td>
             </tr>--%>
-            <tr>
+            <%--<tr>
                 <th colspan="2">
                     ¿Cuantas personas utilizan el colchon?
                 </th>
                 <td>
                     <%= Html.DropDownList("nMattress")%>
                 </td>
-            </tr>
+            </tr>--%>
             <tr>
                 <th colspan="3">
                     Antes de comenzar el cuestionario, para una evaluación más precisa y personalizada,
