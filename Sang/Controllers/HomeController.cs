@@ -26,8 +26,10 @@ namespace Sang.Controllers
         {
             SangUser users = _db.SangUsers.FirstOrDefault(c => c.Email.Equals(User.Identity.Name));
             Hospital hosp = _db.Hospitals.FirstOrDefault(h => h.HospitalName.Equals("Ninguno"));
-
             SangClient client = _db.SangClients.FirstOrDefault(c => c.SangUser.SangUserID.Equals(users.SangUserID));
+
+            //
+            //Si no existe el cliente se crea la cuenta
             if (client == null)
             {
                 List<string> estado = new List<string> { "Aguascalientes", "Baja California", "Baja California Sur", "Campeche", 
@@ -35,6 +37,9 @@ namespace Sang.Controllers
                 "Michoacán de Ocampo", "Morelos", "Nayarit", "Nuevo León", "Oaxaca", "Puebla", "Querétaro", "Quintana Roo",
                 "San Luis Potosí", "Sinaloa", "Sonora", "Tabasco", "Tamaulipas", "Tlaxcala", "Veracruz", "Yucatán", "Zacatecas"};
                 ViewBag.estado = new SelectList(estado);
+
+                List<int> n = new List<int> { 1, 2 };
+                ViewBag.nMattress = new SelectList(n);
 
                 //Set the ID of the relational sanguser
                 var model = new SangClient
@@ -50,20 +55,102 @@ namespace Sang.Controllers
 
                 return View(model);
             }
+            //
+            //Si ya existe la cuenta se envía la garantía
             else
-                return RedirectToAction("Create", "Purchase", new { id = client.SangClientID });
+                return RedirectToAction("Create", "Purchase", new { id = users.tempWarranty });
         }
 
         //
         // POST: /SangClient/Create
 
         [HttpPost]
-        public ActionResult Create(SangClient sangclient, string cGender)
+        public ActionResult Create(SangClient sangclient, string cGender, string nMattress)
         {
             if (ModelState.IsValid && sangclient.PrivacyNotice != false)
             {
-                SangUser users = _db.SangUsers.FirstOrDefault(c => c.Email.Equals(User.Identity.Name));
-                Hospital hosp = _db.Hospitals.FirstOrDefault(h => h.HospitalName.Equals("Ninguno"));
+                var users = _db.SangUsers.FirstOrDefault(c => c.Email.Equals(User.Identity.Name));
+                var hosp = _db.Hospitals.FirstOrDefault(h => h.HospitalName.Equals("Ninguno"));
+
+                _db.SangClients.Add(sangclient);
+                sangclient.CompleteName = sangclient.UserName + " " + sangclient.FirstName + " " + sangclient.LastName;
+                sangclient.Gender = cGender;
+                sangclient.RegisterDate = DateTime.Now;
+                sangclient.SangUser = users;
+                sangclient.Hospital = hosp;
+                sangclient.nMattressUsers = Convert.ToInt32(nMattress);
+                _db.SaveChanges();
+                //return RedirectToAction("AdultCuestionary", new { id = sangclient.SangClientID });
+
+                //Update the client in the warranty
+                var warranty = _db.Warranties.FirstOrDefault(s => s.WarrantyCode.Equals(users.tempWarranty));
+                UpdateModel(warranty);
+                warranty.SangClient = sangclient;
+                _db.SaveChanges();
+
+                return RedirectToAction("Create", "Purchase", new { id = warranty.WarrantyCode });
+            }
+
+            var estado = new List<string> { "Aguascalientes", "Baja California", "Baja California Sur", "Campeche", 
+                    "Chiapas", "Chihuahua", "Coahuila", "Colima", "Durango", "Guanajuato", "Guerrero", "Hidalgo", "Jalisco", "México",
+                "Michoacán de Ocampo", "Morelos", "Nayarit", "Nuevo León", "Oaxaca", "Puebla", "Querétaro", "Quintana Roo",
+                "San Luis Potosí", "Sinaloa", "Sonora", "Tabasco", "Tamaulipas", "Tlaxcala", "Veracruz", "Yucatán", "Zacatecas"};
+            ViewBag.estado = new SelectList(estado);
+
+            var n = new List<int> { 1, 2 };
+            ViewBag.nMattress = new SelectList(n);
+
+            return View(sangclient);
+        }
+
+        public ActionResult CreateSecond()
+        {
+            var users = _db.SangUsers.FirstOrDefault(c => c.Email.Equals(User.Identity.Name));
+            var hosp = _db.Hospitals.FirstOrDefault(h => h.HospitalName.Equals("Ninguno"));
+
+            var estado = new List<string> { "Aguascalientes", "Baja California", "Baja California Sur", "Campeche", 
+                    "Chiapas", "Chihuahua", "Coahuila", "Colima", "Durango", "Guanajuato", "Guerrero", "Hidalgo", "Jalisco", "México",
+                "Michoacán de Ocampo", "Morelos", "Nayarit", "Nuevo León", "Oaxaca", "Puebla", "Querétaro", "Quintana Roo",
+                "San Luis Potosí", "Sinaloa", "Sonora", "Tabasco", "Tamaulipas", "Tlaxcala", "Veracruz", "Yucatán", "Zacatecas"};
+            ViewBag.estado = new SelectList(estado);
+
+            var n = new List<int> { 1, 2 };
+            ViewBag.nMattress = new SelectList(n);
+
+            //Set the ID of the relational sanguser
+            if (hosp != null)
+            {
+                if (users != null)
+                {
+                    var model = new SangClient
+                        {
+                            SangUserId = users.SangUserID,
+                            SangUser = users,
+                            nMattressUsers = 0,
+                            UserType = "Mayor de edad",
+                            Gender = "Ninguno",
+                            HospitalId = hosp.HospitalID,
+                            Hospital = hosp
+                        };
+
+                    return View(model);
+                }
+            }
+
+            return View();
+                //return RedirectToAction("Introduction", "Home");
+        }
+
+        //
+        // POST: /SangClient/Create
+
+        [HttpPost]
+        public ActionResult CreateSecond(SangClient sangclient, string cGender)
+        {
+            if (ModelState.IsValid && sangclient.PrivacyNotice != false)
+            {
+                var users = _db.SangUsers.FirstOrDefault(c => c.Email.Equals(User.Identity.Name));
+                var hosp = _db.Hospitals.FirstOrDefault(h => h.HospitalName.Equals("Ninguno"));
 
                 _db.SangClients.Add(sangclient);
                 sangclient.CompleteName = sangclient.UserName + " " + sangclient.FirstName + " " + sangclient.LastName;
@@ -75,19 +162,22 @@ namespace Sang.Controllers
                 //return RedirectToAction("AdultCuestionary", new { id = sangclient.SangClientID });
 
                 //Update the client in the warranty
-                Warranty warranty = _db.Warranties.FirstOrDefault(s => s.WarrantyCode.Equals(users.tempWarranty));
-                    UpdateModel(warranty);
-                    warranty.SangClient = sangclient;
-                    _db.SaveChanges();
+                var warranty = _db.Warranties.FirstOrDefault(s => s.WarrantyCode.Equals(users.tempWarranty));
+                UpdateModel(warranty);
+                if (warranty != null) warranty.SangClient = sangclient;
+                _db.SaveChanges();
 
-                return RedirectToAction("Create", "Purchase", new { id = warranty.WarrantyID });
+                if (warranty != null) return RedirectToAction("Introduction", "Home", new { id = sangclient.SangClientID });
             }
 
-            List<string> estado = new List<string> { "Aguascalientes", "Baja California", "Baja California Sur", "Campeche", 
+            var estado = new List<string> { "Aguascalientes", "Baja California", "Baja California Sur", "Campeche", 
                     "Chiapas", "Chihuahua", "Coahuila", "Colima", "Durango", "Guanajuato", "Guerrero", "Hidalgo", "Jalisco", "México",
                 "Michoacán de Ocampo", "Morelos", "Nayarit", "Nuevo León", "Oaxaca", "Puebla", "Querétaro", "Quintana Roo",
                 "San Luis Potosí", "Sinaloa", "Sonora", "Tabasco", "Tamaulipas", "Tlaxcala", "Veracruz", "Yucatán", "Zacatecas"};
             ViewBag.estado = new SelectList(estado);
+
+            var n = new List<int> { 1, 2 };
+            ViewBag.nMattress = new SelectList(n);
 
             return View(sangclient);
         }
@@ -121,76 +211,75 @@ namespace Sang.Controllers
             return View();
         }
 
-        public ActionResult Introduction(int id, string MenorEdad, string nMattress)
+        /// <summary>
+        /// Direcciona al exámen dependiendo de la edad.
+        /// </summary>
+        /// <param name="menorEdad">The menor edad.</param>
+        /// <param name="id">The id.</param>
+        /// <returns></returns>
+        public ActionResult Introduction(string menorEdad, int id)
         {
             ViewBag.Message = "Inicio";
-            ViewBag.ModelMattressID = new SelectList(_db.ModelMattress, "ModelMattressID", "ModelName");
+            //ViewBag.ModelMattressID = new SelectList(_db.ModelMattress, "ModelMattressID", "ModelName");
 
-            List<int> n = new List<int> { 1, 2 };
+            var n = new List<int> { 1, 2 };
             ViewBag.nMattress = new SelectList(n);
-
 
             if (Request.HttpMethod == "POST")
             {
-                if (nMattress != "")
-                {
-                    //SangClient client = _db.SangClients.FirstOrDefault(c => c.Email.Equals(User.Identity.Name));
-                    //UpdateModel(client);
-                    //client.nMattressUsers = Convert.ToInt32(nMattress);
-                    //_db.SaveChanges();
+                var users = _db.SangUsers.FirstOrDefault(c => c.Email.Equals(User.Identity.Name));
+                var nMattress = _db.SangClients.FirstOrDefault(c => c.SangUser.SangUserID.Equals(users.SangUserID));
 
-                    if (MenorEdad == "Si")
-                        return RedirectToAction("CuestionaryChild", "Home", new { id = Convert.ToInt32(nMattress) });
-                    if (MenorEdad == "No")
-                        return RedirectToAction("AdultCuestionary", "Home", new { id = Convert.ToInt32(nMattress) });
-                }
+                if (menorEdad == "Si")
+                    return RedirectToAction("CuestionaryChild", "Home", new { id = Convert.ToInt32(nMattress.SangClientID) });
+                if (menorEdad == "No")
+                    return RedirectToAction("AdultCuestionary", "Home", new { id = Convert.ToInt32(nMattress.SangClientID) });
             }
 
             return View();
         }
 
-        //
         //Create Child Cuestionary
-        //public ActionResult CuestionaryChild(int id)
-        //{
-        //    List<int> n = new List<int> { 8, 9, 10, 11, 12, 13, 14, 15, 16, 17 };
-        //    ViewBag.childAge = new SelectList(n);
+        public ActionResult CuestionaryChild(int id)
+        {
+            List<int> n = new List<int> { 8, 9, 10, 11, 12, 13, 14, 15, 16, 17 };
+            ViewBag.childAge = new SelectList(n);
 
-        //    return View();
-        //}
+            return View();
+        }
 
-        //[HttpPost]
-        //public ActionResult CuestionaryChild(SangChild child, int id, string Q1, string Q2, string Q3, string Q4, string Q5, string Q6, string Q7, string Q8,
-        //    string Q9, string childAge)
-        //{
-        //    //if (ModelState.IsValid)
-        //    //{
-        //    child.CuestionaryResult = Convert.ToInt32(Q1) + Convert.ToInt32(Q2) + Convert.ToInt32(Q3) + Convert.ToInt32(Q4) + Convert.ToInt32(Q5) + Convert.ToInt32(Q6) + Convert.ToInt32(Q7) +
-        //        Convert.ToInt32(Q8) + Convert.ToInt32(Q9);
+        [HttpPost]
+        public ActionResult CuestionaryChild(SangChild child, int id, string Q1, string Q2, string Q3, string Q4, string Q5, string Q6, string Q7, string Q8,
+            string Q9, string childAge)
+        {
+            //if (ModelState.IsValid)
+            //{
+            child.CuestionaryResult = Convert.ToInt32(Q1) + Convert.ToInt32(Q2) + Convert.ToInt32(Q3) + Convert.ToInt32(Q4) + Convert.ToInt32(Q5) + Convert.ToInt32(Q6) + Convert.ToInt32(Q7) +
+                Convert.ToInt32(Q8) + Convert.ToInt32(Q9);
 
-        //    _db.SangChildren.Add(child);
-        //    child.CompleteName = child.Name + " " + child.FirstName + " " + child.LastName;
-        //    //child.Age = Convert.ToInt32(childAge);
-        //    child.RegisterDate = DateTime.Now; //DateTime.ParseExact(DateTime.Now.ToShortDateString(),"dd/MM/yyyy",null);
-        //    SangClient client = _db.SangClients.FirstOrDefault(c => c.SangClientID.Equals(id));
-        //    child.SangClient = client;
-        //    _db.SaveChanges();
+            //_db.SangClients.Add(child);
+            child.CompleteName = child.Name + " " + child.FirstName + " " + child.LastName;
+            //child.Age = Convert.ToInt32(childAge);
+            child.RegisterDate = DateTime.Now; //DateTime.ParseExact(DateTime.Now.ToShortDateString(),"dd/MM/yyyy",null);
+            SangClient client = _db.SangClients.FirstOrDefault(c => c.SangClientID.Equals(id));
+            child.SangClient = client;
+            _db.SaveChanges();
 
-        //    int result = Convert.ToInt32(child.CuestionaryResult);
-        //    if (result != null)
-        //    {
-        //        ViewData["waranty"] = result * 10;
-        //        if (result < 20)
-        //            ViewData["Sugest"] = "El resultado de Grado de Somnolencia Epworth para menores de edad se encuentra dentro de los limites normales, por lo que por el momento no requiere apoyo especializado, si considera que es importante la valoración de un especialista, por favor imprima éste estudio y programe una cita en una de las Clínicas del Sueño cuyos datos se encuentran en los panfletos que venían dentro del folleto de su producto säng y al hacerlo por favor mencione el resultado obtenido a través del portal säng.";
-        //        if (result >= 20)
-        //            ViewData["Sugest"] = "El resultado de Grado de Somnolencia Epworth para menores de edad no se encuentra dentro de límites normales. Lo que sugiere la presencia de un trastorno de sueño, por lo que le sugerimos realizar el Estudio de Calidad del Sueño (Sleep Image).";
-        //    }
-        //    //return RedirectToAction("ChildResult", new { result = Convert.ToInt32(child.CuestionaryResult)});
-        //    return View("ChildDiagnosis", child);
-        //    //}
+            int result = Convert.ToInt32(child.CuestionaryResult);
+            if (result != null)
+            {
+                ViewData["waranty"] = result * 10;
+                if (result < 20)
+                    ViewData["Sugest"] = "El resultado de Grado de Somnolencia Epworth para menores de edad se encuentra dentro de los limites normales, por lo que por el momento no requiere apoyo especializado, si considera que es importante la valoración de un especialista, por favor imprima éste estudio y programe una cita en una de las Clínicas del Sueño cuyos datos se encuentran en los panfletos que venían dentro del folleto de su producto säng y al hacerlo por favor mencione el resultado obtenido a través del portal säng.";
+                if (result >= 20)
+                    ViewData["Sugest"] = "El resultado de Grado de Somnolencia Epworth para menores de edad no se encuentra dentro de límites normales. Lo que sugiere la presencia de un trastorno de sueño, por lo que le sugerimos realizar el Estudio de Calidad del Sueño (Sleep Image).";
+            }
+            //return RedirectToAction("ChildResult", new { result = Convert.ToInt32(child.CuestionaryResult)});
+            return View("ChildDiagnosis", child);
+            //}
 
-        //    //return View();
-        //}
+            //return View();
+        }
 
         public ActionResult ChildResult(int result, SangChild child)
         {
