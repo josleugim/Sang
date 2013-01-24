@@ -699,6 +699,7 @@
     <Content Include="Views\Home\Introduction.aspx" />
     <Content Include="Views\Home\Options.aspx" />
     <Content Include="Views\Account\Thanks.aspx" />
+    <Content Include="Views\Home\ThanksCuestionary.aspx" />
     <Content Include="Views\Home\ThanksNewsletter.aspx" />
     <Content Include="Views\Purchase\Create.aspx" />
     <Content Include="Views\Purchase\Thanks.aspx" />

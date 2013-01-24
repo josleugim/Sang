@@ -217,17 +217,41 @@ namespace Sang.Controllers
         /// <param name="menorEdad">The menor edad.</param>
         /// <param name="id">The id.</param>
         /// <returns></returns>
-        public ActionResult Introduction(string menorEdad, int id)
+        public ActionResult Introduction(string menorEdad)
         {
             ViewBag.Message = "Inicio";
             //ViewBag.ModelMattressID = new SelectList(_db.ModelMattress, "ModelMattressID", "ModelName");
 
-            var n = new List<int> { 1, 2 };
-            ViewBag.nMattress = new SelectList(n);
+            //var n = new List<int> { 1, 2 };
+            //ViewBag.nMattress = new SelectList(n);
 
             if (Request.HttpMethod == "POST")
             {
                 var users = _db.SangUsers.FirstOrDefault(c => c.Email.Equals(User.Identity.Name));
+
+                var nMattress = _db.SangClients.FirstOrDefault(c => c.SangUser.SangUserID.Equals(users.SangUserID));
+
+                if (menorEdad == "Si")
+                    return RedirectToAction("CuestionaryChild", "Home", new { id = Convert.ToInt32(nMattress.SangClientID) });
+                if (menorEdad == "No")
+                    return RedirectToAction("AdultCuestionary", "Home", new { id = Convert.ToInt32(nMattress.SangClientID) });
+            }
+
+            return View();
+        }
+
+        public ActionResult Introduction2(string menorEdad)
+        {
+            ViewBag.Message = "Inicio";
+            //ViewBag.ModelMattressID = new SelectList(_db.ModelMattress, "ModelMattressID", "ModelName");
+
+            //var n = new List<int> { 1, 2 };
+            //ViewBag.nMattress = new SelectList(n);
+
+            if (Request.HttpMethod == "POST")
+            {
+                var users = _db.SangUsers.FirstOrDefault(c => c.Email.Equals(User.Identity.Name));
+
                 var nMattress = _db.SangClients.FirstOrDefault(c => c.SangUser.SangUserID.Equals(users.SangUserID));
 
                 if (menorEdad == "Si")
@@ -292,18 +316,6 @@ namespace Sang.Controllers
             return View();
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        //public ActionResult Edit(int id)
-        //{
-        //    SangClient adult = _db.SangClients.Find(id);
-        //    return View(adult);
-        //}
-
-
         //
         //Edit Adult cuestionary result and data
         public ActionResult AdultCuestionary(int id)
@@ -320,6 +332,8 @@ namespace Sang.Controllers
             if (ModelState.IsValid)
             {
                 SangClient adult = _db.SangClients.FirstOrDefault(a => a.SangClientID.Equals(id));
+                var users = _db.SangUsers.FirstOrDefault(c => c.Email.Equals(User.Identity.Name));
+
                 UpdateModel(adult);
 
                 adult.Disorder1 = (Convert.ToInt32(Q1) + Convert.ToInt32(Q7) + Convert.ToInt32(Q8)) / 3;
@@ -332,6 +346,37 @@ namespace Sang.Controllers
                 adult.Disorder8 = Convert.ToInt32(Q21);
 
                 _db.SaveChanges();
+
+                //
+                //Loop en el caso de ser dos usuarios en el colchón
+
+                //Verifíco el numero de usuarios del colchon y lo valido con el número de cuentas creadas
+                switch (adult.nMattressUsers)
+                {
+                    case 1:
+                        //Cuando es solo un usuario se termina el ciclo
+                        return View("ThanksCuestionary");
+                        break;
+                    case 2:
+                        var nclient = from u in _db.SangClients
+                                      where u.SangUserId == users.SangUserID
+                                      select u;
+
+                        //if (nclient.Count() == 1)
+                        //{
+                        //    if (menorEdad == "No")
+                        //        return RedirectToAction("CreateSecond", "Home");
+                        //}
+                        //if (nclient.Count() == 2)
+                        //{
+                        //    if (menorEdad == "Si")
+                        //        return RedirectToAction("CuestionaryChild", "Home", new { id = Convert.ToInt32(nMattress.SangClientID) });
+                        //    if (menorEdad == "No")
+                        //        return RedirectToAction("AdultCuestionary", "Home", new { id = Convert.ToInt32(nMattress.SangClientID) });
+                        //}
+                        break;
+                }
+                //bool goCuestionary = nMattress != null && nclient.Count() <= nMattress.nMattressUsers;
 
                 return RedirectToAction("AdultResult", new
                 {
