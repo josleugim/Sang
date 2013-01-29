@@ -1,0 +1,65 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewBag.Title</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link href="../../Content/Site.css" rel="stylesheet" type="text/css" />
+    <link type="text/css" rel="Stylesheet" href="../../Content/css/jquery-ui-1.8.22.custom.css" />
+    <link type="text/css" rel="Stylesheet" href="../../Content/css/jquery.ui.datepicker.css" />
+</head>
+<body onload="Javascript:history.go(1);" onunload="Javascript:history.go(1);">
+    <div class="page">
+        <header>
+            
+            <div id="logindisplay">
+                
+            </div>
+        </header>
+    </div>
+    <section id="main">
+        @RenderBody()
+    </section>
+    <div id="custom_controls">
+        <div class="menuizquierda">
+            <a href="../../#iniciar">Inicio</a></div>
+        <div class="menus">
+            <a href="../../#sang">säng</a></div>
+        @*<span style="font-size: 16px"></span>*@
+        <div class="menus">
+            <a href="../../#coleccion">Colecciones</a></div>
+        <div class="menus">
+            <a href="../../#productos">Productos</a></div>
+        <div class="menus">
+            <a href="../../#disenio">Diseñadores</a></div>
+        <div class="menus">
+            <a href="../../#garantia">Garantía</a></div>
+        <div class="menus">
+            <a href="../../#news">Newsletter</a></div>
+        <div class="menus">
+            <a href="../../#aviso">Aviso de privacidad</a>
+            @*@Html.ActionLink("Aviso de privacidad", "Aviso", "Home")*@
+        </div>
+        <div class="menubtn">
+            <a href="#">
+                <img width="20" height="20" title="Síguenos en Facebook" style="border: none; margin-left: 10px;"
+                    class="ttip" src="../../Content/images/facebook_dark_small.png"></a>
+        </div>
+    </div>
+    <!--Google Analytics -->
+    <script type="text/javascript">
+
+        var _gaq = _gaq || [];
+        var pluginUrl = '//www.google-analytics.com/plugins/ga/inpage_linkid.js';
+        _gaq.push(['_require', 'inpage_linkid', pluginUrl]);
+        _gaq.push(['_setAccount', 'UA-36828589-1']);
+        _gaq.push(['_trackPageview']);
+
+        (function () {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+
+    </script>
+</body>
+</html>

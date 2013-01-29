@@ -12,7 +12,7 @@ namespace Sang.Controllers
 {
     public class HomeController : Controller
     {
-        private SangDBContext _db = new SangDBContext();
+        private readonly SangDBContext _db = new SangDBContext();
 
         public ActionResult Options()
         {
@@ -24,21 +24,21 @@ namespace Sang.Controllers
 
         public ActionResult Create()
         {
-            SangUser users = _db.SangUsers.FirstOrDefault(c => c.Email.Equals(User.Identity.Name));
-            Hospital hosp = _db.Hospitals.FirstOrDefault(h => h.HospitalName.Equals("Ninguno"));
-            SangClient client = _db.SangClients.FirstOrDefault(c => c.SangUser.SangUserID.Equals(users.SangUserID));
+            var users = _db.SangUsers.FirstOrDefault(c => c.Email.Equals(User.Identity.Name));
+            var hosp = _db.Hospitals.FirstOrDefault(h => h.HospitalName.Equals("Ninguno"));
+            var client = _db.SangClients.FirstOrDefault(c => c.SangUser.SangUserID.Equals(users.SangUserID));
 
             //
             //Si no existe el cliente se crea la cuenta
             if (client == null)
             {
-                List<string> estado = new List<string> { "Aguascalientes", "Baja California", "Baja California Sur", "Campeche", 
+                var estado = new List<string> { "Aguascalientes", "Baja California", "Baja California Sur", "Campeche", 
                     "Chiapas", "Chihuahua", "Coahuila", "Colima", "Durango", "Guanajuato", "Guerrero", "Hidalgo", "Jalisco", "México",
                 "Michoacán de Ocampo", "Morelos", "Nayarit", "Nuevo León", "Oaxaca", "Puebla", "Querétaro", "Quintana Roo",
                 "San Luis Potosí", "Sinaloa", "Sonora", "Tabasco", "Tamaulipas", "Tlaxcala", "Veracruz", "Yucatán", "Zacatecas"};
                 ViewBag.estado = new SelectList(estado);
 
-                List<int> n = new List<int> { 1, 2 };
+                var n = new List<int> { 1, 2 };
                 ViewBag.nMattress = new SelectList(n);
 
                 //Set the ID of the relational sanguser
@@ -138,12 +138,11 @@ namespace Sang.Controllers
             }
 
             return View();
-                //return RedirectToAction("Introduction", "Home");
+            //return RedirectToAction("Introduction", "Home");
         }
 
         //
-        // POST: /SangClient/Create
-
+        // POST: /SangClient/Crear segundo adulto
         [HttpPost]
         public ActionResult CreateSecond(SangClient sangclient, string cGender)
         {
@@ -167,7 +166,7 @@ namespace Sang.Controllers
                 if (warranty != null) warranty.SangClient = sangclient;
                 _db.SaveChanges();
 
-                if (warranty != null) return RedirectToAction("Introduction", "Home", new { id = sangclient.SangClientID });
+                if (warranty != null) return RedirectToAction("AdultCuestionary2", "Home", new { id = sangclient.SangClientID });
             }
 
             var estado = new List<string> { "Aguascalientes", "Baja California", "Baja California Sur", "Campeche", 
@@ -232,7 +231,7 @@ namespace Sang.Controllers
                 var nMattress = _db.SangClients.FirstOrDefault(c => c.SangUser.SangUserID.Equals(users.SangUserID));
 
                 if (menorEdad == "Si")
-                    return RedirectToAction("CuestionaryChild", "Home", new { id = Convert.ToInt32(nMattress.SangClientID) });
+                    return RedirectToAction("Create", "Child");
                 if (menorEdad == "No")
                     return RedirectToAction("AdultCuestionary", "Home", new { id = Convert.ToInt32(nMattress.SangClientID) });
             }
@@ -240,24 +239,50 @@ namespace Sang.Controllers
             return View();
         }
 
+        /// <summary>
+        /// Introduction2s the specified menor edad, en este método el cliente ya creo las 2 cuentas.
+        /// </summary>
+        /// <param name="menorEdad">The menor edad.</param>
+        /// <returns></returns>
         public ActionResult Introduction2(string menorEdad)
         {
             ViewBag.Message = "Inicio";
-            //ViewBag.ModelMattressID = new SelectList(_db.ModelMattress, "ModelMattressID", "ModelName");
+            var users = _db.SangUsers.FirstOrDefault(c => c.Email.Equals(User.Identity.Name));
 
-            //var n = new List<int> { 1, 2 };
-            //ViewBag.nMattress = new SelectList(n);
+            //Cuantos clientes existen
+            var nClient = from e in _db.SangClients
+                          where e.SangUser.SangUserID == users.SangUserID
+                          select e;
+            if (nClient.Count() == 2)
+            {
+                var client =
+                _db.SangClients.Where(u => u.SangUserId == users.SangUserID)
+                   .OrderByDescending(c => c.SangClientID)
+                   .FirstOrDefault();
+
+                if (client.SangClientID != null && client.Disorder1.HasValue)
+                {
+                    //Thanks view
+                    return View("ThanksAdult");
+                }
+
+                if (Request.HttpMethod == "POST")
+                {
+                    if (menorEdad == "Si")
+                        return RedirectToAction("CuestionaryChild", "Home", new { id = Convert.ToInt32(client.SangClientID) });
+                    //Mayor de edad
+                    if (menorEdad == "No")
+                        return RedirectToAction("AdultCuestionary2", "Home", new { id = client.SangClientID });
+                }
+            }
 
             if (Request.HttpMethod == "POST")
             {
-                var users = _db.SangUsers.FirstOrDefault(c => c.Email.Equals(User.Identity.Name));
-
-                var nMattress = _db.SangClients.FirstOrDefault(c => c.SangUser.SangUserID.Equals(users.SangUserID));
-
                 if (menorEdad == "Si")
-                    return RedirectToAction("CuestionaryChild", "Home", new { id = Convert.ToInt32(nMattress.SangClientID) });
+                    return RedirectToAction("CuestionaryChild", "Home");
+                //Mayor de edad
                 if (menorEdad == "No")
-                    return RedirectToAction("AdultCuestionary", "Home", new { id = Convert.ToInt32(nMattress.SangClientID) });
+                    return RedirectToAction("CreateSecond", "Home");
             }
 
             return View();
@@ -266,9 +291,6 @@ namespace Sang.Controllers
         //Create Child Cuestionary
         public ActionResult CuestionaryChild(int id)
         {
-            List<int> n = new List<int> { 8, 9, 10, 11, 12, 13, 14, 15, 16, 17 };
-            ViewBag.childAge = new SelectList(n);
-
             return View();
         }
 
@@ -276,33 +298,39 @@ namespace Sang.Controllers
         public ActionResult CuestionaryChild(SangChild child, int id, string Q1, string Q2, string Q3, string Q4, string Q5, string Q6, string Q7, string Q8,
             string Q9, string childAge)
         {
-            //if (ModelState.IsValid)
-            //{
-            child.CuestionaryResult = Convert.ToInt32(Q1) + Convert.ToInt32(Q2) + Convert.ToInt32(Q3) + Convert.ToInt32(Q4) + Convert.ToInt32(Q5) + Convert.ToInt32(Q6) + Convert.ToInt32(Q7) +
-                Convert.ToInt32(Q8) + Convert.ToInt32(Q9);
-
-            //_db.SangClients.Add(child);
-            child.CompleteName = child.Name + " " + child.FirstName + " " + child.LastName;
-            //child.Age = Convert.ToInt32(childAge);
-            child.RegisterDate = DateTime.Now; //DateTime.ParseExact(DateTime.Now.ToShortDateString(),"dd/MM/yyyy",null);
-            SangClient client = _db.SangClients.FirstOrDefault(c => c.SangClientID.Equals(id));
-            child.SangClient = client;
-            _db.SaveChanges();
-
-            int result = Convert.ToInt32(child.CuestionaryResult);
-            if (result != null)
+            if (ModelState.IsValid)
             {
-                ViewData["waranty"] = result * 10;
-                if (result < 20)
-                    ViewData["Sugest"] = "El resultado de Grado de Somnolencia Epworth para menores de edad se encuentra dentro de los limites normales, por lo que por el momento no requiere apoyo especializado, si considera que es importante la valoración de un especialista, por favor imprima éste estudio y programe una cita en una de las Clínicas del Sueño cuyos datos se encuentran en los panfletos que venían dentro del folleto de su producto säng y al hacerlo por favor mencione el resultado obtenido a través del portal säng.";
-                if (result >= 20)
-                    ViewData["Sugest"] = "El resultado de Grado de Somnolencia Epworth para menores de edad no se encuentra dentro de límites normales. Lo que sugiere la presencia de un trastorno de sueño, por lo que le sugerimos realizar el Estudio de Calidad del Sueño (Sleep Image).";
-            }
-            //return RedirectToAction("ChildResult", new { result = Convert.ToInt32(child.CuestionaryResult)});
-            return View("ChildDiagnosis", child);
-            //}
+                //var adult = _db.SangClients.FirstOrDefault(a => a.SangClientID.Equals(id));
+                //var users = _db.SangUsers.FirstOrDefault(c => c.Email.Equals(User.Identity.Name));
 
-            //return View();
+                UpdateModel(child);
+                child.CuestionaryResult = Convert.ToInt32(Q1) + Convert.ToInt32(Q2) + Convert.ToInt32(Q3) + Convert.ToInt32(Q4) + Convert.ToInt32(Q5) + Convert.ToInt32(Q6) + Convert.ToInt32(Q7) +
+                    Convert.ToInt32(Q8) + Convert.ToInt32(Q9);
+                _db.SaveChanges();
+
+                //_db.SangClients.Add(child);
+                //child.CompleteName = child.Name + " " + child.FirstName + " " + child.LastName;
+                //child.Age = Convert.ToInt32(childAge);
+                //child.RegisterDate = DateTime.Now; //DateTime.ParseExact(DateTime.Now.ToShortDateString(),"dd/MM/yyyy",null);
+                //SangClient client = _db.SangClients.FirstOrDefault(c => c.SangClientID.Equals(id));
+                //child.SangClient = client;
+                //_db.SaveChanges();
+
+                var result = Convert.ToInt32(child.CuestionaryResult);
+
+                if (result != null)
+                {
+                    ViewData["waranty"] = result * 10;
+                    if (result < 20)
+                        ViewData["Sugest"] = "El resultado de Grado de Somnolencia Epworth para menores de edad se encuentra dentro de los limites normales, por lo que por el momento no requiere apoyo especializado, si considera que es importante la valoración de un especialista, por favor imprima éste estudio y programe una cita en una de las Clínicas del Sueño cuyos datos se encuentran en los panfletos que venían dentro del folleto de su producto säng y al hacerlo por favor mencione el resultado obtenido a través del portal säng.";
+                    if (result >= 20)
+                        ViewData["Sugest"] = "El resultado de Grado de Somnolencia Epworth para menores de edad no se encuentra dentro de límites normales. Lo que sugiere la presencia de un trastorno de sueño, por lo que le sugerimos realizar el Estudio de Calidad del Sueño (Sleep Image).";
+                }
+                //return RedirectToAction("ChildResult", new { result = Convert.ToInt32(child.CuestionaryResult)});
+                return View("ChildDiagnosis", child);
+            }
+
+            return View();
         }
 
         public ActionResult ChildResult(int result, SangChild child)
@@ -327,11 +355,10 @@ namespace Sang.Controllers
         public ActionResult AdultCuestionary(int id, string Q1, string Q2, string Q3, string Q4, string Q5, string Q6, string Q7, string Q8,
             string Q9, string Q10, string Q11, string Q12, string Q13, string Q14, string Q15, string Q16, string Q17, string Q18, string Q19, string Q20,
             string Q21)
-        //public ActionResult AdultCuestionary(int id, FormCollection formValues)
         {
             if (ModelState.IsValid)
             {
-                SangClient adult = _db.SangClients.FirstOrDefault(a => a.SangClientID.Equals(id));
+                var adult = _db.SangClients.FirstOrDefault(a => a.SangClientID.Equals(id));
                 var users = _db.SangUsers.FirstOrDefault(c => c.Email.Equals(User.Identity.Name));
 
                 UpdateModel(adult);
@@ -361,7 +388,7 @@ namespace Sang.Controllers
                         var nclient = from u in _db.SangClients
                                       where u.SangUserId == users.SangUserID
                                       select u;
-
+                        return RedirectToAction("Introduction2");
                         //if (nclient.Count() == 1)
                         //{
                         //    if (menorEdad == "No")
@@ -388,6 +415,64 @@ namespace Sang.Controllers
                     d7 = Convert.ToInt32(adult.Disorder7),
                     d8 = Convert.ToInt32(adult.Disorder8)
                 });
+            }
+
+            return View();
+        }
+
+        //
+        //Create Adult cuestionary result and data
+        public ActionResult AdultCuestionary2(int id)
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult AdultCuestionary2(int id, string Q1, string Q2, string Q3, string Q4, string Q5, string Q6, string Q7, string Q8,
+            string Q9, string Q10, string Q11, string Q12, string Q13, string Q14, string Q15, string Q16, string Q17, string Q18, string Q19, string Q20,
+            string Q21)
+        //public ActionResult AdultCuestionary(int id, FormCollection formValues)
+        {
+            if (ModelState.IsValid)
+            {
+                SangClient adult = _db.SangClients.FirstOrDefault(a => a.SangClientID.Equals(id));
+                //var users = _db.SangUsers.FirstOrDefault(c => c.Email.Equals(User.Identity.Name));
+
+                UpdateModel(adult);
+
+                adult.Disorder1 = (Convert.ToInt32(Q1) + Convert.ToInt32(Q7) + Convert.ToInt32(Q8)) / 3;
+                adult.Disorder2 = (Convert.ToInt32(Q2) + Convert.ToInt32(Q3) + Convert.ToInt32(Q4) + Convert.ToInt32(Q12)) / 4;
+                adult.Disorder3 = (Convert.ToInt32(Q5) + Convert.ToInt32(Q10)) / 2;
+                adult.Disorder4 = Convert.ToInt32(Q10);
+                adult.Disorder5 = (Convert.ToInt32(Q6) + Convert.ToInt32(Q9) + Convert.ToInt32(Q11)) / 3;
+                adult.Disorder7 = Convert.ToInt32(Q13) + Convert.ToInt32(Q14) + Convert.ToInt32(Q15) + Convert.ToInt32(Q16) + Convert.ToInt32(Q17) + Convert.ToInt32(Q18) +
+                    Convert.ToInt32(Q19) + Convert.ToInt32(Q20);
+                adult.Disorder8 = Convert.ToInt32(Q21);
+
+                _db.SaveChanges();
+
+                if (adult.Disorder8 == 100)
+                {
+                    var coupon = new Coupon();
+
+                    coupon.CouponNumber = "ASD123";
+                    coupon.RegisterDate = DateTime.Now;
+                    _db.Coupons.Add(coupon);
+                    _db.SaveChanges();
+                }
+
+                return View("ThanksCuestionary");
+
+                //return RedirectToAction("AdultResult", new
+                //{
+                //    d1 = Convert.ToInt32(adult.Disorder1),
+                //    d2 = Convert.ToInt32(adult.Disorder2),
+                //    d3 = Convert.ToInt32(adult.Disorder3),
+                //    d4 = Convert.ToInt32(adult.Disorder4),
+                //    d5 = Convert.ToInt32(adult.Disorder5),
+                //    d7 = Convert.ToInt32(adult.Disorder7),
+                //    d8 = Convert.ToInt32(adult.Disorder8)
+                //});
             }
 
             return View();
@@ -492,7 +577,7 @@ namespace Sang.Controllers
                 }
             }
 
-            return View();
+            return View("Error");
         }
 
         /// <summary>

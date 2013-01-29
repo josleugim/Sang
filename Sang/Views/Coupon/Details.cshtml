@@ -1,0 +1,30 @@
+﻿@model Sang.Models.Coupon
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Datos cupón</h2>
+
+<fieldset>
+    <legend>Coupon</legend>
+
+    <div class="display-label">SangUser</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.SangUser.Email)
+    </div>
+
+    <div class="display-label">CouponNumber</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.CouponNumber)
+    </div>
+
+    <div class="display-label">RegisterDate</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.RegisterDate)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.CouponId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

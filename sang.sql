@@ -39,6 +39,7 @@ Select * from Warranties
 select * from SangUsers
 select * from SangClients
 Where SangUserId = 1
+select * from SangChilds
 select * from ModelMattresses
 select * from Collections
 Select * from Newsletters
@@ -59,4 +60,4 @@ select * from Purchases
 --drop table Purchases
 
 INSERT INTO Warranties(SangClientId,WarrantyCode, NAttempts, IsActived, ExpirationDate, RegisterDate)
-Values(null,'TEST1231',0,1,getdate(),getdate())
+Values(null,'TEST1233',0,1,getdate(),getdate())

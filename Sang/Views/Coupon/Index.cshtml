@@ -1,0 +1,49 @@
+﻿@model IEnumerable<Sang.Models.Coupon>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+@using (Html.BeginForm())
+{
+    @Html.TextBox("cupon")
+    <p><input type="button" value="Buscar" /></p>
+}
+
+
+<table>
+    <tr>
+        <th>
+            Nombre del paciente
+        </th>
+        <th>
+            CouponNumber
+        </th>
+        <th>
+            RegisterDate
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model)
+{
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.SangUser.Email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CouponNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RegisterDate)
+        </td>
+        <td>
+            @*@Html.ActionLink("Edit", "Edit", new { id = item.CouponId }) |
+            @Html.ActionLink("Details", "Details", new { id = item.CouponId }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.CouponId })*@
+        </td>
+    </tr>
+}
+
+</table>

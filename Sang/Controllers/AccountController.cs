@@ -13,7 +13,7 @@ namespace Sang.Controllers
 {
     public class AccountController : Controller
     {
-        private SangDBContext _db = new SangDBContext();
+        private readonly SangDBContext _db = new SangDBContext();
         //
         // GET: /Account/LogOn
 
@@ -43,7 +43,19 @@ namespace Sang.Controllers
                             return Redirect(returnUrl);
                         }
                         else
+                        {
+                            //
+                            //Identificar en que paso se quedo el usuario para direccionarlo
+                            var clients = from e in _db.SangClients
+                                          where e.SangUser.Email == user.Email
+                                          select e;
+                            if (clients.Count() == 2)
+                            {
+                                return RedirectToAction("Introduction2", "Home");
+                            }
+
                             return RedirectToAction("Create", "Home");
+                        }
                     }
                     else
                         ModelState.AddModelError("", "Active su registro mediante el correo que se le envio.");

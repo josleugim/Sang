@@ -21,6 +21,7 @@ namespace Sang.Models
         public DbSet<Warranty> Warranties { get; set; }
         public DbSet<SangClient> SangClients { get; set; }
         public DbSet<Purchase> Purchase { get; set; }
-        //public DbSet<SangChild> SangChildren { get; set; }
+        public DbSet<SangChild> SangChildren { get; set; }
+        public DbSet<Coupon> Coupons { get; set; }
     }
 }
