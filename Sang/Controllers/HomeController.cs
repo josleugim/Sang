@@ -28,6 +28,13 @@ namespace Sang.Controllers
             var hosp = _db.Hospitals.FirstOrDefault(h => h.HospitalName.Equals("Ninguno"));
             var client = _db.SangClients.FirstOrDefault(c => c.SangUser.SangUserID.Equals(users.SangUserID));
 
+            var nChild = from e in _db.SangChildren
+                         where e.SangClientId == client.SangClientID
+                         select e;
+            if (nChild.Count() >= 2)
+            {
+                return View("ThanksAdult");
+            }
             //
             //Si no existe el cliente se crea la cuenta
             if (client == null)
@@ -227,13 +234,12 @@ namespace Sang.Controllers
             if (Request.HttpMethod == "POST")
             {
                 var users = _db.SangUsers.FirstOrDefault(c => c.Email.Equals(User.Identity.Name));
-
-                var nMattress = _db.SangClients.FirstOrDefault(c => c.SangUser.SangUserID.Equals(users.SangUserID));
+                var client = _db.SangClients.FirstOrDefault(c => c.SangUser.SangUserID.Equals(users.SangUserID));
 
                 if (menorEdad == "Si")
                     return RedirectToAction("Create", "Child");
                 if (menorEdad == "No")
-                    return RedirectToAction("AdultCuestionary", "Home", new { id = Convert.ToInt32(nMattress.SangClientID) });
+                    return RedirectToAction("AdultCuestionary", "Home", new { id = Convert.ToInt32(client.SangClientID) });
             }
 
             return View();

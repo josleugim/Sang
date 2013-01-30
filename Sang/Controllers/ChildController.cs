@@ -39,27 +39,22 @@ namespace Sang.Controllers
             //ViewBag.SangClientId = new SelectList(db.SangClients, "SangClientID", "UserName");
             var users = _db.SangUsers.FirstOrDefault(c => c.Email.Equals(User.Identity.Name));
             var client = _db.SangClients.FirstOrDefault(c => c.SangUser.SangUserID.Equals(users.SangUserID));
-            //Cuantos niños existen
-            //var nClient = from e in _db.SangClients
-            //             where e.SangUserId == users.SangUserID
-            //             select e;
-            //var child =
-            //    _db.SangChildren.Where(u => u.SangClientId == client.SangClientID)
-            //       .OrderByDescending(c => c.SangChildID)
-            //       .FirstOrDefault();
 
-            //if (nClient.Count() == 1)
-            //{
-            //    View(child.CuestionaryResult.HasValue ? "Thanks" : "Edit");
-            //}
-            //if (nClient.Count() == 2)
-            //{
-            //    if (child.CuestionaryResult.HasValue)
-            //    {
-            //        View("Thanks");
-            //    }
-            //}
-            
+            //Cuantos niños existen, si tiene nMattress = 2 buscar que no exitan 2 niños creados
+
+            var nChild = from e in _db.SangChildren
+                          where e.SangClientId == client.SangClientID
+                          select e;
+            var child =
+                _db.SangChildren.Where(u => u.SangClientId == client.SangClientID)
+                   .OrderByDescending(c => c.SangChildID)
+                   .FirstOrDefault();
+
+            if (nChild.Count() == 1)
+                View(child.CuestionaryResult.HasValue ? "Thanks" : "Edit");
+            if (nChild.Count() == 2)
+                View(child.CuestionaryResult.HasValue ? "Thanks" : "Edit");
+
 
             if (client != null)
             {
@@ -116,9 +111,17 @@ namespace Sang.Controllers
                 sangchild.CuestionaryResult = Convert.ToInt32(Q1) + Convert.ToInt32(Q2) + Convert.ToInt32(Q3) + Convert.ToInt32(Q4) + Convert.ToInt32(Q5) + Convert.ToInt32(Q6) + Convert.ToInt32(Q7) +
                     Convert.ToInt32(Q8) + Convert.ToInt32(Q9);
                 _db.SaveChanges();
-                return View("Thanks");
+                return View("Continue");
             }
             return View(sangchild);
+        }
+
+        public ActionResult Continue()
+        {
+            if (Request.HttpMethod == "POST")
+                return RedirectToAction("Introduction", "Home");
+
+            return View();
         }
 
         //

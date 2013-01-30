@@ -786,13 +786,14 @@
     <Content Include="Views\Child\Edit.cshtml" />
     <Content Include="Views\Child\Delete.cshtml" />
     <Content Include="Views\Shared\_masterpage.cshtml" />
-    <Content Include="Views\Child\Thanks.cshtml" />
     <Content Include="Views\Shared\_AdminMasterPage.cshtml" />
     <Content Include="Views\Coupon\Index.cshtml" />
     <Content Include="Views\Coupon\Details.cshtml" />
     <Content Include="Views\Coupon\Create.cshtml" />
     <Content Include="Views\Coupon\Edit.cshtml" />
     <Content Include="Views\Coupon\Delete.cshtml" />
+    <Content Include="Views\Child\Continue.cshtml" />
+    <Content Include="Views\Child\Thanks.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
