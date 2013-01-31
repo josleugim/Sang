@@ -28,21 +28,45 @@ namespace Sang.Controllers
             var hosp = _db.Hospitals.FirstOrDefault(h => h.HospitalName.Equals("Ninguno"));
             var client = _db.SangClients.FirstOrDefault(c => c.SangUser.SangUserID.Equals(users.SangUserID));
 
-            var nChild = from e in _db.SangChildren
-                         where e.SangClientId == client.SangClientID
-                         select e;
-            if (nChild.Count() >= 2)
-            {
-                return View("ThanksAdult");
-            }
+            
             //
             //Si no existe el cliente se crea la cuenta
             if (client == null)
             {
-                var estado = new List<string> { "Aguascalientes", "Baja California", "Baja California Sur", "Campeche", 
-                    "Chiapas", "Chihuahua", "Coahuila", "Colima", "Durango", "Guanajuato", "Guerrero", "Hidalgo", "Jalisco", "México",
-                "Michoacán de Ocampo", "Morelos", "Nayarit", "Nuevo León", "Oaxaca", "Puebla", "Querétaro", "Quintana Roo",
-                "San Luis Potosí", "Sinaloa", "Sonora", "Tabasco", "Tamaulipas", "Tlaxcala", "Veracruz", "Yucatán", "Zacatecas"};
+                var estado = new List<string>
+                    {
+                        "Aguascalientes",
+                        "Baja California",
+                        "Baja California Sur",
+                        "Campeche",
+                        "Chiapas",
+                        "Chihuahua",
+                        "Coahuila",
+                        "Colima",
+                        "Durango",
+                        "Guanajuato",
+                        "Guerrero",
+                        "Hidalgo",
+                        "Jalisco",
+                        "México",
+                        "Michoacán de Ocampo",
+                        "Morelos",
+                        "Nayarit",
+                        "Nuevo León",
+                        "Oaxaca",
+                        "Puebla",
+                        "Querétaro",
+                        "Quintana Roo",
+                        "San Luis Potosí",
+                        "Sinaloa",
+                        "Sonora",
+                        "Tabasco",
+                        "Tamaulipas",
+                        "Tlaxcala",
+                        "Veracruz",
+                        "Yucatán",
+                        "Zacatecas"
+                    };
                 ViewBag.estado = new SelectList(estado);
 
                 var n = new List<int> { 1, 2 };
@@ -50,22 +74,36 @@ namespace Sang.Controllers
 
                 //Set the ID of the relational sanguser
                 var model = new SangClient
-                {
-                    SangUserId = users.SangUserID,
-                    SangUser = users,
-                    nMattressUsers = 0,
-                    UserType = "Mayor de edad",
-                    Gender = "Ninguno",
-                    HospitalId = hosp.HospitalID,
-                    Hospital = hosp
-                };
+                    {
+                        SangUserId = users.SangUserID,
+                        SangUser = users,
+                        nMattressUsers = 0,
+                        UserType = "Mayor de edad",
+                        Gender = "Ninguno",
+                        HospitalId = hosp.HospitalID,
+                        Hospital = hosp
+                    };
 
                 return View(model);
             }
             //
             //Si ya existe la cuenta se envía la garantía
             else
+            {
+                var nChild = from e in _db.SangChildren
+                             where e.SangClientId == client.SangClientID
+                             select e;
+
+                if (!nChild.Any())
+                {
+                    if (nChild.Count() >= 2)
+                    {
+                        return View("ThanksAdult");
+                    }
+                }
+
                 return RedirectToAction("Create", "Purchase", new { id = users.tempWarranty });
+            }
         }
 
         //
