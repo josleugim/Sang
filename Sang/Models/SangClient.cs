@@ -40,20 +40,20 @@ namespace Sang.Models
 
         //
         //Datos de menores de edad
-        [DisplayName("Apellido Paterno")]
-        public string ChildFirstName { get; set; }
+        //[DisplayName("Apellido Paterno")]
+        //public string ChildFirstName { get; set; }
 
-        [DisplayName("Apellido Materno")]
-        public string ChildLastName { get; set; }
+        //[DisplayName("Apellido Materno")]
+        //public string ChildLastName { get; set; }
 
-        [DisplayName("Nombre completo")]
-        public string ChildCompleteName { get; set; }
+        //[DisplayName("Nombre completo")]
+        //public string ChildCompleteName { get; set; }
 
-        [DisplayName("Fecha de nacimiento")]
-        public DateTime? ChildBirthDate { get; set; }
+        //[DisplayName("Fecha de nacimiento")]
+        //public DateTime? ChildBirthDate { get; set; }
 
-        [DisplayName("Genero")]
-        public string ChildGender { get; set; }
+        //[DisplayName("Genero")]
+        //public string ChildGender { get; set; }
 
         [DisplayName("Usuarios del colchón")]
         public int? nMattressUsers { get; set; }
@@ -100,8 +100,8 @@ namespace Sang.Models
         [DisplayName("Teléfono movil")]
         public long?  MovilPhone { get; set; }
 
-        [DisplayName("¿Menor o mayor de edad?")]
-        public string UserType { get; set; }
+        //[DisplayName("¿Menor o mayor de edad?")]
+        //public string UserType { get; set; }
 
         [DisplayName("Suscribirse a nuestro Newsletter")]
         public bool NewsLetter { get; set; }

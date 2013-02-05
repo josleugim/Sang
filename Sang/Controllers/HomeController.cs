@@ -25,10 +25,9 @@ namespace Sang.Controllers
         public ActionResult Create()
         {
             var users = _db.SangUsers.FirstOrDefault(c => c.Email.Equals(User.Identity.Name));
-            var hosp = _db.Hospitals.FirstOrDefault(h => h.HospitalName.Equals("Ninguno"));
             var client = _db.SangClients.FirstOrDefault(c => c.SangUser.SangUserID.Equals(users.SangUserID));
+            ViewBag.HospitalId = new SelectList(_db.Hospitals, "HospitalID", "HospitalName");
 
-            
             //
             //Si no existe el cliente se crea la cuenta
             if (client == null)
@@ -73,15 +72,11 @@ namespace Sang.Controllers
                 ViewBag.nMattress = new SelectList(n);
 
                 //Set the ID of the relational sanguser
-                var model = new SangClient
+                var model = new SangClient()
                     {
                         SangUserId = users.SangUserID,
                         SangUser = users,
-                        nMattressUsers = 0,
-                        UserType = "Mayor de edad",
-                        Gender = "Ninguno",
-                        HospitalId = hosp.HospitalID,
-                        Hospital = hosp
+                        Gender = "Ninguno"
                     };
 
                 return View(model);
@@ -115,14 +110,13 @@ namespace Sang.Controllers
             if (ModelState.IsValid && sangclient.PrivacyNotice != false)
             {
                 var users = _db.SangUsers.FirstOrDefault(c => c.Email.Equals(User.Identity.Name));
-                var hosp = _db.Hospitals.FirstOrDefault(h => h.HospitalName.Equals("Ninguno"));
 
                 _db.SangClients.Add(sangclient);
                 sangclient.CompleteName = sangclient.UserName + " " + sangclient.FirstName + " " + sangclient.LastName;
                 sangclient.Gender = cGender;
                 sangclient.RegisterDate = DateTime.Now;
                 sangclient.SangUser = users;
-                sangclient.Hospital = hosp;
+                //sangclient.Hospital = hosp;
                 sangclient.nMattressUsers = Convert.ToInt32(nMattress);
                 _db.SaveChanges();
                 //return RedirectToAction("AdultCuestionary", new { id = sangclient.SangClientID });
@@ -144,6 +138,8 @@ namespace Sang.Controllers
 
             var n = new List<int> { 1, 2 };
             ViewBag.nMattress = new SelectList(n);
+
+            ViewBag.HospitalId = new SelectList(_db.Hospitals, "HospitalID", "HospitalName");
 
             return View(sangclient);
         }
@@ -172,7 +168,7 @@ namespace Sang.Controllers
                             SangUserId = users.SangUserID,
                             SangUser = users,
                             nMattressUsers = 0,
-                            UserType = "Mayor de edad",
+                            //UserType = "Mayor de edad",
                             Gender = "Ninguno",
                             HospitalId = hosp.HospitalID,
                             Hospital = hosp

@@ -33,9 +33,8 @@
            { %>
         <%: Html.ValidationSummary(true) %>
         <%: Html.HiddenFor(model => model.SangUserId) %>
-        <%: Html.HiddenFor(model => model.HospitalId) %>
-        <%: Html.HiddenFor(model => model.nMattressUsers) %>
-        <%: Html.HiddenFor(model => model.UserType) %>
+        <%--<%: Html.HiddenFor(model => model.nMattressUsers) %>--%>
+        <%--<%: Html.HiddenFor(model => model.UserType) %>--%>
         <%: Html.HiddenFor(model => model.Gender) %>
 
         <img style="margin:10px" src="../../Content/images/PantallaDatos_small.png" alt="Imagen" />
@@ -99,7 +98,7 @@
             <tr>
                 <th>
                     Datos Adicionales:
-                </th>
+                 </th>
             </tr>
             <tr>
                 <td>
@@ -145,6 +144,11 @@
                                 border: none; font-weight: lighter; font-size:24px; cursor: pointer" /></u>
                     </p>
                 </td>
+            </tr>
+            <tr>
+             <td colspan="3">
+             <%: Html.LabelFor(model => model.HospitalId, "Hospital") %> <%: Html.DropDownList("HospitalId", String.Empty)%>
+             </td>
             </tr>
             <tr>
                 <td colspan="3">

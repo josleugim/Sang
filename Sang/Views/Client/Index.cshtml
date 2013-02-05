@@ -1,0 +1,207 @@
+﻿@model IEnumerable<Sang.Models.SangClient>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+    <tr>
+        <th>
+            SangUser
+        </th>
+        <th>
+            Hospital
+        </th>
+        <th>
+            UserName
+        </th>
+        <th>
+            FirstName
+        </th>
+        <th>
+            LastName
+        </th>
+        <th>
+            CompleteName
+        </th>
+        <th>
+            BirthDate
+        </th>
+        <th>
+            Gender
+        </th>
+        <th>
+            nMattressUsers
+        </th>
+        <th>
+            Disorder1
+        </th>
+        <th>
+            Disorder2
+        </th>
+        <th>
+            Disorder3
+        </th>
+        <th>
+            Disorder4
+        </th>
+        <th>
+            Disorder5
+        </th>
+        <th>
+            Disorder6
+        </th>
+        <th>
+            Disorder7
+        </th>
+        <th>
+            Disorder8
+        </th>
+        <th>
+            CuestionaryResult
+        </th>
+        <th>
+            SecondaryEmail
+        </th>
+        <th>
+            Address
+        </th>
+        <th>
+            Colony
+        </th>
+        <th>
+            PostalCode
+        </th>
+        <th>
+            Township
+        </th>
+        <th>
+            ShortState
+        </th>
+        <th>
+            Lada
+        </th>
+        <th>
+            HomePhone
+        </th>
+        <th>
+            MovilPhone
+        </th>
+        <th>
+            NewsLetter
+        </th>
+        <th>
+            PrivacyNotice
+        </th>
+        <th>
+            RegisterDate
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.SangUser.Email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Hospital.HospitalName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FirstName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LastName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CompleteName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BirthDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Gender)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.nMattressUsers)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Disorder1)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Disorder2)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Disorder3)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Disorder4)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Disorder5)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Disorder6)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Disorder7)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Disorder8)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CuestionaryResult)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SecondaryEmail)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Address)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Colony)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PostalCode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Township)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ShortState)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Lada)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HomePhone)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MovilPhone)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NewsLetter)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PrivacyNotice)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RegisterDate)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.SangClientID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.SangClientID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.SangClientID })
+        </td>
+    </tr>
+}
+
+</table>

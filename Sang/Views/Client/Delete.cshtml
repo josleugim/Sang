@@ -1,0 +1,168 @@
+﻿@model Sang.Models.SangClient
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend>SangClient</legend>
+
+    <div class="display-label">SangUser</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.SangUser.Email)
+    </div>
+
+    <div class="display-label">Hospital</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Hospital.HospitalName)
+    </div>
+
+    <div class="display-label">UserName</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.UserName)
+    </div>
+
+    <div class="display-label">FirstName</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.FirstName)
+    </div>
+
+    <div class="display-label">LastName</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.LastName)
+    </div>
+
+    <div class="display-label">CompleteName</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.CompleteName)
+    </div>
+
+    <div class="display-label">BirthDate</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.BirthDate)
+    </div>
+
+    <div class="display-label">Gender</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Gender)
+    </div>
+
+    <div class="display-label">nMattressUsers</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.nMattressUsers)
+    </div>
+
+    <div class="display-label">Disorder1</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Disorder1)
+    </div>
+
+    <div class="display-label">Disorder2</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Disorder2)
+    </div>
+
+    <div class="display-label">Disorder3</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Disorder3)
+    </div>
+
+    <div class="display-label">Disorder4</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Disorder4)
+    </div>
+
+    <div class="display-label">Disorder5</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Disorder5)
+    </div>
+
+    <div class="display-label">Disorder6</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Disorder6)
+    </div>
+
+    <div class="display-label">Disorder7</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Disorder7)
+    </div>
+
+    <div class="display-label">Disorder8</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Disorder8)
+    </div>
+
+    <div class="display-label">CuestionaryResult</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.CuestionaryResult)
+    </div>
+
+    <div class="display-label">SecondaryEmail</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.SecondaryEmail)
+    </div>
+
+    <div class="display-label">Address</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Address)
+    </div>
+
+    <div class="display-label">Colony</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Colony)
+    </div>
+
+    <div class="display-label">PostalCode</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.PostalCode)
+    </div>
+
+    <div class="display-label">Township</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Township)
+    </div>
+
+    <div class="display-label">ShortState</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ShortState)
+    </div>
+
+    <div class="display-label">Lada</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Lada)
+    </div>
+
+    <div class="display-label">HomePhone</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.HomePhone)
+    </div>
+
+    <div class="display-label">MovilPhone</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.MovilPhone)
+    </div>
+
+    <div class="display-label">NewsLetter</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.NewsLetter)
+    </div>
+
+    <div class="display-label">PrivacyNotice</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.PrivacyNotice)
+    </div>
+
+    <div class="display-label">RegisterDate</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.RegisterDate)
+    </div>
+</fieldset>
+@using (Html.BeginForm()) {
+    <p>
+        <input type="submit" value="Delete" /> |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}

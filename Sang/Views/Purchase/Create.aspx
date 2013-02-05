@@ -61,7 +61,7 @@
             </tr>
             <tr>
                 <th>
-                    Dirección:
+                    Datos de cliente - Escriba su dirección:
                 </th>
             </tr>
             <tr>

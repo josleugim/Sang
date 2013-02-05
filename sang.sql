@@ -60,4 +60,4 @@ select * from Purchases
 --drop table Purchases
 
 INSERT INTO Warranties(SangClientId,WarrantyCode, NAttempts, IsActived, ExpirationDate, RegisterDate)
-Values(null,'TEST1233',0,1,getdate(),getdate())
+Values(null,'TEST1234',0,1,getdate(),getdate())
