@@ -38,23 +38,6 @@ namespace Sang.Models
         [DisplayName("Genero")]
         public string Gender { get; set; }
 
-        //
-        //Datos de menores de edad
-        //[DisplayName("Apellido Paterno")]
-        //public string ChildFirstName { get; set; }
-
-        //[DisplayName("Apellido Materno")]
-        //public string ChildLastName { get; set; }
-
-        //[DisplayName("Nombre completo")]
-        //public string ChildCompleteName { get; set; }
-
-        //[DisplayName("Fecha de nacimiento")]
-        //public DateTime? ChildBirthDate { get; set; }
-
-        //[DisplayName("Genero")]
-        //public string ChildGender { get; set; }
-
         [DisplayName("Usuarios del colchón")]
         public int? nMattressUsers { get; set; }
         

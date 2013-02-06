@@ -1,12 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Data.Entity;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using Sang.Models;
-using System.Web.SessionState;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
+using System.IO;
 
 namespace Sang.Controllers
 {
@@ -206,6 +205,104 @@ namespace Sang.Controllers
                 adult.Disorder8 = Convert.ToInt32(Q21);
 
                 _db.SaveChanges();
+
+                //Generar resultados en pdf
+                var doc = new Document(PageSize.A4);
+                var output = new FileStream(Server.MapPath("../../Content/Documents/" + adult.CompleteName + adult.SangUser.tempWarranty + ".pdf"), FileMode.Create);
+                var writer = PdfWriter.GetInstance(doc, output);
+
+                doc.Open();
+
+
+                var logoHospital = Image.GetInstance(Server.MapPath(adult.Hospital.HospitalLogo));
+                logoHospital.Alignment = 1;
+                logoHospital.ScalePercent(50f);
+                doc.Add(logoHospital);
+
+                var titleResult = Image.GetInstance(Server.MapPath("../../Content/images/ResultadosEvaluacion.jpg"));
+                titleResult.Alignment = 1;
+                titleResult.ScalePercent(40f);
+                doc.Add(titleResult);
+                var table = new PdfPTable(4);
+
+                //var cellHosp = new PdfPCell(logoHospital, false) { Colspan = 4, HorizontalAlignment = 1 };
+                //table.AddCell(cellHosp);
+
+                //var cellHeader = new PdfPCell(titleResult, false) { Colspan = 4, HorizontalAlignment = 1 };
+                //table.AddCell(cellHeader);
+
+                var cellLabelName =
+                    new PdfPCell(new Phrase("Nombre: ",
+                                            new Font(Font.FontFamily.HELVETICA, 8f, Font.NORMAL, BaseColor.WHITE)));
+                cellLabelName.BackgroundColor = new BaseColor(0, 0, 0);
+                cellLabelName.HorizontalAlignment = 0;
+                table.AddCell(cellLabelName);
+
+                var cellName =
+                    new PdfPCell(new Phrase(adult.CompleteName,
+                                            new Font(Font.FontFamily.HELVETICA, 8f, Font.NORMAL, BaseColor.WHITE)));
+                cellName.BackgroundColor = new BaseColor(0, 0, 0);
+                cellName.HorizontalAlignment = 0;
+                table.AddCell(cellName);
+
+                var cellLabelAddress =
+                    new PdfPCell(new Phrase("Dirección: ",
+                                            new Font(Font.FontFamily.HELVETICA, 8f, Font.NORMAL, BaseColor.WHITE)));
+                cellLabelAddress.BackgroundColor = new BaseColor(0, 0, 0);
+                cellLabelAddress.HorizontalAlignment = 0;
+                table.AddCell(cellLabelAddress);
+
+                var cellAddress =
+                    new PdfPCell(new Phrase(adult.Address,
+                                            new Font(Font.FontFamily.HELVETICA, 8f, Font.NORMAL, BaseColor.WHITE)));
+                cellAddress.BackgroundColor = new BaseColor(0, 0, 0);
+                cellAddress.HorizontalAlignment = 0;
+                table.AddCell(cellAddress);
+
+                var cellLabelColony =
+                    new PdfPCell(new Phrase("Colonia: ",
+                                            new Font(Font.FontFamily.HELVETICA, 8f, Font.NORMAL, BaseColor.WHITE)));
+                cellLabelColony.BackgroundColor = new BaseColor(0, 0, 0);
+                cellLabelColony.HorizontalAlignment = 0;
+                table.AddCell(cellLabelColony);
+
+                var cellColony =
+                    new PdfPCell(new Phrase(adult.Colony,
+                                            new Font(Font.FontFamily.HELVETICA, 8f, Font.NORMAL, BaseColor.WHITE)));
+                cellColony.BackgroundColor = new BaseColor(0, 0, 0);
+                cellColony.HorizontalAlignment = 0;
+                table.AddCell(cellColony);
+
+                var cellLabelTownship =
+                    new PdfPCell(new Phrase("Municipio/Delegación: ",
+                                            new Font(Font.FontFamily.HELVETICA, 8f, Font.NORMAL, BaseColor.WHITE)));
+                cellLabelTownship.BackgroundColor = new BaseColor(0, 0, 0);
+                cellLabelTownship.HorizontalAlignment = 0;
+                table.AddCell(cellLabelTownship);
+
+                var cellTownship =
+                    new PdfPCell(new Phrase(adult.Township,
+                                            new Font(Font.FontFamily.HELVETICA, 8f, Font.NORMAL, BaseColor.WHITE)));
+                cellTownship.BackgroundColor = new BaseColor(0, 0, 0);
+                cellTownship.HorizontalAlignment = 0;
+                table.AddCell(cellTownship);
+
+                var cellLabelState =
+                    new PdfPCell(new Phrase("Estado: ",
+                                            new Font(Font.FontFamily.HELVETICA, 8f, Font.NORMAL, BaseColor.WHITE)));
+                cellLabelState.BackgroundColor = new BaseColor(0, 0, 0);
+                cellLabelState.HorizontalAlignment = 0;
+                table.AddCell(cellLabelState);
+
+                var cellState =
+                    new PdfPCell(new Phrase(adult.ShortState,
+                                            new Font(Font.FontFamily.HELVETICA, 8f, Font.NORMAL, BaseColor.WHITE)));
+                cellState.BackgroundColor = new BaseColor(0, 0, 0);
+                cellState.HorizontalAlignment = 0;
+                table.AddCell(cellState);
+
+                doc.Add(table);
+                doc.Close();
 
                 //Generación de vale
                 return RedirectToAction("GenerateCoupon", "Coupon", new { id = adult.SangUserId });

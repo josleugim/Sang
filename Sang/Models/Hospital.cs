@@ -14,6 +14,12 @@ namespace Sang.Models
         [DisplayName("Nombre del hospital")]
         public string HospitalName { get; set; }
 
+        public string HospitalAddress { get; set; }
+
+        public string HospitalLogo { get; set; }
+
+        public string DoctorName { get; set; }
+
         public DateTime RegisterDate { get; set; }
     }
 }

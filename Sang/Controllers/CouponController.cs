@@ -11,7 +11,7 @@ using iTextSharp.text.pdf;
 using System.IO;
 
 namespace Sang.Controllers
-{ 
+{
     public class CouponController : Controller
     {
         private readonly SangDBContext _db = new SangDBContext();
@@ -45,34 +45,34 @@ namespace Sang.Controllers
         public ActionResult GenerateCoupon(int id)
         {
             var users = _db.SangUsers.FirstOrDefault(c => c.Email.Equals(User.Identity.Name));
-            //var client =
-            //    _db.SangClients.Where(u => u.SangUserId == users.SangUserID)
-            //       .OrderByDescending(c => c.SangClientID)
-            //       .FirstOrDefault();
+            var client =
+                _db.SangClients.Where(u => u.SangUserId == users.SangUserID)
+                   .OrderByDescending(c => c.SangClientID)
+                   .FirstOrDefault();
 
-            var random = new Random();
+            var random = new Random(1000);
             int randomN = random.Next();
 
-            //var coupon = new Coupon();
-            //coupon.SangUserId = id;
-            //coupon.SangUser = users;
-            //coupon.CouponNumber = users.tempWarranty + randomN;
-            //coupon.RegisterDate = DateTime.Now;
-            //coupon.CouponURL = "../../Content/Documents/" + coupon.CouponNumber + ".pdf";
-            //_db.Coupons.Add(coupon);
-            //_db.SaveChanges();
+            var coupon = new Coupon();
+            coupon.SangUserId = id;
+            coupon.SangUser = users;
+            coupon.CouponNumber = users.tempWarranty + randomN;
+            coupon.RegisterDate = DateTime.Now;
+            coupon.CouponURL = "../../Content/Documents/" + coupon.CouponNumber + ".pdf";
+            _db.Coupons.Add(coupon);
+            _db.SaveChanges();
 
             var doc = new Document(PageSize.A4);
-            var output = new FileStream(Server.MapPath("../../Content/Documents/" + "LP12341932043748" + ".pdf"), FileMode.Create);
+            var output = new FileStream(Server.MapPath("../../Content/Documents/" + coupon.CouponNumber + ".pdf"), FileMode.Create);
             var writer = PdfWriter.GetInstance(doc, output);
 
             doc.Open();
 
-            
+
             var logoVale = Image.GetInstance(Server.MapPath("../../Content/images/Logo-vale.jpg"));
             var logoSang = Image.GetInstance(Server.MapPath("../../Content/images/logo-sang.jpg"));
             var sleepImage = Image.GetInstance(Server.MapPath("../../Content/images/sleep-image.jpg"));
-            var sleepImage2 = Image.GetInstance(Server.MapPath("../../Content/images/sleep-image2.jpg"));
+            var info = Image.GetInstance(Server.MapPath("../../Content/images/informes.jpg"));
 
             var table = new PdfPTable(2);
 
@@ -82,7 +82,7 @@ namespace Sang.Controllers
 
             table.SetTotalWidth(widths);
 
-            var cellLogoVale = new PdfPCell(logoVale, false) {Rowspan = 6, HorizontalAlignment = 1};
+            var cellLogoVale = new PdfPCell(logoVale, false) { Rowspan = 6, HorizontalAlignment = 1 };
             table.AddCell(cellLogoVale);
 
             var cellLogoSang = new PdfPCell(logoSang, false) { HorizontalAlignment = 1 };
@@ -97,33 +97,15 @@ namespace Sang.Controllers
 
             var cellSleepImage = new PdfPCell(sleepImage, true) { HorizontalAlignment = 1 };
             table.AddCell(cellSleepImage);
-            //var cellSleepImage2 = new PdfPCell(sleepImage2, true) { HorizontalAlignment = 1 };
-            //table.AddCell(cellSleepImage2);
 
+            var cellNombreCompleto = new PdfPCell(new Phrase(client.CompleteName, new Font(Font.FontFamily.HELVETICA, 11f, Font.NORMAL, BaseColor.WHITE))) { HorizontalAlignment = 1, BackgroundColor = new BaseColor(0, 0, 0) };
+            table.AddCell(cellNombreCompleto);
 
-            var cell = new PdfPCell(new Phrase("1. Datos generales", new Font(Font.FontFamily.HELVETICA, 8f, Font.NORMAL, BaseColor.WHITE)));
-            cell.Colspan = 4;
-            cell.HorizontalAlignment = 1; //0=Left, 1=Centre, 2=Right
-            cell.BackgroundColor = new BaseColor(128, 128, 128);
-            table.AddCell(cell);
+            var cellInforme = new PdfPCell(info, true) { HorizontalAlignment = 1 };
+            table.AddCell(cellInforme);
 
-            table.AddCell("!!");
-            table.AddCell("No. de cliente");
-            table.AddCell("");
-
-            table.AddCell("Giro");
-
-            var cellGiro =
-                new PdfPCell(new Phrase("", new Font(Font.FontFamily.HELVETICA, 8f, Font.NORMAL, BaseColor.BLACK)));
-            cellGiro.Colspan = 3;
-            table.AddCell(cellGiro);
-
-            table.AddCell("Eslogan (Lema publicitario)");
-
-            var cellEslogan =
-                new PdfPCell(new Phrase("", new Font(Font.FontFamily.HELVETICA, 8f, Font.NORMAL, BaseColor.BLACK)));
-            cellEslogan.Colspan = 3;
-            table.AddCell(cellEslogan);
+            var cellAddress = new PdfPCell(new Phrase("Dirección", new Font(Font.FontFamily.HELVETICA, 12f, Font.NORMAL, BaseColor.WHITE))) { HorizontalAlignment = 1, BackgroundColor = new BaseColor(0, 0, 0) };
+            table.AddCell(cellAddress);
 
             doc.Add(table);
 
@@ -139,7 +121,7 @@ namespace Sang.Controllers
         {
             ViewBag.SangUserId = new SelectList(_db.SangUsers, "SangUserID", "Email");
             return View();
-        } 
+        }
 
         //
         // POST: /Coupon/Create
@@ -151,16 +133,16 @@ namespace Sang.Controllers
             {
                 _db.Coupons.Add(coupon);
                 _db.SaveChanges();
-                return RedirectToAction("Index");  
+                return RedirectToAction("Index");
             }
 
             ViewBag.SangUserId = new SelectList(_db.SangUsers, "SangUserID", "Email", coupon.SangUserId);
             return View(coupon);
         }
-        
+
         //
         // GET: /Coupon/Edit/5
- 
+
         public ActionResult Edit(int id)
         {
             Coupon coupon = _db.Coupons.Find(id);
@@ -186,7 +168,7 @@ namespace Sang.Controllers
 
         //
         // GET: /Coupon/Delete/5
- 
+
         public ActionResult Delete(int id)
         {
             Coupon coupon = _db.Coupons.Find(id);
@@ -198,7 +180,7 @@ namespace Sang.Controllers
 
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
-        {            
+        {
             Coupon coupon = _db.Coupons.Find(id);
             _db.Coupons.Remove(coupon);
             _db.SaveChanges();

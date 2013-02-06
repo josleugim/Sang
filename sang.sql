@@ -3,14 +3,15 @@ go
 
 --INSERT INTO Hospitals(HospitalName, RegisterDate)
 --Values('Ninguno', getdate())
---INSERT INTO Hospitals(HospitalName, RegisterDate)
---Values('Hospital ABC, México, D.F.', getdate())
---INSERT INTO Hospitals(HospitalName, RegisterDate)
---Values('Hospital Angeles Pedregal, México, D.F.', getdate())
---INSERT INTO Hospitals(HospitalName, RegisterDate)
---Values('Hospital Español, México, D.F.', getdate())
---INSERT INTO Hospitals(HospitalName, RegisterDate)
---Values('Clínica del Ronquido y Apnea del Sueño, Guadalajara, Jal.', getdate())
+
+--INSERT INTO Hospitals(HospitalName, HospitalAddress, HospitalLogo, DoctorName, RegisterDate)
+--Values('Hospital ABC, México, D.F.', '', '../../Content/images/ABC.jpg', '', getdate())
+--INSERT INTO Hospitals(HospitalName, HospitalAddress, HospitalLogo, DoctorName, RegisterDate)
+--Values('Hospital Angeles Pedregal', 'Clínica del Sueño de la Clínica de Neurofisiología, Hospital Ángeles del pedegral, Consultorio 151. Camino a Santa Teresa 1055, Col. Héroes de Padierna, México, D.F., C.P. 10700.', '../../Content/images/Hospital-Angeles.jpg', 'Doctor name', getdate())
+--INSERT INTO Hospitals(HospitalName, HospitalAddress, HospitalLogo, DoctorName, RegisterDate)
+--Values('Hospital Español, México, D.F.','', '../../Content/images/Hospital-Espanol.jpg', '', getdate())
+--INSERT INTO Hospitals(HospitalName, HospitalAddress, HospitalLogo, DoctorName, RegisterDate)
+--Values('Clínica del Ronquido y Apnea del Sueño, Guadalajara, Jal.', '', '../../Content/images/Guadalajara.jpg', '', getdate())
 
 --insert into Collections (CollectionName, RegisterDate)
 --Values('Lyx resten', getdate())
