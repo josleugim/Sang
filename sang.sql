@@ -45,6 +45,7 @@ select * from Collections
 Select * from Newsletters
 Select * from Hospitals
 select * from Purchases
+Select * from Coupons
 
 --Delete from SangUsers
 --Delete From ModelMattresses

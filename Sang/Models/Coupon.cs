@@ -13,6 +13,8 @@ namespace Sang.Models
         [DisplayName("Cupón")]
         public string CouponNumber { get; set; }
 
+        public string CouponURL { get; set; }
+
         public DateTime RegisterDate { get; set; }
 
         public virtual SangUser SangUser { get; set; }

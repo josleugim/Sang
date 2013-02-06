@@ -8,17 +8,17 @@ using System.Web.Mvc;
 using Sang.Models;
 
 namespace Sang.Controllers
-{ 
+{
     public class ClientController : Controller
     {
-        private SangDBContext db = new SangDBContext();
+        private SangDBContext _db = new SangDBContext();
 
         //
         // GET: /Client/
 
         public ViewResult Index()
         {
-            var sangclients = db.SangClients.Include(s => s.SangUser).Include(s => s.Hospital);
+            var sangclients = _db.SangClients.Include(s => s.SangUser).Include(s => s.Hospital);
             return View(sangclients.ToList());
         }
 
@@ -27,7 +27,7 @@ namespace Sang.Controllers
 
         public ViewResult Details(int id)
         {
-            SangClient sangclient = db.SangClients.Find(id);
+            SangClient sangclient = _db.SangClients.Find(id);
             return View(sangclient);
         }
 
@@ -36,37 +36,101 @@ namespace Sang.Controllers
 
         public ActionResult Create()
         {
-            ViewBag.SangUserId = new SelectList(db.SangUsers, "SangUserID", "Email");
-            ViewBag.HospitalId = new SelectList(db.Hospitals, "HospitalID", "HospitalName");
-            return View();
-        } 
+            int nCuentas = 0;
+            var users = _db.SangUsers.FirstOrDefault(c => c.Email.Equals(User.Identity.Name));
+            //var client = _db.SangClients.FirstOrDefault(c => c.SangUser.SangUserID.Equals(users.SangUserID));
+            var client =
+                _db.SangClients.Where(u => u.SangUserId == users.SangUserID)
+                   .OrderByDescending(c => c.SangClientID)
+                   .FirstOrDefault();
+
+            //Cuantos clientes existen
+            var nClient = from e in _db.SangClients
+                          where e.SangUser.SangUserID == users.SangUserID
+                          select e;
+
+            if (nClient.Any())
+            {
+                var nChildren = from c in _db.SangChildren
+                                where c.SangClientId == client.SangClientID
+                                select c;
+
+                nCuentas = nClient.Count() + nChildren.Count();
+
+            }
+
+            if (Convert.ToInt32(nCuentas) >= 2)
+                return View("Thanks");
+            else
+            {
+                ViewBag.HospitalId = new SelectList(_db.Hospitals, "HospitalID", "HospitalName");
+                if (client == null)
+                {
+                    var n = new List<int> {1, 2};
+                    ViewBag.nMattress = new SelectList(n);
+
+                    //Set the ID of the relational sanguser
+                    var model = new SangClient()
+                        {
+                            SangUserId = users.SangUserID,
+                            SangUser = users,
+                            Gender = "Ninguno"
+                        };
+
+                    return View(model);
+                }
+                    //
+                    //Si ya existe la cuenta se envía la garantía
+                else
+                    return RedirectToAction("Create", "Purchase", new { id = users.tempWarranty });
+            }
+        }
 
         //
         // POST: /Client/Create
 
         [HttpPost]
-        public ActionResult Create(SangClient sangclient)
+        public ActionResult Create(SangClient sangclient, string cGender, string nMattress)
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid && sangclient.PrivacyNotice != false)
             {
-                db.SangClients.Add(sangclient);
-                db.SaveChanges();
-                return RedirectToAction("Index");  
+                var users = _db.SangUsers.FirstOrDefault(c => c.Email.Equals(User.Identity.Name));
+
+                _db.SangClients.Add(sangclient);
+                sangclient.CompleteName = sangclient.UserName + " " + sangclient.FirstName + " " + sangclient.LastName;
+                sangclient.Gender = cGender;
+                sangclient.RegisterDate = DateTime.Now;
+                sangclient.SangUser = users;
+                //sangclient.Hospital = hosp;
+                sangclient.nMattressUsers = Convert.ToInt32(nMattress);
+                _db.SaveChanges();
+                //return RedirectToAction("AdultCuestionary", new { id = sangclient.SangClientID });
+
+                //Update the client in the warranty
+                var warranty = _db.Warranties.FirstOrDefault(s => s.WarrantyCode.Equals(users.tempWarranty));
+                UpdateModel(warranty);
+                warranty.SangClient = sangclient;
+                _db.SaveChanges();
+
+                return RedirectToAction("Create", "Purchase", new { id = warranty.WarrantyCode });
             }
 
-            ViewBag.SangUserId = new SelectList(db.SangUsers, "SangUserID", "Email", sangclient.SangUserId);
-            ViewBag.HospitalId = new SelectList(db.Hospitals, "HospitalID", "HospitalName", sangclient.HospitalId);
+            var n = new List<int> { 1, 2 };
+            ViewBag.nMattress = new SelectList(n);
+
+            ViewBag.HospitalId = new SelectList(_db.Hospitals, "HospitalID", "HospitalName");
+
             return View(sangclient);
         }
-        
+
         //
         // GET: /Client/Edit/5
- 
+
         public ActionResult Edit(int id)
         {
-            SangClient sangclient = db.SangClients.Find(id);
-            ViewBag.SangUserId = new SelectList(db.SangUsers, "SangUserID", "Email", sangclient.SangUserId);
-            ViewBag.HospitalId = new SelectList(db.Hospitals, "HospitalID", "HospitalName", sangclient.HospitalId);
+            SangClient sangclient = _db.SangClients.Find(id);
+            ViewBag.SangUserId = new SelectList(_db.SangUsers, "SangUserID", "Email", sangclient.SangUserId);
+            ViewBag.HospitalId = new SelectList(_db.Hospitals, "HospitalID", "HospitalName", sangclient.HospitalId);
             return View(sangclient);
         }
 
@@ -78,21 +142,21 @@ namespace Sang.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(sangclient).State = EntityState.Modified;
-                db.SaveChanges();
+                _db.Entry(sangclient).State = EntityState.Modified;
+                _db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.SangUserId = new SelectList(db.SangUsers, "SangUserID", "Email", sangclient.SangUserId);
-            ViewBag.HospitalId = new SelectList(db.Hospitals, "HospitalID", "HospitalName", sangclient.HospitalId);
+            ViewBag.SangUserId = new SelectList(_db.SangUsers, "SangUserID", "Email", sangclient.SangUserId);
+            ViewBag.HospitalId = new SelectList(_db.Hospitals, "HospitalID", "HospitalName", sangclient.HospitalId);
             return View(sangclient);
         }
 
         //
         // GET: /Client/Delete/5
- 
+
         public ActionResult Delete(int id)
         {
-            SangClient sangclient = db.SangClients.Find(id);
+            SangClient sangclient = _db.SangClients.Find(id);
             return View(sangclient);
         }
 
@@ -101,16 +165,16 @@ namespace Sang.Controllers
 
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
-        {            
-            SangClient sangclient = db.SangClients.Find(id);
-            db.SangClients.Remove(sangclient);
-            db.SaveChanges();
+        {
+            SangClient sangclient = _db.SangClients.Find(id);
+            _db.SangClients.Remove(sangclient);
+            _db.SaveChanges();
             return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)
         {
-            db.Dispose();
+            _db.Dispose();
             base.Dispose(disposing);
         }
     }

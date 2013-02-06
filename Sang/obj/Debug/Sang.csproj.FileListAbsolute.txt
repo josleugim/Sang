@@ -180,3 +180,4 @@ C:\Users\josleugim\Sang\Sang\bin\System.Web.WebPages.Razor.xml
 C:\Users\josleugim\Sang\Sang\obj\Debug\ResolveAssemblyReference.cache
 C:\Users\josleugim\Sang\Sang\obj\Debug\Sang.dll
 C:\Users\josleugim\Sang\Sang\obj\Debug\Sang.pdb
+C:\Documents and Settings\MEGA\Sang\Sang\bin\itextsharp.dll

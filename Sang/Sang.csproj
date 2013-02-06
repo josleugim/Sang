@@ -37,6 +37,9 @@
     <Reference Include="EntityFramework">
       <HintPath>..\packages\EntityFramework.4.1.10331.0\lib\EntityFramework.dll</HintPath>
     </Reference>
+    <Reference Include="itextsharp">
+      <HintPath>..\..\Mis documentos\Visual Studio 2010\Projects\SeccionAmarrilla\itextsharp.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
@@ -241,11 +244,20 @@
     <Content Include="Content\images\galeria_imgGrandes\onskan.jpg" />
     <Content Include="Content\images\galeria_imgGrandes\esp_onskan.png" />
     <Content Include="Content\images\galeria_imgGrandes\_notes\dwsync.xml" />
+    <Content Include="Content\images\Logo-vale.jpg" />
     <Content Include="Content\images\Logoabc_hospital.jpg" />
     <Content Include="Content\images\Registro.png" />
+    <Content Include="Content\images\sleep-image.jpg" />
+    <Content Include="Content\images\sleep-image2.jpg" />
     <Content Include="Content\images\Texto1.png" />
     <Content Include="Content\images\Texto2.png" />
     <Content Include="Content\images\Texto3.png" />
+    <Content Include="Content\images\ui-bg_glass_20_555555_1x400.png" />
+    <Content Include="Content\images\ui-bg_glass_40_0078a3_1x400.png" />
+    <Content Include="Content\images\ui-bg_glass_40_ffc73d_1x400.png" />
+    <Content Include="Content\images\ui-bg_gloss-wave_25_333333_500x100.png" />
+    <Content Include="Content\images\ui-bg_highlight-soft_80_eeeeee_1x100.png" />
+    <Content Include="Content\images\ui-icons_ffffff_256x240.png" />
     <Content Include="Content\images\zoom_in.png" />
     <Content Include="Content\img-demo\1.jpg" />
     <Content Include="Content\img-demo\agrandar_icon.png" />
@@ -639,6 +651,7 @@
     <Content Include="Content\js\tooltip.js" />
     <Content Include="Content\js\xero.forms.js" />
     <Content Include="Content\js\_notes\dwsync.xml" />
+    <Content Include="Content\images\logo-sang.jpg" />
     <Content Include="Content\sliding.form.js" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
@@ -734,7 +747,6 @@
     <Content Include="Views\Account\ChangePasswordSuccess.aspx" />
     <Content Include="Views\Account\LogOn.aspx" />
     <Content Include="Views\Account\Register.aspx" />
-    <Content Include="Views\Home\About.aspx" />
     <Content Include="Views\Shared\Error.aspx" />
     <Content Include="Views\Shared\LogOnUserControl.ascx" />
     <Content Include="Views\Shared\Site.Master" />
@@ -742,6 +754,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="bin\" />
+    <Folder Include="Content\Documents\" />
     <Folder Include="ViewModels\" />
   </ItemGroup>
   <ItemGroup>
@@ -800,6 +813,7 @@
     <Content Include="Views\Client\Create.cshtml" />
     <Content Include="Views\Client\Edit.cshtml" />
     <Content Include="Views\Client\Delete.cshtml" />
+    <Content Include="Views\Client\Thanks.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

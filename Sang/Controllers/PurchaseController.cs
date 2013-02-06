@@ -45,13 +45,18 @@ namespace Sang.Controllers
                 ViewBag.MattressId = new SelectList(db.ModelMattress, "ModelMattressID", "ModelName");
                 var size = new List<string> { "Individual", "Matrimonial", "King Size", "Queen Size" };
                 ViewBag.Size = new SelectList(size);
-                var estado = new List<string> { "Aguascalientes", "Baja California", "Baja California Sur", "Campeche",
-                    "Chiapas", "Chihuahua", "Coahuila", "Colima", "Durango", "Guanajuato", "Guerrero", "Hidalgo", "Jalisco", "México",
-                "Michoacán de Ocampo", "Morelos", "Nayarit", "Nuevo León", "Oaxaca", "Puebla", "Querétaro", "Quintana Roo",
-                "San Luis Potosí", "Sinaloa", "Sonora", "Tabasco", "Tamaulipas", "Tlaxcala", "Veracruz", "Yucatán", "Zacatecas"};
+
+                var estado = new List<string>
+                        {
+                            "Aguascalientes", "Baja California", "Baja California Sur", "Campeche", "Chiapas", "Chihuahua",
+                            "Coahuila", "Colima", "Durango", "Distrito Federal", "Estado de México", "Guanajuato", "Guerrero",
+                            "Hidalgo", "Jalisco", "Michoacán de Ocampo", "Morelos", "Nayarit", "Nuevo León", "Oaxaca", "Puebla",
+                            "Querétaro", "Quintana Roo", "San Luis Potosí", "Sinaloa", "Sonora", "Tabasco", "Tamaulipas", "Tlaxcala",
+                            "Veracruz", "Yucatán", "Zacatecas"
+                        };
                 ViewBag.estado = new SelectList(estado);
 
-                Warranty warr = db.Warranties.Find(warrant.WarrantyID);
+                var warr = db.Warranties.Find(warrant.WarrantyID);
 
                 var model = new Purchase
                 {
@@ -104,10 +109,15 @@ namespace Sang.Controllers
             ViewBag.MattressId = new SelectList(db.ModelMattress, "ModelMattressID", "ModelName");
             var size = new List<string> { "Individual", "Matrimonial", "King Size", "Queen Size" };
             ViewBag.Size = new SelectList(size);
-            var estado2 = new List<string> { "Aguascalientes", "Baja California", "Baja California Sur", "Campeche",
-                    "Chiapas", "Chihuahua", "Coahuila", "Colima", "Durango", "Guanajuato", "Guerrero", "Hidalgo", "Jalisco", "México",
-                "Michoacán de Ocampo", "Morelos", "Nayarit", "Nuevo León", "Oaxaca", "Puebla", "Querétaro", "Quintana Roo",
-                "San Luis Potosí", "Sinaloa", "Sonora", "Tabasco", "Tamaulipas", "Tlaxcala", "Veracruz", "Yucatán", "Zacatecas"};
+
+            var estado2 = new List<string>
+                        {
+                            "Aguascalientes", "Baja California", "Baja California Sur", "Campeche", "Chiapas", "Chihuahua",
+                            "Coahuila", "Colima", "Durango", "Distrito Federal", "Estado de México", "Guanajuato", "Guerrero",
+                            "Hidalgo", "Jalisco", "Michoacán de Ocampo", "Morelos", "Nayarit", "Nuevo León", "Oaxaca", "Puebla",
+                            "Querétaro", "Quintana Roo", "San Luis Potosí", "Sinaloa", "Sonora", "Tabasco", "Tamaulipas", "Tlaxcala",
+                            "Veracruz", "Yucatán", "Zacatecas"
+                        };
             ViewBag.estado = new SelectList(estado2);
 
             //return View(purchase);

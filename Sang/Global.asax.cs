@@ -33,7 +33,7 @@ namespace Sang
 
         protected void Application_Start()
         {
-            Database.SetInitializer<SangDBContext>(new SangInitializer());
+            Database.SetInitializer(new SangInitializer());
             //Database.SetInitializer<SangDBContext>(null);
             AreaRegistration.RegisterAllAreas();
 

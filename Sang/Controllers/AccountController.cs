@@ -54,7 +54,7 @@ namespace Sang.Controllers
                                 return RedirectToAction("Introduction2", "Home");
                             }
 
-                            return RedirectToAction("Create", "Home");
+                            return RedirectToAction("Create", "Client");
                         }
                     }
                     else
