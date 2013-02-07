@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web.Mvc;
 using Sang.Models;
 using iTextSharp.text;
+using iTextSharp.text.html.simpleparser;
 using iTextSharp.text.pdf;
 using System.IO;
 
@@ -206,6 +207,14 @@ namespace Sang.Controllers
 
                 _db.SaveChanges();
 
+                var d1 = Convert.ToInt32(adult.Disorder1);
+                var d2 = Convert.ToInt32(adult.Disorder2);
+                var d3 = Convert.ToInt32(adult.Disorder3);
+                var d4 = Convert.ToInt32(adult.Disorder4);
+                var d5 = Convert.ToInt32(adult.Disorder5);
+                var d7 = Convert.ToInt32(adult.Disorder7);
+                var d8 = Convert.ToInt32(adult.Disorder8);
+
                 //Generar resultados en pdf
                 var doc = new Document(PageSize.A4);
                 var output = new FileStream(Server.MapPath("../../Content/Documents/" + adult.CompleteName + adult.SangUser.tempWarranty + ".pdf"), FileMode.Create);
@@ -302,6 +311,87 @@ namespace Sang.Controllers
                 table.AddCell(cellState);
 
                 doc.Add(table);
+
+                //var htmlWorker = new HTMLWorker(doc);
+                //var str = "<html><head></head><body>" +
+                //  "<br /><h1 style='text-align: center'>Distirbuios del sueño</h1><div width='300px' bgcolor='red' height='100px' background-color='black'><p>Test</p></div>" +
+                //  "<table style='margin: 0 auto; border: 2px solid #9A0D0D'><tr><th style='background-color: #9A0D0D'>Trastorno de inicio y continuidad del sueño</th></tr>" +
+                //  "<tr><td bgcolor='red'><div style='width:" + d1 + "px; height: 36px; text-align: right;'><img src='" + Server.MapPath("../../Content/images/down_arrow.png") + "' alt='Arrow' /></div>" + 
+                //  "<div style='width: 400px; height: 10px; font-size: 12px; text-align: center; color: Black;'>" +
+                //        "<div style='float: left; width: 80px; height: 20px; background-color: #75E109'>" +
+                //            "Riesgo bajo" +
+                //        "</div>"+
+                //        "<div style='float: left; width: 80px; height: 20px; background-color: #FFFF00'>"+
+                //            "Riesgo medio"+
+                //        "</div>"+
+                //        "<div style='float: left; width: 240px; height: 20px; background-color: red'>Riesgo alto</div>"+
+                //    "</div></td></tr>" +
+                //  "</table></body></html>";
+                //htmlWorker.Parse(new StringReader(str));
+
+                PdfContentByte cb = writer.DirectContent;
+                //cb.SetColorStroke(new CMYKColor(1f, 0f, 0f, 0f));
+                cb.SetColorFill(new BaseColor(0, 128, 0));
+
+                
+                //cb.MoveTo(10, 500);
+                //cb.LineTo(410, 500);
+                ////Path closed and stroked
+                //cb.ClosePathStroke();
+
+                //for (int i = 10; i < 420; i += 10)
+                //{
+                //    cb.MoveTo(i, 495);
+                //    cb.LineTo(i, 505);
+                //    //Path closed and stroked
+                //    cb.ClosePathStroke();
+                //}
+
+                //Trastorno de inicio y continuidad del sueño
+                cb.SetColorFill(new BaseColor(0, 128, 0));
+                cb.MoveTo(100, 400);
+                cb.LineTo(200, 400);
+                cb.LineTo(200, 410);
+                cb.LineTo(100, 410);
+                //Path closed, stroked and filled
+                cb.ClosePathFillStroke();
+
+                //Trastorno de inicio y continuidad del sueño
+                cb.SetColorFill(new BaseColor(255, 255, 0));
+                cb.MoveTo(200, 400);
+                cb.LineTo(300, 400);
+                cb.LineTo(300, 410);
+                cb.LineTo(200, 410);
+                //Path closed, stroked and filled
+                cb.ClosePathFillStroke();
+
+                cb.MoveTo(190, 200);
+                cb.LineTo(290, 200);
+                cb.LineTo(290, 300);
+                cb.LineTo(190, 300);
+
+                //Filled, but not stroked or closed
+
+                cb.Fill();
+
+
+
+                cb.MoveTo(310, 200);
+
+                cb.LineTo(410, 200);
+
+                cb.LineTo(410, 300);
+
+                cb.LineTo(310, 300);
+
+                //Filled, stroked, but path not closed
+
+                cb.FillStroke();
+
+
+
+                
+
                 doc.Close();
 
                 //Generación de vale

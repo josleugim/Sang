@@ -237,6 +237,10 @@
     <Content Include="Content\images\bgsang.jpg" />
     <Content Include="Content\images\Boton.png" />
     <Content Include="Content\images\downarrow_small.png" />
+    <Content Include="Content\images\DrABC.jpg" />
+    <Content Include="Content\images\DrAngeles.jpg" />
+    <Content Include="Content\images\DrEspanol.jpg" />
+    <Content Include="Content\images\DrGuadalajara.jpg" />
     <Content Include="Content\images\Evaluacion.png" />
     <Content Include="Content\images\facebook_dark_small.png" />
     <Content Include="Content\images\galeria_imgGrandes\esp_livet.jpg" />
@@ -253,7 +257,6 @@
     <Content Include="Content\images\Registro.png" />
     <Content Include="Content\images\ResultadosEvaluacion.jpg" />
     <Content Include="Content\images\sleep-image.jpg" />
-    <Content Include="Content\images\sleep-image2.jpg" />
     <Content Include="Content\images\Texto1.png" />
     <Content Include="Content\images\Texto2.png" />
     <Content Include="Content\images\Texto3.png" />
