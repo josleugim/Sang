@@ -74,10 +74,10 @@ h5, h6
 }
 
 .tableCuestion{margin:0 auto;}
-.tableCuestion td {border:1px solid #505153;}
+.tableCuestion td {border:1px solid #FFFFFF;}
 .tableCuestion th {border:1px solid #FFF; background-color:#505153}
-.tableResult {margin: 0 auto; border: 2px solid #9A0D0D}
-.tableResult th {background-color: #9A0D0D}
+.tableResult {margin: 0 auto; border: 2px solid #000}
+.tableResult th {background-color: #000}
 /* PRIMARY LAYOUT ELEMENTS   
 ----------------------------------------------------------*/
 

@@ -216,23 +216,23 @@ namespace Sang.Controllers
                 var d8 = Convert.ToInt32(adult.Disorder8);
 
                 //Generar resultados en pdf
-                var doc = new Document(PageSize.A4);
-                var output = new FileStream(Server.MapPath("../../Content/Documents/" + adult.CompleteName + adult.SangUser.tempWarranty + ".pdf"), FileMode.Create);
-                var writer = PdfWriter.GetInstance(doc, output);
+                //var doc = new Document(PageSize.A4);
+                //var output = new FileStream(Server.MapPath("../../Content/Documents/" + adult.CompleteName + adult.SangUser.tempWarranty + ".pdf"), FileMode.Create);
+                //var writer = PdfWriter.GetInstance(doc, output);
 
-                doc.Open();
+                //doc.Open();
 
 
-                var logoHospital = Image.GetInstance(Server.MapPath(adult.Hospital.HospitalLogo));
-                logoHospital.Alignment = 1;
-                logoHospital.ScalePercent(50f);
-                doc.Add(logoHospital);
+                //var logoHospital = Image.GetInstance(Server.MapPath(adult.Hospital.HospitalLogo));
+                //logoHospital.Alignment = 1;
+                //logoHospital.ScalePercent(50f);
+                //doc.Add(logoHospital);
 
-                var titleResult = Image.GetInstance(Server.MapPath("../../Content/images/ResultadosEvaluacion.jpg"));
-                titleResult.Alignment = 1;
-                titleResult.ScalePercent(40f);
-                doc.Add(titleResult);
-                var table = new PdfPTable(4);
+                //var titleResult = Image.GetInstance(Server.MapPath("../../Content/images/ResultadosEvaluacion.jpg"));
+                //titleResult.Alignment = 1;
+                //titleResult.ScalePercent(40f);
+                //doc.Add(titleResult);
+                //var table = new PdfPTable(4);
 
                 //var cellHosp = new PdfPCell(logoHospital, false) { Colspan = 4, HorizontalAlignment = 1 };
                 //table.AddCell(cellHosp);
@@ -240,77 +240,77 @@ namespace Sang.Controllers
                 //var cellHeader = new PdfPCell(titleResult, false) { Colspan = 4, HorizontalAlignment = 1 };
                 //table.AddCell(cellHeader);
 
-                var cellLabelName =
-                    new PdfPCell(new Phrase("Nombre: ",
-                                            new Font(Font.FontFamily.HELVETICA, 8f, Font.NORMAL, BaseColor.WHITE)));
-                cellLabelName.BackgroundColor = new BaseColor(0, 0, 0);
-                cellLabelName.HorizontalAlignment = 0;
-                table.AddCell(cellLabelName);
+                //var cellLabelName =
+                //    new PdfPCell(new Phrase("Nombre: ",
+                //                            new Font(Font.FontFamily.HELVETICA, 8f, Font.NORMAL, BaseColor.WHITE)));
+                //cellLabelName.BackgroundColor = new BaseColor(0, 0, 0);
+                //cellLabelName.HorizontalAlignment = 0;
+                //table.AddCell(cellLabelName);
 
-                var cellName =
-                    new PdfPCell(new Phrase(adult.CompleteName,
-                                            new Font(Font.FontFamily.HELVETICA, 8f, Font.NORMAL, BaseColor.WHITE)));
-                cellName.BackgroundColor = new BaseColor(0, 0, 0);
-                cellName.HorizontalAlignment = 0;
-                table.AddCell(cellName);
+                //var cellName =
+                //    new PdfPCell(new Phrase(adult.CompleteName,
+                //                            new Font(Font.FontFamily.HELVETICA, 8f, Font.NORMAL, BaseColor.WHITE)));
+                //cellName.BackgroundColor = new BaseColor(0, 0, 0);
+                //cellName.HorizontalAlignment = 0;
+                //table.AddCell(cellName);
 
-                var cellLabelAddress =
-                    new PdfPCell(new Phrase("Dirección: ",
-                                            new Font(Font.FontFamily.HELVETICA, 8f, Font.NORMAL, BaseColor.WHITE)));
-                cellLabelAddress.BackgroundColor = new BaseColor(0, 0, 0);
-                cellLabelAddress.HorizontalAlignment = 0;
-                table.AddCell(cellLabelAddress);
+                //var cellLabelAddress =
+                //    new PdfPCell(new Phrase("Dirección: ",
+                //                            new Font(Font.FontFamily.HELVETICA, 8f, Font.NORMAL, BaseColor.WHITE)));
+                //cellLabelAddress.BackgroundColor = new BaseColor(0, 0, 0);
+                //cellLabelAddress.HorizontalAlignment = 0;
+                //table.AddCell(cellLabelAddress);
 
-                var cellAddress =
-                    new PdfPCell(new Phrase(adult.Address,
-                                            new Font(Font.FontFamily.HELVETICA, 8f, Font.NORMAL, BaseColor.WHITE)));
-                cellAddress.BackgroundColor = new BaseColor(0, 0, 0);
-                cellAddress.HorizontalAlignment = 0;
-                table.AddCell(cellAddress);
+                //var cellAddress =
+                //    new PdfPCell(new Phrase(adult.Address,
+                //                            new Font(Font.FontFamily.HELVETICA, 8f, Font.NORMAL, BaseColor.WHITE)));
+                //cellAddress.BackgroundColor = new BaseColor(0, 0, 0);
+                //cellAddress.HorizontalAlignment = 0;
+                //table.AddCell(cellAddress);
 
-                var cellLabelColony =
-                    new PdfPCell(new Phrase("Colonia: ",
-                                            new Font(Font.FontFamily.HELVETICA, 8f, Font.NORMAL, BaseColor.WHITE)));
-                cellLabelColony.BackgroundColor = new BaseColor(0, 0, 0);
-                cellLabelColony.HorizontalAlignment = 0;
-                table.AddCell(cellLabelColony);
+                //var cellLabelColony =
+                //    new PdfPCell(new Phrase("Colonia: ",
+                //                            new Font(Font.FontFamily.HELVETICA, 8f, Font.NORMAL, BaseColor.WHITE)));
+                //cellLabelColony.BackgroundColor = new BaseColor(0, 0, 0);
+                //cellLabelColony.HorizontalAlignment = 0;
+                //table.AddCell(cellLabelColony);
 
-                var cellColony =
-                    new PdfPCell(new Phrase(adult.Colony,
-                                            new Font(Font.FontFamily.HELVETICA, 8f, Font.NORMAL, BaseColor.WHITE)));
-                cellColony.BackgroundColor = new BaseColor(0, 0, 0);
-                cellColony.HorizontalAlignment = 0;
-                table.AddCell(cellColony);
+                //var cellColony =
+                //    new PdfPCell(new Phrase(adult.Colony,
+                //                            new Font(Font.FontFamily.HELVETICA, 8f, Font.NORMAL, BaseColor.WHITE)));
+                //cellColony.BackgroundColor = new BaseColor(0, 0, 0);
+                //cellColony.HorizontalAlignment = 0;
+                //table.AddCell(cellColony);
 
-                var cellLabelTownship =
-                    new PdfPCell(new Phrase("Municipio/Delegación: ",
-                                            new Font(Font.FontFamily.HELVETICA, 8f, Font.NORMAL, BaseColor.WHITE)));
-                cellLabelTownship.BackgroundColor = new BaseColor(0, 0, 0);
-                cellLabelTownship.HorizontalAlignment = 0;
-                table.AddCell(cellLabelTownship);
+                //var cellLabelTownship =
+                //    new PdfPCell(new Phrase("Municipio/Delegación: ",
+                //                            new Font(Font.FontFamily.HELVETICA, 8f, Font.NORMAL, BaseColor.WHITE)));
+                //cellLabelTownship.BackgroundColor = new BaseColor(0, 0, 0);
+                //cellLabelTownship.HorizontalAlignment = 0;
+                //table.AddCell(cellLabelTownship);
 
-                var cellTownship =
-                    new PdfPCell(new Phrase(adult.Township,
-                                            new Font(Font.FontFamily.HELVETICA, 8f, Font.NORMAL, BaseColor.WHITE)));
-                cellTownship.BackgroundColor = new BaseColor(0, 0, 0);
-                cellTownship.HorizontalAlignment = 0;
-                table.AddCell(cellTownship);
+                //var cellTownship =
+                //    new PdfPCell(new Phrase(adult.Township,
+                //                            new Font(Font.FontFamily.HELVETICA, 8f, Font.NORMAL, BaseColor.WHITE)));
+                //cellTownship.BackgroundColor = new BaseColor(0, 0, 0);
+                //cellTownship.HorizontalAlignment = 0;
+                //table.AddCell(cellTownship);
 
-                var cellLabelState =
-                    new PdfPCell(new Phrase("Estado: ",
-                                            new Font(Font.FontFamily.HELVETICA, 8f, Font.NORMAL, BaseColor.WHITE)));
-                cellLabelState.BackgroundColor = new BaseColor(0, 0, 0);
-                cellLabelState.HorizontalAlignment = 0;
-                table.AddCell(cellLabelState);
+                //var cellLabelState =
+                //    new PdfPCell(new Phrase("Estado: ",
+                //                            new Font(Font.FontFamily.HELVETICA, 8f, Font.NORMAL, BaseColor.WHITE)));
+                //cellLabelState.BackgroundColor = new BaseColor(0, 0, 0);
+                //cellLabelState.HorizontalAlignment = 0;
+                //table.AddCell(cellLabelState);
 
-                var cellState =
-                    new PdfPCell(new Phrase(adult.ShortState,
-                                            new Font(Font.FontFamily.HELVETICA, 8f, Font.NORMAL, BaseColor.WHITE)));
-                cellState.BackgroundColor = new BaseColor(0, 0, 0);
-                cellState.HorizontalAlignment = 0;
-                table.AddCell(cellState);
+                //var cellState =
+                //    new PdfPCell(new Phrase(adult.ShortState,
+                //                            new Font(Font.FontFamily.HELVETICA, 8f, Font.NORMAL, BaseColor.WHITE)));
+                //cellState.BackgroundColor = new BaseColor(0, 0, 0);
+                //cellState.HorizontalAlignment = 0;
+                //table.AddCell(cellState);
 
-                doc.Add(table);
+                //doc.Add(table);
 
                 //var htmlWorker = new HTMLWorker(doc);
                 //var str = "<html><head></head><body>" +
@@ -328,12 +328,12 @@ namespace Sang.Controllers
                 //    "</div></td></tr>" +
                 //  "</table></body></html>";
                 //htmlWorker.Parse(new StringReader(str));
-
-                PdfContentByte cb = writer.DirectContent;
-                //cb.SetColorStroke(new CMYKColor(1f, 0f, 0f, 0f));
-                cb.SetColorFill(new BaseColor(0, 128, 0));
-
                 
+                //PdfContentByte cb = writer.DirectContent;
+                //cb.SetColorStroke(new CMYKColor(1f, 0f, 0f, 0f));
+                //cb.SetColorFill(new BaseColor(0, 128, 0));
+
+
                 //cb.MoveTo(10, 500);
                 //cb.LineTo(410, 500);
                 ////Path closed and stroked
@@ -347,131 +347,77 @@ namespace Sang.Controllers
                 //    cb.ClosePathStroke();
                 //}
 
-                //Trastorno de inicio y continuidad del sueño
-                cb.SetColorFill(new BaseColor(0, 128, 0));
-                cb.MoveTo(100, 400);
-                cb.LineTo(200, 400);
-                cb.LineTo(200, 410);
-                cb.LineTo(100, 410);
-                //Path closed, stroked and filled
-                cb.ClosePathFillStroke();
+                //doc.Add(new Paragraph("Trastorno de inicio y continuidad del sueño"));
+                //var arrow = Image.GetInstance(Server.MapPath("../../Content/images/down_arrow.png"));
+                //arrow.SetAbsolutePosition(d1 + 100, 615);
+                //doc.Add(arrow);
+                ////Trastorno de inicio y continuidad del sueño
+                //cb.SetColorFill(new BaseColor(0, 128, 0));
+                //cb.MoveTo(100, 600);
+                //cb.LineTo(200, 600);
+                //cb.LineTo(200, 610);
+                //cb.LineTo(100, 610);
+                ////Path closed, stroked and filled
+                //cb.ClosePathFillStroke();
 
-                //Trastorno de inicio y continuidad del sueño
-                cb.SetColorFill(new BaseColor(255, 255, 0));
-                cb.MoveTo(200, 400);
-                cb.LineTo(300, 400);
-                cb.LineTo(300, 410);
-                cb.LineTo(200, 410);
-                //Path closed, stroked and filled
-                cb.ClosePathFillStroke();
+                //cb.SetColorFill(new BaseColor(255, 255, 0));
+                //cb.MoveTo(200, 600);
+                //cb.LineTo(300, 600);
+                //cb.LineTo(300, 610);
+                //cb.LineTo(200, 610);
+                ////Path closed, stroked and filled
+                //cb.ClosePathFillStroke();
 
-                cb.MoveTo(190, 200);
-                cb.LineTo(290, 200);
-                cb.LineTo(290, 300);
-                cb.LineTo(190, 300);
+                //cb.SetColorFill(new BaseColor(255, 0, 0));
+                //cb.MoveTo(300, 600);
+                //cb.LineTo(400, 600);
+                //cb.LineTo(400, 610);
+                //cb.LineTo(300, 610);
+                ////Path closed, stroked and filled
+                //cb.ClosePathFillStroke();
 
-                //Filled, but not stroked or closed
+                //cb.MoveTo(190, 200);
+                //cb.LineTo(290, 200);
+                //cb.LineTo(290, 300);
+                //cb.LineTo(190, 300);
+                ////Filled, but not stroked or closed
+                //cb.Fill();
 
-                cb.Fill();
-
-
-
-                cb.MoveTo(310, 200);
-
-                cb.LineTo(410, 200);
-
-                cb.LineTo(410, 300);
-
-                cb.LineTo(310, 300);
-
-                //Filled, stroked, but path not closed
-
-                cb.FillStroke();
+                //cb.MoveTo(310, 200);
+                //cb.LineTo(410, 200);
+                //cb.LineTo(410, 300);
+                //cb.LineTo(310, 300);
+                ////Filled, stroked, but path not closed
+                //cb.FillStroke();
 
 
 
-                
 
-                doc.Close();
+
+                //doc.Close();
 
                 //Generación de vale
-                return RedirectToAction("GenerateCoupon", "Coupon", new { id = adult.SangUserId });
+                //return RedirectToAction("GenerateCoupon", "Coupon", new { id = adult.SangUserId });
 
-                //return RedirectToAction("AdultResult", new
-                //{
-                //    d1 = Convert.ToInt32(adult.Disorder1),
-                //    d2 = Convert.ToInt32(adult.Disorder2),
-                //    d3 = Convert.ToInt32(adult.Disorder3),
-                //    d4 = Convert.ToInt32(adult.Disorder4),
-                //    d5 = Convert.ToInt32(adult.Disorder5),
-                //    d7 = Convert.ToInt32(adult.Disorder7),
-                //    d8 = Convert.ToInt32(adult.Disorder8)
-                //});
-            }
-
-            return View();
-        }
-
-        //
-        //Create Adult cuestionary result and data
-        public ActionResult AdultCuestionary2(int id)
-        {
-            return View();
-        }
-
-        [HttpPost]
-        public ActionResult AdultCuestionary2(int id, string Q1, string Q2, string Q3, string Q4, string Q5, string Q6, string Q7, string Q8,
-            string Q9, string Q10, string Q11, string Q12, string Q13, string Q14, string Q15, string Q16, string Q17, string Q18, string Q19, string Q20,
-            string Q21)
-        //public ActionResult AdultCuestionary(int id, FormCollection formValues)
-        {
-            if (ModelState.IsValid)
-            {
-                SangClient adult = _db.SangClients.FirstOrDefault(a => a.SangClientID.Equals(id));
-                //var users = _db.SangUsers.FirstOrDefault(c => c.Email.Equals(User.Identity.Name));
-
-                UpdateModel(adult);
-
-                adult.Disorder1 = (Convert.ToInt32(Q1) + Convert.ToInt32(Q7) + Convert.ToInt32(Q8)) / 3;
-                adult.Disorder2 = (Convert.ToInt32(Q2) + Convert.ToInt32(Q3) + Convert.ToInt32(Q4) + Convert.ToInt32(Q12)) / 4;
-                adult.Disorder3 = (Convert.ToInt32(Q5) + Convert.ToInt32(Q10)) / 2;
-                adult.Disorder4 = Convert.ToInt32(Q10);
-                adult.Disorder5 = (Convert.ToInt32(Q6) + Convert.ToInt32(Q9) + Convert.ToInt32(Q11)) / 3;
-                adult.Disorder7 = Convert.ToInt32(Q13) + Convert.ToInt32(Q14) + Convert.ToInt32(Q15) + Convert.ToInt32(Q16) + Convert.ToInt32(Q17) + Convert.ToInt32(Q18) +
-                    Convert.ToInt32(Q19) + Convert.ToInt32(Q20);
-                adult.Disorder8 = Convert.ToInt32(Q21);
-
-                _db.SaveChanges();
-
-                if (adult.Disorder8 == 100)
+                return RedirectToAction("AdultResult", new
                 {
-                    var coupon = new Coupon();
-
-                    coupon.CouponNumber = "ASD123";
-                    coupon.RegisterDate = DateTime.Now;
-                    _db.Coupons.Add(coupon);
-                    _db.SaveChanges();
-                }
-
-                return View("ThanksCuestionary");
-
-                //return RedirectToAction("AdultResult", new
-                //{
-                //    d1 = Convert.ToInt32(adult.Disorder1),
-                //    d2 = Convert.ToInt32(adult.Disorder2),
-                //    d3 = Convert.ToInt32(adult.Disorder3),
-                //    d4 = Convert.ToInt32(adult.Disorder4),
-                //    d5 = Convert.ToInt32(adult.Disorder5),
-                //    d7 = Convert.ToInt32(adult.Disorder7),
-                //    d8 = Convert.ToInt32(adult.Disorder8)
-                //});
+                    id = adult.SangClientID,
+                    d1 = Convert.ToInt32(adult.Disorder1),
+                    d2 = Convert.ToInt32(adult.Disorder2),
+                    d3 = Convert.ToInt32(adult.Disorder3),
+                    d4 = Convert.ToInt32(adult.Disorder4),
+                    d5 = Convert.ToInt32(adult.Disorder5),
+                    d7 = Convert.ToInt32(adult.Disorder7),
+                    d8 = Convert.ToInt32(adult.Disorder8)
+                });
             }
 
             return View();
         }
 
-        public ActionResult AdultResult(int d1, int d2, int d3, int d4, int d5, int d7, int d8)
+        public ActionResult AdultResult(int id, int d1, int d2, int d3, int d4, int d5, int d7, int d8)
         {
+            var adult = _db.SangClients.FirstOrDefault(a => a.SangClientID.Equals(id));
             //Scale 1 x 4
             ViewData["d1"] = d1 * 4;
             ViewData["d2"] = d2 * 4;
@@ -493,7 +439,7 @@ namespace Sang.Controllers
             else
                 ViewData["d8High"] = "hidden";
 
-            return View();
+            return View(adult);
         }
 
         //

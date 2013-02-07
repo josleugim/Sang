@@ -1,17 +1,42 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<dynamic>" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<Sang.Models.SangClient>" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
     AdultResult
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <div class="blankspan">
-    </div>
-    <div class="cuestionario">
+    <%--<div class="blankspan">
+    </div>--%>
+    <div style="background-color: #FFFFFF;">
         <div style="width: 100%; background-color: #FFF; text-align: center">
-            <img src="../../Content/images/Logoabc_hospital.jpg" alt="Imagen" /></div>
-        <h1 class="ribbon">
-            <strong class="ribbon-contentenido">Disturbios del Sueño</strong>
+            <img src="<%= Model.Hospital.HospitalLogo %>" alt="Imagen" />
+        </div>
+        <div style="width: 100%; background-color: #FFF; text-align: center">
+            <img src="../../Content/images/ResultadosEvaluacion.jpg" alt="Imagen" /></div>
+        <h1 style="color: black; text-align: center;">
+            Disturbios del Sueño
         </h1>
+        <table class="tableResult">
+            <tr>
+                <th colspan="4">
+                    Nombre: <%= Model.CompleteName %>
+                </th>
+            </tr>
+            <tr>
+                <th>
+                    Dirección:
+                </th>
+                <th>
+                    <%= Model.Address %>
+                </th>
+                <th>
+                    Colonia:
+                </th>
+                <th>
+                    <%= Model.Colony %>
+                </th>
+            </tr>
+        </table>
+        <br/>
         <table class="tableResult">
             <tr>
                 <th>
@@ -169,6 +194,9 @@
                 </td>
             </tr>
         </table>
+        <br />
+        <div style="width: 100%; background-color: #FFF; text-align: center">
+            <img src="<%= Model.Hospital.DoctorName %>" alt="Imagen" /></div>
         <br />
     </div>
 </asp:Content>
