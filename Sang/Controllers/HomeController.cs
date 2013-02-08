@@ -328,7 +328,7 @@ namespace Sang.Controllers
                 //    "</div></td></tr>" +
                 //  "</table></body></html>";
                 //htmlWorker.Parse(new StringReader(str));
-                
+
                 //PdfContentByte cb = writer.DirectContent;
                 //cb.SetColorStroke(new CMYKColor(1f, 0f, 0f, 0f));
                 //cb.SetColorFill(new BaseColor(0, 128, 0));
@@ -391,8 +391,22 @@ namespace Sang.Controllers
                 //cb.FillStroke();
 
 
+                //Si 1, 2, 3, 4, 5 es mayor de 40 o 7 > 9 = tiene problemas y
+                //Si tiene problemas cardiacos = pase al doctor
+                if (d1 > 40 || d2 > 40 || d3 > 40 || d4 > 40 || d5 > 40 || d7 > 9)
+                {
+                    if (d8 == 0)
+                    {
+                        //Generación de vale
+                        return RedirectToAction("GenerateCoupon", "Coupon", new { id = adult.SangUserId });
+                    }
+                }
 
-
+                if (d8 == 100)
+                {
+                    //Generación de vale de consulta
+                    return RedirectToAction("GenerateAppointment", "Coupon", new { id = adult.SangUserId });
+                }
 
                 //doc.Close();
 
@@ -418,6 +432,7 @@ namespace Sang.Controllers
         public ActionResult AdultResult(int id, int d1, int d2, int d3, int d4, int d5, int d7, int d8)
         {
             var adult = _db.SangClients.FirstOrDefault(a => a.SangClientID.Equals(id));
+            var coupon = _db.Coupons.FirstOrDefault(c => c.SangUserId.Equals(adult.SangUserId));
             //Scale 1 x 4
             ViewData["d1"] = d1 * 4;
             ViewData["d2"] = d2 * 4;
@@ -438,6 +453,12 @@ namespace Sang.Controllers
                 ViewData["d8Low"] = "hidden";
             else
                 ViewData["d8High"] = "hidden";
+
+            if (coupon != null)
+            {
+                ViewData["CouponOk"] = "Ver vale";
+                ViewData["Coupon"] = coupon.CouponURL;
+            }
 
             return View(adult);
         }

@@ -41,14 +41,105 @@ namespace Sang.Controllers
             return View(coupon);
         }
 
-        //Generación de vale
-        public ActionResult GenerateCoupon(int id)
+        //Genera vale para consulta
+        public ActionResult GenerateAppointment(int id)
         {
             var users = _db.SangUsers.FirstOrDefault(c => c.Email.Equals(User.Identity.Name));
+
             var client =
                 _db.SangClients.Where(u => u.SangUserId == users.SangUserID)
                    .OrderByDescending(c => c.SangClientID)
                    .FirstOrDefault();
+
+            var hosp = _db.Hospitals.FirstOrDefault(h => h.HospitalID.Equals(client.HospitalId));
+
+            var random = new Random(1000);
+            int randomN = random.Next();
+
+            var coupon = new Coupon();
+            coupon.SangUserId = id;
+            coupon.SangUser = users;
+            coupon.CouponNumber = users.tempWarranty + randomN;
+            coupon.RegisterDate = DateTime.Now;
+            coupon.CouponURL = "../../Content/Documents/" + coupon.CouponNumber + ".pdf";
+            _db.Coupons.Add(coupon);
+            _db.SaveChanges();
+
+            var doc = new Document(PageSize.A4);
+            var output = new FileStream(Server.MapPath("../../Content/Documents/" + coupon.CouponNumber + ".pdf"), FileMode.Create);
+            var writer = PdfWriter.GetInstance(doc, output);
+
+            doc.Open();
+
+
+            var logoVale = Image.GetInstance(Server.MapPath("../../Content/images/Logo-vale.jpg"));
+            var logoSang = Image.GetInstance(Server.MapPath("../../Content/images/logo-sang.jpg"));
+            var sleepImage = Image.GetInstance(Server.MapPath("../../Content/images/vale-consulta.jpg"));
+            var info = Image.GetInstance(Server.MapPath("../../Content/images/informes.jpg"));
+
+            var table = new PdfPTable(2);
+
+            float[] widths = new float[2];
+            widths[0] = 317.0F;
+            widths[1] = 483.0F;
+
+            table.SetTotalWidth(widths);
+
+            var cellLogoVale = new PdfPCell(logoVale, false) { Rowspan = 6, HorizontalAlignment = 1 };
+            table.AddCell(cellLogoVale);
+
+            var cellLogoSang = new PdfPCell(logoSang, false) { HorizontalAlignment = 1 };
+            table.AddCell(cellLogoSang);
+
+            var cellCategoria =
+                new PdfPCell(new Phrase("No. Vale: " + "LP12341932043748",
+                                        new Font(Font.FontFamily.HELVETICA, 8f, Font.NORMAL, BaseColor.WHITE)));
+            cellCategoria.BackgroundColor = new BaseColor(0, 0, 0);
+            cellCategoria.HorizontalAlignment = 2;
+            table.AddCell(cellCategoria);
+
+            var cellSleepImage = new PdfPCell(sleepImage, true) { HorizontalAlignment = 1 };
+            table.AddCell(cellSleepImage);
+
+            var cellNombreCompleto = new PdfPCell(new Phrase(client.CompleteName, new Font(Font.FontFamily.HELVETICA, 11f, Font.NORMAL, BaseColor.WHITE))) { HorizontalAlignment = 1, BackgroundColor = new BaseColor(0, 0, 0) };
+            table.AddCell(cellNombreCompleto);
+
+            var cellInforme = new PdfPCell(info, true) { HorizontalAlignment = 1 };
+            table.AddCell(cellInforme);
+
+            var cellAddress = new PdfPCell(new Phrase(hosp.HospitalAddress, new Font(Font.FontFamily.HELVETICA, 8f, Font.NORMAL, BaseColor.WHITE))) { HorizontalAlignment = 0, BackgroundColor = new BaseColor(0, 0, 0) };
+            table.AddCell(cellAddress);
+
+            doc.Add(table);
+
+            doc.Close();
+
+            return RedirectToAction("AdultResult", "Home", new
+            {
+                id = client.SangClientID,
+                d1 = Convert.ToInt32(client.Disorder1),
+                d2 = Convert.ToInt32(client.Disorder2),
+                d3 = Convert.ToInt32(client.Disorder3),
+                d4 = Convert.ToInt32(client.Disorder4),
+                d5 = Convert.ToInt32(client.Disorder5),
+                d7 = Convert.ToInt32(client.Disorder7),
+                d8 = Convert.ToInt32(client.Disorder8)
+            });
+
+            //return Redirect("../../Content/Documents/" + coupon.CouponNumber + ".pdf");
+        }
+
+        //Generación de vale
+        public ActionResult GenerateCoupon(int id)
+        {
+            var users = _db.SangUsers.FirstOrDefault(c => c.Email.Equals(User.Identity.Name));
+
+            var client =
+                _db.SangClients.Where(u => u.SangUserId == users.SangUserID)
+                   .OrderByDescending(c => c.SangClientID)
+                   .FirstOrDefault();
+
+            var hosp = _db.Hospitals.FirstOrDefault(h => h.HospitalID.Equals(client.HospitalId));
 
             var random = new Random(1000);
             int randomN = random.Next();
@@ -104,14 +195,26 @@ namespace Sang.Controllers
             var cellInforme = new PdfPCell(info, true) { HorizontalAlignment = 1 };
             table.AddCell(cellInforme);
 
-            var cellAddress = new PdfPCell(new Phrase("Dirección", new Font(Font.FontFamily.HELVETICA, 12f, Font.NORMAL, BaseColor.WHITE))) { HorizontalAlignment = 1, BackgroundColor = new BaseColor(0, 0, 0) };
+            var cellAddress = new PdfPCell(new Phrase(hosp.HospitalAddress, new Font(Font.FontFamily.HELVETICA, 8f, Font.NORMAL, BaseColor.WHITE))) { HorizontalAlignment = 0, BackgroundColor = new BaseColor(0, 0, 0) };
             table.AddCell(cellAddress);
 
             doc.Add(table);
 
             doc.Close();
 
-            return View();
+            return RedirectToAction("AdultResult", "Home", new
+            {
+                id = client.SangClientID,
+                d1 = Convert.ToInt32(client.Disorder1),
+                d2 = Convert.ToInt32(client.Disorder2),
+                d3 = Convert.ToInt32(client.Disorder3),
+                d4 = Convert.ToInt32(client.Disorder4),
+                d5 = Convert.ToInt32(client.Disorder5),
+                d7 = Convert.ToInt32(client.Disorder7),
+                d8 = Convert.ToInt32(client.Disorder8)
+            });
+
+            //return Redirect("../../Content/Documents/" + coupon.CouponNumber + ".pdf");
         }
 
         //

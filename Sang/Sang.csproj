@@ -265,6 +265,7 @@
     <Content Include="Content\images\ui-bg_gloss-wave_25_333333_500x100.png" />
     <Content Include="Content\images\ui-bg_highlight-soft_80_eeeeee_1x100.png" />
     <Content Include="Content\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Content\images\vale-consulta.jpg" />
     <Content Include="Content\images\zoom_in.png" />
     <Content Include="Content\img-demo\1.jpg" />
     <Content Include="Content\img-demo\agrandar_icon.png" />
