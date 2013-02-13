@@ -27,15 +27,21 @@
 <div class="blankspan">
 </div>
 <div class="cuestionario">
-@using (Html.BeginForm())
-{
-    @Html.ValidationSummary(true)
+    @using (Html.BeginForm())
+    {
+        @Html.ValidationSummary(true)
 
-    @Html.HiddenFor(model => model.SangUserId)
-    @Html.HiddenFor(model => model.Gender)
+        @Html.HiddenFor(model => model.SangUserId)
+        @Html.HiddenFor(model => model.Gender)
     
-    <img style="margin:10px" src="../../Content/images/Registro.png" alt="Imagen" />
-        <table style="margin:0 auto;">
+        <img style="margin: 10px" src="../../Content/images/Registro.png" alt="Imagen" />
+        if (ViewBag.nCuentas == 1)
+        {
+        <p>
+            <strong>Escribe los datos del segundo usuario</strong></p>
+        }
+
+        <table style="margin: 0 auto;">
             <tr>
                 <th>
                     Nombre completo:
@@ -77,12 +83,12 @@
                 </td>
                 <td>
                     @Html.LabelFor(model => model.Gender)
-                    <strong>* <span style="font-size:12px;">Requerido</span></strong>
+                    <strong>* <span style="font-size: 12px;">Requerido</span></strong>
                 </td>
             </tr>
             <tr>
                 <td>
-                    @Html.TextBoxFor(model => model.BirthDate, new { id="from"})
+                    @Html.TextBoxFor(model => model.BirthDate, new { id = "from" })
                 </td>
                 <td>
                     <p>
@@ -95,7 +101,7 @@
             <tr>
                 <th>
                     Datos Adicionales:
-                 </th>
+                </th>
             </tr>
             <tr>
                 <td>
@@ -118,7 +124,7 @@
                     @Html.EditorFor(model => model.SecondaryEmail)
                 </td>
                 <td>
-                    @Html.TextBoxFor(model => model.Lada, new { style="width:50px;"})
+                    @Html.TextBoxFor(model => model.Lada, new { style = "width:50px;" })
                     @Html.EditorFor(model => model.HomePhone)
                 </td>
                 <td>
@@ -132,20 +138,27 @@
                         @Html.LabelFor(model => model.NewsLetter)</p>
                 </td>
                 <td>
-                    <p>¿Número de personas que usan el colchon? @Html.DropDownList("nMattress")</p>
+                    @{
+        if (ViewBag.nCuentas != 1)
+        {
+                        <p>
+                            ¿Número de personas que usan el colchon? @Html.DropDownList("nMattress")</p>
+        }
+                    }
                 </td>
                 <td>
                     <p>
                         <u>
                             <input type="submit" value="Enviar" style="background: transparent; color: White;
-                                border: none; font-weight: lighter; font-size:24px; cursor: pointer" /></u>
+                                border: none; font-weight: lighter; font-size: 24px; cursor: pointer" /></u>
                     </p>
                 </td>
             </tr>
             <tr>
-             <td colspan="3">
-             Seleccione el @Html.LabelFor(model => model.HospitalId, "Hospital")de su preferencia: @Html.DropDownList("HospitalId")
-             </td>
+                <td colspan="3">
+                    Seleccione el @Html.LabelFor(model => model.HospitalId, "Hospital")de su preferencia:
+                    @Html.DropDownList("HospitalId")
+                </td>
             </tr>
             <tr>
                 <td colspan="3">
@@ -155,5 +168,5 @@
                 </td>
             </tr>
         </table>
-}
+    }
 </div>

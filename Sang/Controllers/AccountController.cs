@@ -39,26 +39,11 @@ namespace Sang.Controllers
                         FormsAuthentication.SetAuthCookie(model.Email, model.RememberMe);
                         if (Url.IsLocalUrl(returnUrl) && returnUrl.Length > 1 && returnUrl.StartsWith("/")
                             && !returnUrl.StartsWith("//") && !returnUrl.StartsWith("/\\"))
-                        {
                             return Redirect(returnUrl);
-                        }
-                        else
-                        {
-                            //
-                            //Identificar en que paso se quedo el usuario para direccionarlo
-                            var clients = from e in _db.SangClients
-                                          where e.SangUser.Email == user.Email
-                                          select e;
-                            if (clients.Count() == 2)
-                            {
-                                return RedirectToAction("Introduction2", "Home");
-                            }
 
-                            return RedirectToAction("Create", "Client");
-                        }
+                        return RedirectToAction("Create", "Client");
                     }
-                    else
-                        ModelState.AddModelError("", "Active su registro mediante el correo que se le envio.");
+                    ModelState.AddModelError("", "Active su registro mediante el correo que se le envio.");
                 }
                 else
                     ModelState.AddModelError("", "El nombre de usuario o la contraseña especificados son incorrectos.");
@@ -92,7 +77,7 @@ namespace Sang.Controllers
         [HttpPost]
         public ActionResult Register(RegisterModel model, string w)
         {
-            
+
 
             if (ModelState.IsValid)
             {

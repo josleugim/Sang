@@ -36,15 +36,16 @@ namespace Sang.Controllers
 
         public ActionResult Create()
         {
-            int nCuentas = 0;
+            var nCuentas = 0;
+            ViewBag.HospitalId = new SelectList(_db.Hospitals, "HospitalID", "HospitalName");
             var users = _db.SangUsers.FirstOrDefault(c => c.Email.Equals(User.Identity.Name));
-            //var client = _db.SangClients.FirstOrDefault(c => c.SangUser.SangUserID.Equals(users.SangUserID));
+            
             var client =
                 _db.SangClients.Where(u => u.SangUserId == users.SangUserID)
                    .OrderByDescending(c => c.SangClientID)
                    .FirstOrDefault();
 
-            //Cuantos clientes existen
+            //Verificación del número de registros creados
             var nClient = from e in _db.SangClients
                           where e.SangUser.SangUserID == users.SangUserID
                           select e;
@@ -56,34 +57,32 @@ namespace Sang.Controllers
                                 select c;
 
                 nCuentas = nClient.Count() + nChildren.Count();
-
             }
 
             if (Convert.ToInt32(nCuentas) >= 2)
                 return View("Thanks");
-            else
+
+            
+
+            if (client == null || nCuentas == 1)
             {
-                ViewBag.HospitalId = new SelectList(_db.Hospitals, "HospitalID", "HospitalName");
-                if (client == null)
-                {
-                    var n = new List<int> {1, 2};
-                    ViewBag.nMattress = new SelectList(n);
+                var n = new List<int> {1, 2};
+                ViewBag.nMattress = new SelectList(n);
+                ViewBag.nCuentas = nClient.Count();
+                //Set the ID of the relational sanguser
+                var model = new SangClient()
+                    {
+                        SangUserId = users.SangUserID,
+                        SangUser = users,
+                        Gender = "Ninguno"
+                    };
 
-                    //Set the ID of the relational sanguser
-                    var model = new SangClient()
-                        {
-                            SangUserId = users.SangUserID,
-                            SangUser = users,
-                            Gender = "Ninguno"
-                        };
-
-                    return View(model);
-                }
-                    //
-                    //Si ya existe la cuenta se envía la garantía
-                else
-                    return RedirectToAction("Create", "Purchase", new { id = users.tempWarranty });
+                return View(model);
             }
+                //
+                //Si ya existe la cuenta se envía la garantía
+
+            return RedirectToAction("Create", "Purchase", new { id = users.tempWarranty });
         }
 
         //
@@ -101,8 +100,8 @@ namespace Sang.Controllers
                 sangclient.Gender = cGender;
                 sangclient.RegisterDate = DateTime.Now;
                 sangclient.SangUser = users;
-                //sangclient.Hospital = hosp;
-                sangclient.nMattressUsers = Convert.ToInt32(nMattress);
+                sangclient.nMattressUsers = String.IsNullOrEmpty(nMattress) ? 0 : Convert.ToInt32(nMattress);
+
                 _db.SaveChanges();
                 //return RedirectToAction("AdultCuestionary", new { id = sangclient.SangClientID });
 

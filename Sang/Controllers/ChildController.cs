@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using Sang.Models;
 
@@ -36,35 +34,47 @@ namespace Sang.Controllers
 
         public ActionResult Create()
         {
-            //ViewBag.SangClientId = new SelectList(db.SangClients, "SangClientID", "UserName");
             var users = _db.SangUsers.FirstOrDefault(c => c.Email.Equals(User.Identity.Name));
-            var client = _db.SangClients.FirstOrDefault(c => c.SangUser.SangUserID.Equals(users.SangUserID));
-
-            //Cuantos niños existen, si tiene nMattress = 2 buscar que no exitan 2 niños creados
-
-            var nChild = from e in _db.SangChildren
-                          where e.SangClientId == client.SangClientID
-                          select e;
-            var child =
-                _db.SangChildren.Where(u => u.SangClientId == client.SangClientID)
-                   .OrderByDescending(c => c.SangChildID)
+            var client =
+                _db.SangClients.Where(u => u.SangUserId == users.SangUserID)
+                   .OrderByDescending(c => c.SangClientID)
                    .FirstOrDefault();
 
-            if (nChild.Count() == 1)
-                View(child.CuestionaryResult.HasValue ? "Thanks" : "Edit");
-            if (nChild.Count() == 2)
-                View(child.CuestionaryResult.HasValue ? "Thanks" : "Edit");
+            //Verificación del número de registros creados
+            var nClient = from e in _db.SangClients
+                          where e.SangUser.SangUserID == users.SangUserID
+                          select e;
 
-
-            if (client != null)
+            if (nClient.Any())
             {
-                var model = new SangChild()
+                var nChild = from c in _db.SangChildren
+                             where c.SangClientId == client.SangClientID
+                             select c;
+
+                var nCuentas = nClient.Count() + nChild.Count();
+
+
+                if (Convert.ToInt32(nCuentas) >= 2)
+                    return View("Thanks");
+
+                //Cuando ya existe un menor creado
+                var child =
+                    _db.SangChildren.Where(u => u.SangClientId == client.SangClientID)
+                   .OrderByDescending(c => c.SangChildID)
+                   .FirstOrDefault();
+                View(child != null && child.CuestionaryResult.HasValue ? "Thanks" : "Edit");
+
+                //Tiene que existir un mayor de edad para crear la cuenta de un menor
+                if (client != null)
+                {
+                    var model = new SangChild()
                     {
                         SangClientId = client.SangClientID,
                         SangClient = client
                     };
 
-                return View(model);
+                    return View(model);
+                }
             }
 
             return View();
@@ -111,17 +121,15 @@ namespace Sang.Controllers
                 sangchild.CuestionaryResult = Convert.ToInt32(Q1) + Convert.ToInt32(Q2) + Convert.ToInt32(Q3) + Convert.ToInt32(Q4) + Convert.ToInt32(Q5) + Convert.ToInt32(Q6) + Convert.ToInt32(Q7) +
                     Convert.ToInt32(Q8) + Convert.ToInt32(Q9);
                 _db.SaveChanges();
-                return View("Continue");
+
+                var result = Convert.ToInt32(sangchild.CuestionaryResult);
+
+                if (result > 19)
+                    return RedirectToAction("GenerateCouponChild", "Coupon", new {id = sangchild.SangClient.SangUserId});
+
+                return RedirectToAction("Create", "Client");
             }
             return View(sangchild);
-        }
-
-        public ActionResult Continue()
-        {
-            if (Request.HttpMethod == "POST")
-                return RedirectToAction("Introduction", "Home");
-
-            return View();
         }
 
         //

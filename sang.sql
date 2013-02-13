@@ -45,7 +45,6 @@ select * from Hospitals
 Select * from Warranties
 select * from SangUsers
 select * from SangClients
-Where SangUserId = 1
 select * from SangChilds
 select * from ModelMattresses
 select * from Collections
@@ -67,5 +66,5 @@ Select * from Coupons
 --drop table Warranties
 --drop table Purchases
 
---INSERT INTO Warranties(SangClientId,WarrantyCode, NAttempts, IsActived, ExpirationDate, RegisterDate)
---Values(null,'TEST0003',0,1,getdate(),getdate())
+INSERT INTO Warranties(SangClientId,WarrantyCode, NAttempts, IsActived, ExpirationDate, RegisterDate)
+Values(null,'TEST0003',0,1,getdate(),getdate())
