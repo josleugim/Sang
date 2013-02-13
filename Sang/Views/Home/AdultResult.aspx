@@ -6,7 +6,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <%--<div class="blankspan">
     </div>--%>
-    <div style="background-color: #FFFFFF;">
+    <div style="background-color: #FFFFFF; font-family: Helvetica">
         <div style="width: 100%; background-color: #FFF; text-align: center">
             <img src="<%= Model.Hospital.HospitalLogo %>" alt="Imagen" />
         </div>
@@ -15,7 +15,7 @@
         <h1 style="color: black; text-align: center;">
             Disturbios del Sueño
         </h1>
-        <table class="tableResult">
+        <table style="margin:0 auto; color: black">
             <tr>
                 <th colspan="4">
                     Nombre: <%= Model.CompleteName %>
@@ -198,5 +198,6 @@
         <div style="width: 100%; background-color: #FFF; text-align: center">
             <img src="<%= Model.Hospital.DoctorName %>" alt="Imagen" /></div>
         <br />
+        <p style="font-size: 20px"><a style="color: black;" href="<%= Html.Encode(ViewData["Coupon"]) %>" target="_blank"><%= Html.Encode(ViewData["CouponOk"])%></a></p>
     </div>
 </asp:Content>
