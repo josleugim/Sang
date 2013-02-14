@@ -146,13 +146,13 @@ namespace Sang.Controllers
 
             var hosp = _db.Hospitals.FirstOrDefault(h => h.HospitalID.Equals(client.HospitalId));
 
-            var random = new Random(1000);
+            var random = new Random(1);
             int randomN = random.Next();
 
             var coupon = new Coupon();
             coupon.SangUserId = id;
             coupon.SangUser = users;
-            coupon.CouponNumber = users.tempWarranty + randomN;
+            coupon.CouponNumber = users.tempWarranty + client.SangClientID + randomN;
             coupon.RegisterDate = DateTime.Now;
             coupon.CouponURL = "../../Content/Documents/" + coupon.CouponNumber + ".pdf";
             _db.Coupons.Add(coupon);
@@ -207,12 +207,6 @@ namespace Sang.Controllers
 
             doc.Close();
 
-            //Validar si son 2 usuarios y enviar a crear nuevo
-            if (client.nMattressUsers == 2)
-            {
-                return RedirectToAction("Create", "Client");
-            }
-
             //return RedirectToAction("AdultResult", "Home", new
             //{
             //    id = client.SangClientID,
@@ -227,7 +221,7 @@ namespace Sang.Controllers
 
             //return Redirect("../../Content/Documents/" + coupon.CouponNumber + ".pdf");
 
-            return RedirectToActionPermanent("Create", "Client");
+            return RedirectToAction("Introduction", "Home");
         }
 
         public ActionResult GenerateCouponChild(int id)

@@ -65,9 +65,8 @@ namespace Sang.Controllers
 
                 return View(model);
             }
-            else
-                return RedirectToAction("Introduction", "Home", new {id = warrant.SangClientId});
-                //return View("Thanks");
+            
+            return RedirectToAction("AdultCuestionary", "Home");
         }
 
         //
@@ -101,8 +100,7 @@ namespace Sang.Controllers
                 client.PostalCode = cp;
                 db.SaveChanges();
 
-                return RedirectToAction("Introduction", "Home", new {id = client.SangClientID});
-                //return View("Thanks");
+                return RedirectToAction("AdultCuestionary", "Home", new {id = client.SangClientID});
             }
 
             ViewBag.WarrantyId = new SelectList(db.Warranties, "WarrantyID", "WarrantyCode", purchase.WarrantyId);

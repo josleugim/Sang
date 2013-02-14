@@ -58,15 +58,58 @@ namespace Sang.Controllers
         {
             ViewBag.Message = "Introducción";
 
+            var nCuentas = 0;
+            var users = _db.SangUsers.FirstOrDefault(c => c.Email.Equals(User.Identity.Name));
+            var client =
+                _db.SangClients.Where(u => u.SangUserId == users.SangUserID)
+                   .OrderByDescending(c => c.SangClientID)
+                   .FirstOrDefault();
+
+            //Verificación del número de registros creados
+            var nClient = from e in _db.SangClients
+                          where e.SangUser.SangUserID == users.SangUserID
+                          select e;
+
+            if (nClient.Any())
+            {
+                var nChildren = from c in _db.SangChildren
+                                where c.SangClientId == client.SangClientID
+                                select c;
+
+                nCuentas = nClient.Count() + nChildren.Count();
+            }
+
             if (Request.HttpMethod == "POST")
             {
-                var users = _db.SangUsers.FirstOrDefault(c => c.Email.Equals(User.Identity.Name));
-                var client = _db.SangClients.FirstOrDefault(c => c.SangUser.SangUserID.Equals(users.SangUserID));
-
                 if (menorEdad == "Si")
+                {
+                    if (Convert.ToInt32(nCuentas) >= 3)
+                        return View("ThanksAdult");
+
                     return RedirectToAction("Create", "Child");
+                }
+
                 if (menorEdad == "No")
-                    return RedirectToAction("AdultCuestionary", "Home", new { id = Convert.ToInt32(client.SangClientID) });
+                {
+                    if (Convert.ToInt32(nCuentas) >= 2)
+                    {
+                        if (client != null && client.Disorder1 == null)
+                            return View("AdultCuestionary");
+
+                        return View("ThanksAdult");
+                    }
+                        
+
+                    return RedirectToAction("Create", "Client");
+                }
+            }
+
+            if (nCuentas == 0)
+                return RedirectToAction("Create", "Client");
+            if (nCuentas >= 2)
+            {
+                if (client != null && client.Disorder1 == null)
+                    return View("AdultCuestionary");
             }
 
             return View();
@@ -156,7 +199,10 @@ namespace Sang.Controllers
                 //    d7 = Convert.ToInt32(adult.Disorder7),
                 //    d8 = Convert.ToInt32(adult.Disorder8)
                 //});
-                return View("ThanksAdult");
+                if (adult.nMattressUsers == 1)
+                    return View("ThanksAdult");
+
+                return View("Introduction");
             }
 
             return View();

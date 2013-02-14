@@ -41,7 +41,7 @@ namespace Sang.Controllers
                             && !returnUrl.StartsWith("//") && !returnUrl.StartsWith("/\\"))
                             return Redirect(returnUrl);
 
-                        return RedirectToAction("Create", "Client");
+                        return RedirectToAction("Introduction", "Home");
                     }
                     ModelState.AddModelError("", "Active su registro mediante el correo que se le envio.");
                 }
