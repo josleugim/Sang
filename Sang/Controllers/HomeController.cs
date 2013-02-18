@@ -94,7 +94,7 @@ namespace Sang.Controllers
                     if (Convert.ToInt32(nCuentas) >= 2)
                     {
                         if (client != null && client.Disorder1 == null)
-                            return View("AdultCuestionary");
+                            return RedirectToAction("AdultCuestionary", new {id = client.SangClientID});
 
                         return View("ThanksAdult");
                     }
@@ -109,7 +109,7 @@ namespace Sang.Controllers
             if (nCuentas >= 2)
             {
                 if (client != null && client.Disorder1 == null)
-                    return View("AdultCuestionary");
+                    return RedirectToAction("AdultCuestionary", new { id = client.SangClientID });
             }
 
             return View();
@@ -202,7 +202,7 @@ namespace Sang.Controllers
                 if (adult.nMattressUsers == 1)
                     return View("ThanksAdult");
 
-                return View("Introduction");
+                return RedirectToAction("Introduction");
             }
 
             return View();

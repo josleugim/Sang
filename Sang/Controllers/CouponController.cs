@@ -301,7 +301,7 @@ namespace Sang.Controllers
 
             doc.Close();
 
-            return RedirectToActionPermanent("Create", "Client");
+            return RedirectToAction("Introduction", "Home");
         }
 
         //

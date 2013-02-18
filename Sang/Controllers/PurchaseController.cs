@@ -66,7 +66,7 @@ namespace Sang.Controllers
                 return View(model);
             }
             
-            return RedirectToAction("AdultCuestionary", "Home");
+            return RedirectToAction("AdultCuestionary", "Home", warrant.SangClientId);
         }
 
         //
