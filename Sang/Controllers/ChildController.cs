@@ -54,7 +54,7 @@ namespace Sang.Controllers
                 var nCuentas = nClient.Count() + nChild.Count();
 
 
-                if (Convert.ToInt32(nCuentas) >= 2)
+                if (Convert.ToInt32(nCuentas) >= 3)
                     return View("Thanks");
 
                 //Cuando ya existe un menor creado
@@ -124,8 +124,11 @@ namespace Sang.Controllers
 
                 var result = Convert.ToInt32(sangchild.CuestionaryResult);
 
+                var client =
+                    _db.SangClients.Find(sangchild.SangClientId);
+
                 if (result > 19)
-                    return RedirectToAction("GenerateCouponChild", "Coupon", new {id = sangchild.SangClient.SangUserId});
+                    return RedirectToAction("GenerateCouponChild", "Coupon", new {id = client.SangUserId });
 
                 return RedirectToAction("Create", "Client");
             }

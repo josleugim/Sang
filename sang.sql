@@ -67,4 +67,4 @@ Select * from Coupons
 --drop table Purchases
 
 INSERT INTO Warranties(SangClientId,WarrantyCode, NAttempts, IsActived, ExpirationDate, RegisterDate)
-Values(null,'TEST0007',0,1,getdate(),getdate())
+Values(null,'TEST0005',0,1,getdate(),getdate())
