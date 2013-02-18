@@ -100,7 +100,7 @@ namespace Sang.Controllers
                 client.PostalCode = cp;
                 db.SaveChanges();
 
-                return RedirectToAction("AdultCuestionary", "Home", new {id = client.SangClientID});
+                return RedirectToAction("Introduction", "Home");
             }
 
             ViewBag.WarrantyId = new SelectList(db.Warranties, "WarrantyID", "WarrantyCode", purchase.WarrantyId);
