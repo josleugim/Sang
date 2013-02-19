@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Web.Mvc;
 using Sang.Models;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
 
 namespace Sang.Controllers
 {
@@ -120,17 +123,83 @@ namespace Sang.Controllers
                 _db.Entry(sangchild).State = EntityState.Modified;
                 sangchild.CuestionaryResult = Convert.ToInt32(Q1) + Convert.ToInt32(Q2) + Convert.ToInt32(Q3) + Convert.ToInt32(Q4) + Convert.ToInt32(Q5) + Convert.ToInt32(Q6) + Convert.ToInt32(Q7) +
                     Convert.ToInt32(Q8) + Convert.ToInt32(Q9);
-                _db.SaveChanges();
+                
 
                 var result = Convert.ToInt32(sangchild.CuestionaryResult);
 
-                var client =
-                    _db.SangClients.Find(sangchild.SangClientId);
+                //var client =
+                //    _db.SangClients.Find(sangchild.SangClientId);
 
                 if (result > 19)
-                    return RedirectToAction("GenerateCouponChild", "Coupon", new {id = client.SangUserId });
+                {
+                    //return RedirectToAction("GenerateCouponChild", "Coupon", new {id = client.SangUserId });
+                    var users = _db.SangUsers.FirstOrDefault(c => c.Email.Equals(User.Identity.Name));
 
-                return RedirectToAction("Create", "Client");
+                    var client =
+                        _db.SangClients.Where(u => u.SangUserId == users.SangUserID)
+                           .OrderByDescending(c => c.SangClientID)
+                           .FirstOrDefault();
+
+                    var hosp = _db.Hospitals.FirstOrDefault(h => h.HospitalID.Equals(client.HospitalId));
+
+                    var random = new Random();
+                    int randomN = random.Next(1);
+
+                    sangchild.CouponNumber = users.tempWarranty + randomN + client.SangClientID + sangchild.SangChildID;
+                    sangchild.CouponUrl = "../../Content/Documents/" + sangchild.CouponNumber + ".pdf";
+
+                    var doc = new Document(PageSize.A4);
+                    var output = new FileStream(Server.MapPath("../../Content/Documents/" + sangchild.CouponNumber + ".pdf"), FileMode.Create);
+                    var writer = PdfWriter.GetInstance(doc, output);
+
+                    doc.Open();
+
+                    var logoVale = Image.GetInstance(Server.MapPath("../../Content/images/Logo-vale.jpg"));
+                    var logoSang = Image.GetInstance(Server.MapPath("../../Content/images/logo-sang.jpg"));
+                    var sleepImage = Image.GetInstance(Server.MapPath("../../Content/images/sleep-image.jpg"));
+                    var info = Image.GetInstance(Server.MapPath("../../Content/images/informes.jpg"));
+
+                    var table = new PdfPTable(2);
+
+                    var widths = new float[2];
+                    widths[0] = 317.0F;
+                    widths[1] = 483.0F;
+
+                    table.SetTotalWidth(widths);
+
+                    var cellLogoVale = new PdfPCell(logoVale, false) { Rowspan = 6, HorizontalAlignment = 1 };
+                    table.AddCell(cellLogoVale);
+
+                    var cellLogoSang = new PdfPCell(logoSang, false) { HorizontalAlignment = 1 };
+                    table.AddCell(cellLogoSang);
+
+                    var cellCategoria =
+                        new PdfPCell(new Phrase("No. Vale: " + sangchild.CouponNumber,
+                                                new Font(Font.FontFamily.HELVETICA, 8f, Font.NORMAL, BaseColor.WHITE)));
+                    cellCategoria.BackgroundColor = new BaseColor(0, 0, 0);
+                    cellCategoria.HorizontalAlignment = 2;
+                    table.AddCell(cellCategoria);
+
+                    var cellSleepImage = new PdfPCell(sleepImage, true) { HorizontalAlignment = 1 };
+                    table.AddCell(cellSleepImage);
+
+                    var cellNombreCompleto = new PdfPCell(new Phrase(sangchild.CompleteName, new Font(Font.FontFamily.HELVETICA, 11f, Font.NORMAL, BaseColor.WHITE))) { HorizontalAlignment = 1, BackgroundColor = new BaseColor(0, 0, 0) };
+                    table.AddCell(cellNombreCompleto);
+
+                    var cellInforme = new PdfPCell(info, true) { HorizontalAlignment = 1 };
+                    table.AddCell(cellInforme);
+
+                    var cellAddress = new PdfPCell(new Phrase(hosp.HospitalAddress, new Font(Font.FontFamily.HELVETICA, 8f, Font.NORMAL, BaseColor.WHITE))) { HorizontalAlignment = 0, BackgroundColor = new BaseColor(0, 0, 0) };
+                    table.AddCell(cellAddress);
+
+                    doc.Add(table);
+
+                    doc.Close();
+                }
+
+                _db.SaveChanges();
+
+                return RedirectToAction("Introduction", "Home");
             }
             return View(sangchild);
         }

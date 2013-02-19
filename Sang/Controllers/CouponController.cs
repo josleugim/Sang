@@ -23,13 +23,17 @@ namespace Sang.Controllers
         {
             if (Request.HttpMethod == "POST")
             {
-                var couponResult = _db.Coupons.Include(u => u.SangUser)
-                    .Where(c => c.CouponNumber.Equals(cupon));
-
-                return View(couponResult.ToList());
+                if (User.Identity.Name == "abc@sang.mx" || User.Identity.Name == "angeles@sang.mx")
+                {
+                    var couponResult = _db.Coupons.Include(u => u.SangUser)
+                        .Where(c => c.CouponNumber.Equals(cupon));
+                    return View(couponResult.ToList());
+                }
             }
-            var coupons = _db.Coupons.Include(c => c.SangUser);
-            return View(coupons.ToList());
+            
+            
+
+            return View();
         }
 
         //
@@ -59,7 +63,7 @@ namespace Sang.Controllers
             var coupon = new Coupon();
             coupon.SangUserId = id;
             coupon.SangUser = users;
-            coupon.CouponNumber = users.tempWarranty + randomN;
+            coupon.CouponNumber = users.tempWarranty + randomN + client.SangClientID;
             coupon.RegisterDate = DateTime.Now;
             coupon.CouponURL = "../../Content/Documents/" + coupon.CouponNumber + ".pdf";
             _db.Coupons.Add(coupon);
@@ -152,7 +156,7 @@ namespace Sang.Controllers
             var coupon = new Coupon();
             coupon.SangUserId = id;
             coupon.SangUser = users;
-            coupon.CouponNumber = users.tempWarranty + client.SangClientID + randomN;
+            coupon.CouponNumber = users.tempWarranty + randomN + client.SangClientID;
             coupon.RegisterDate = DateTime.Now;
             coupon.CouponURL = "../../Content/Documents/" + coupon.CouponNumber + ".pdf";
             _db.Coupons.Add(coupon);
@@ -246,7 +250,7 @@ namespace Sang.Controllers
             var coupon = new Coupon();
             coupon.SangUserId = id;
             coupon.SangUser = users;
-            coupon.CouponNumber = users.tempWarranty + randomN;
+            coupon.CouponNumber = users.tempWarranty + randomN + child.SangChildID;
             coupon.RegisterDate = DateTime.Now;
             coupon.CouponURL = "../../Content/Documents/" + coupon.CouponNumber + ".pdf";
             _db.Coupons.Add(coupon);

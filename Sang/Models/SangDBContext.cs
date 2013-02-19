@@ -9,9 +9,9 @@ namespace Sang.Models
     public class SangDBContext : DbContext
     {
         //Use this code in only in the development server
-        public SangDBContext()
-            : base("name=SangDBContext")
-        { }
+        //public SangDBContext()
+        //    : base("name=SangDBContext")
+        //{ }
         //-----------------------------------------------------
         public DbSet<SangUser> SangUsers { get; set; }
         public DbSet<Hospital> Hospitals { get; set; }
@@ -22,6 +22,6 @@ namespace Sang.Models
         public DbSet<SangClient> SangClients { get; set; }
         public DbSet<Purchase> Purchase { get; set; }
         public DbSet<SangChild> SangChildren { get; set; }
-        public DbSet<Coupon> Coupons { get; set; }
+        //public DbSet<Coupon> Coupons { get; set; }
     }
 }

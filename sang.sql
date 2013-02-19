@@ -41,6 +41,17 @@ select * from Hospitals
 --Update SangClients
 --Set Email = 'xxxx'
 --Where WarrantyID = 2
+INSERT INTO SangUsers(Email, Pass, SecureCode, IsActived, RegisterDate)
+Values('abc@sang.mx', '123456', '8251634F-3C9C-45EC-9629-F563F93B14A0', 1, getdate())
+
+update SangUsers
+set Pass = CONVERT(VARCHAR(32), HashBytes('MD5', '123456'), 2)
+Where SangUserID = 13
+
+update SangUsers
+set IsActived = 1
+Where SangUserID = 14
+
 
 Select * from Warranties
 select * from SangUsers
@@ -67,4 +78,4 @@ Select * from Coupons
 --drop table Purchases
 
 INSERT INTO Warranties(SangClientId,WarrantyCode, NAttempts, IsActived, ExpirationDate, RegisterDate)
-Values(null,'TEST0005',0,1,getdate(),getdate())
+Values(null,'TEST0009',0,1,getdate(),getdate())

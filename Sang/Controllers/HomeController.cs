@@ -1,10 +1,9 @@
 ﻿using System;
-using System.Data;
+using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
 using Sang.Models;
 using iTextSharp.text;
-using iTextSharp.text.html.simpleparser;
 using iTextSharp.text.pdf;
 using System.IO;
 
@@ -14,37 +13,30 @@ namespace Sang.Controllers
     {
         private readonly SangDBContext _db = new SangDBContext();
 
-        public ActionResult Options()
+        public ViewResult CouponSearch(string coupon)
         {
-            return View();
-        }
+            //var infoMayor = from c in _db.SangClients
+            //           where c.CouponNumber.Equals(coupon)
+            //           select c;
 
-        //
-        // GET: /Collection/Edit/
+            var infoMayor = _db.SangClients.FirstOrDefault(c => c.CouponNumber.Equals(coupon));
 
-        public ActionResult Edit(int id)
-        {
-            SangClient client = _db.SangClients.Find(id);
-            return View(client);
-        }
+            //var infoMenor = from c in _db.SangChildren
+            //                where c.CouponNumber.Equals(coupon)
+            //                select c;
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="id"></param>
-        /// <param name="formValues"></param>
-        /// <returns></returns>
-        [HttpPost]
-        public ActionResult Edit(SangClient client)
-        {
-            if (ModelState.IsValid)
+            var infoMenor = _db.SangChildren.Include(c => c.SangClient).Single(c => c.CouponNumber.Equals(coupon));
+
+            if (infoMayor != null)
             {
-                //SangClient adult = _db.SangClients.FirstOrDefault(a => a.SangClientID.Equals(id));
-                _db.Entry(client).State = EntityState.Modified;
-                _db.SaveChanges();
-
-                return RedirectToAction("Options");
+                return View(infoMayor);
             }
+
+            if (infoMenor != null)
+            {
+                return View(infoMenor);
+            }
+
             return View();
         }
 
@@ -98,7 +90,9 @@ namespace Sang.Controllers
 
                         return View("ThanksAdult");
                     }
-                        
+
+                    if (client != null && client.Disorder1 == null)
+                        return RedirectToAction("AdultCuestionary", new { id = client.SangClientID });
 
                     return RedirectToAction("Create", "Client");
                 }
@@ -108,8 +102,14 @@ namespace Sang.Controllers
                 return RedirectToAction("Create", "Client");
             if (nCuentas >= 2)
             {
-                if (client != null && client.Disorder1 == null)
-                    return RedirectToAction("AdultCuestionary", new { id = client.SangClientID });
+                if (client != null && client.nMattressUsers == 2)
+                {
+                    if (client.Disorder1 == null)
+                        return RedirectToAction("AdultCuestionary", new { id = client.SangClientID });
+                }
+
+                if (client != null && (client.Disorder1 == null && client.nMattressUsers == 1))
+                    return View("ThanksAdult");
             }
 
             return View();
@@ -173,20 +173,154 @@ namespace Sang.Controllers
                     if (d8 == 0)
                     {
                         //Generación de vale
-                        return RedirectToAction("GenerateCoupon", "Coupon", new { id = adult.SangUserId });
+                        //return RedirectToAction("GenerateCoupon", "Coupon", new { id = adult.SangUserId });
+                        var users = _db.SangUsers.FirstOrDefault(c => c.Email.Equals(User.Identity.Name));
+
+                        var client =
+                            _db.SangClients.Where(u => u.SangUserId == users.SangUserID)
+                               .OrderByDescending(c => c.SangClientID)
+                               .FirstOrDefault();
+
+                        var hosp = _db.Hospitals.FirstOrDefault(h => h.HospitalID.Equals(client.HospitalId));
+
+                        var random = new Random();
+                        int randomN = random.Next(1);
+
+                        UpdateModel(adult);
+                        adult.CouponNumber = users.tempWarranty + randomN + client.SangClientID;
+                        adult.CouponUrl = "../../Content/Documents/" + adult.CouponNumber + ".pdf";
+                        _db.SaveChanges();
+                        //var coupon = new Coupon();
+                        //coupon.SangUserId = id;
+                        //coupon.SangUser = users;
+                        //coupon.CouponNumber = users.tempWarranty + randomN + client.SangClientID;
+                        //coupon.RegisterDate = DateTime.Now;
+                        //coupon.CouponURL = "../../Content/Documents/" + coupon.CouponNumber + ".pdf";
+                        //_db.Coupons.Add(coupon);
+                        //_db.SaveChanges();
+
+                        var doc = new Document(PageSize.A4);
+                        var output = new FileStream(Server.MapPath("../../Content/Documents/" + adult.CouponNumber + ".pdf"), FileMode.Create);
+                        var writer = PdfWriter.GetInstance(doc, output);
+
+                        doc.Open();
+
+
+                        var logoVale = Image.GetInstance(Server.MapPath("../../Content/images/Logo-vale.jpg"));
+                        var logoSang = Image.GetInstance(Server.MapPath("../../Content/images/logo-sang.jpg"));
+                        var sleepImage = Image.GetInstance(Server.MapPath("../../Content/images/sleep-image.jpg"));
+                        var info = Image.GetInstance(Server.MapPath("../../Content/images/informes.jpg"));
+
+                        var table = new PdfPTable(2);
+
+                        float[] widths = new float[2];
+                        widths[0] = 317.0F;
+                        widths[1] = 483.0F;
+
+                        table.SetTotalWidth(widths);
+
+                        var cellLogoVale = new PdfPCell(logoVale, false) { Rowspan = 6, HorizontalAlignment = 1 };
+                        table.AddCell(cellLogoVale);
+
+                        var cellLogoSang = new PdfPCell(logoSang, false) { HorizontalAlignment = 1 };
+                        table.AddCell(cellLogoSang);
+
+                        var cellCategoria =
+                            new PdfPCell(new Phrase("No. Vale: " + adult.CouponNumber,
+                                                    new Font(Font.FontFamily.HELVETICA, 8f, Font.NORMAL, BaseColor.WHITE)));
+                        cellCategoria.BackgroundColor = new BaseColor(0, 0, 0);
+                        cellCategoria.HorizontalAlignment = 2;
+                        table.AddCell(cellCategoria);
+
+                        var cellSleepImage = new PdfPCell(sleepImage, true) { HorizontalAlignment = 1 };
+                        table.AddCell(cellSleepImage);
+
+                        var cellNombreCompleto = new PdfPCell(new Phrase(client.CompleteName, new Font(Font.FontFamily.HELVETICA, 11f, Font.NORMAL, BaseColor.WHITE))) { HorizontalAlignment = 1, BackgroundColor = new BaseColor(0, 0, 0) };
+                        table.AddCell(cellNombreCompleto);
+
+                        var cellInforme = new PdfPCell(info, true) { HorizontalAlignment = 1 };
+                        table.AddCell(cellInforme);
+
+                        var cellAddress = new PdfPCell(new Phrase(hosp.HospitalAddress, new Font(Font.FontFamily.HELVETICA, 8f, Font.NORMAL, BaseColor.WHITE))) { HorizontalAlignment = 0, BackgroundColor = new BaseColor(0, 0, 0) };
+                        table.AddCell(cellAddress);
+
+                        doc.Add(table);
+
+                        doc.Close();
                     }
                 }
 
                 if (d8 == 100)
                 {
                     //Generación de vale de consulta
-                    return RedirectToAction("GenerateAppointment", "Coupon", new { id = adult.SangUserId });
+                    //return RedirectToAction("GenerateAppointment", "Coupon", new { id = adult.SangUserId });
+
+                    var users = _db.SangUsers.FirstOrDefault(c => c.Email.Equals(User.Identity.Name));
+
+                    var client =
+                        _db.SangClients.Where(u => u.SangUserId == users.SangUserID)
+                           .OrderByDescending(c => c.SangClientID)
+                           .FirstOrDefault();
+
+                    var hosp = _db.Hospitals.FirstOrDefault(h => h.HospitalID.Equals(client.HospitalId));
+
+                    var random = new Random();
+                    int randomN = random.Next(1);
+
+                    UpdateModel(adult);
+                    adult.CouponNumber = users.tempWarranty + randomN + client.SangClientID;
+                    adult.CouponUrl = "../../Content/Documents/" + adult.CouponNumber + ".pdf";
+                    _db.SaveChanges();
+
+                    var doc = new Document(PageSize.A4);
+                    var output = new FileStream(Server.MapPath("../../Content/Documents/" + adult.CouponNumber + ".pdf"), FileMode.Create);
+                    var writer = PdfWriter.GetInstance(doc, output);
+
+                    doc.Open();
+
+
+                    var logoVale = Image.GetInstance(Server.MapPath("../../Content/images/Logo-vale.jpg"));
+                    var logoSang = Image.GetInstance(Server.MapPath("../../Content/images/logo-sang.jpg"));
+                    var sleepImage = Image.GetInstance(Server.MapPath("../../Content/images/vale-consulta.jpg"));
+                    var info = Image.GetInstance(Server.MapPath("../../Content/images/informes.jpg"));
+
+                    var table = new PdfPTable(2);
+
+                    float[] widths = new float[2];
+                    widths[0] = 317.0F;
+                    widths[1] = 483.0F;
+
+                    table.SetTotalWidth(widths);
+
+                    var cellLogoVale = new PdfPCell(logoVale, false) { Rowspan = 6, HorizontalAlignment = 1 };
+                    table.AddCell(cellLogoVale);
+
+                    var cellLogoSang = new PdfPCell(logoSang, false) { HorizontalAlignment = 1 };
+                    table.AddCell(cellLogoSang);
+
+                    var cellCategoria =
+                        new PdfPCell(new Phrase("No. Vale: " + adult.CouponNumber,
+                                                new Font(Font.FontFamily.HELVETICA, 8f, Font.NORMAL, BaseColor.WHITE)));
+                    cellCategoria.BackgroundColor = new BaseColor(0, 0, 0);
+                    cellCategoria.HorizontalAlignment = 2;
+                    table.AddCell(cellCategoria);
+
+                    var cellSleepImage = new PdfPCell(sleepImage, true) { HorizontalAlignment = 1 };
+                    table.AddCell(cellSleepImage);
+
+                    var cellNombreCompleto = new PdfPCell(new Phrase(client.CompleteName, new Font(Font.FontFamily.HELVETICA, 11f, Font.NORMAL, BaseColor.WHITE))) { HorizontalAlignment = 1, BackgroundColor = new BaseColor(0, 0, 0) };
+                    table.AddCell(cellNombreCompleto);
+
+                    var cellInforme = new PdfPCell(info, true) { HorizontalAlignment = 1 };
+                    table.AddCell(cellInforme);
+
+                    var cellAddress = new PdfPCell(new Phrase(hosp.HospitalAddress, new Font(Font.FontFamily.HELVETICA, 8f, Font.NORMAL, BaseColor.WHITE))) { HorizontalAlignment = 0, BackgroundColor = new BaseColor(0, 0, 0) };
+                    table.AddCell(cellAddress);
+
+                    doc.Add(table);
+
+                    doc.Close();
                 }
-
-                //doc.Close();
-
-                //Generación de vale
-                //return RedirectToAction("GenerateCoupon", "Coupon", new { id = adult.SangUserId });
 
                 //return RedirectToAction("AdultResult", new
                 //{
@@ -211,7 +345,7 @@ namespace Sang.Controllers
         public ActionResult AdultResult(int id, int d1, int d2, int d3, int d4, int d5, int d7, int d8)
         {
             var adult = _db.SangClients.FirstOrDefault(a => a.SangClientID.Equals(id));
-            var coupon = _db.Coupons.FirstOrDefault(c => c.SangUserId.Equals(adult.SangUserId));
+            //var coupon = _db.Coupons.FirstOrDefault(c => c.SangUserId.Equals(adult.SangUserId));
             //Scale 1 x 4
             ViewData["d1"] = d1 * 4;
             ViewData["d2"] = d2 * 4;
@@ -233,10 +367,10 @@ namespace Sang.Controllers
             else
                 ViewData["d8High"] = "hidden";
 
-            if (coupon != null)
+            if (adult != null)
             {
                 ViewData["CouponOk"] = "Ver vale";
-                ViewData["Coupon"] = coupon.CouponURL;
+                ViewData["Coupon"] = adult.CouponUrl;
             }
 
             return View(adult);

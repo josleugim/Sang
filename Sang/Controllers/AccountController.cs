@@ -41,6 +41,9 @@ namespace Sang.Controllers
                             && !returnUrl.StartsWith("//") && !returnUrl.StartsWith("/\\"))
                             return Redirect(returnUrl);
 
+                        if (User.Identity.Name == "abc@sang.mx" || User.Identity.Name == "angeles@sang.mx")
+                            return RedirectToAction("Index", "Coupon");
+
                         return RedirectToAction("Introduction", "Home");
                     }
                     ModelState.AddModelError("", "Active su registro mediante el correo que se le envio.");

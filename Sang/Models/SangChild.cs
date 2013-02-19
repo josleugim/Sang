@@ -32,6 +32,16 @@ namespace Sang.Models
         [DisplayName("Resultado")]
         public int? CuestionaryResult { get; set; }
 
+        //Coupon Data
+        [DisplayName("Coupon number")]
+        public string CouponNumber { get; set; }
+
+        [DisplayName("Coupon Url")]
+        public string CouponUrl { get; set; }
+
+        [DisplayName("Sleeping Image result")]
+        public string SleepingImageUrl { get; set; }
+
         public DateTime RegisterDate { get; set; }
 
         [DisplayName("Tutor")]

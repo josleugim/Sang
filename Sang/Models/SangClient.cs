@@ -93,6 +93,16 @@ namespace Sang.Models
         [DisplayName("He leído y acepto los Términos del Aviso de privacidad")]
         public bool PrivacyNotice { get; set; }
 
+        //Coupon Data
+        [DisplayName("Coupon number")]
+        public string CouponNumber { get; set; }
+
+        [DisplayName("Coupon Url")]
+        public string CouponUrl { get; set; }
+
+        [DisplayName("Sleeping Image result")]
+        public string SleepingImageUrl { get; set; }
+
         public virtual SangUser SangUser { get; set; }
 
         [DisplayName("Seleccione un hospital")]
