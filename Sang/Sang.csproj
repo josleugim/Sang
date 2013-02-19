@@ -819,6 +819,9 @@
     <Content Include="Views\Client\Delete.cshtml" />
     <Content Include="Views\Client\Thanks.cshtml" />
     <Content Include="Views\Home\CouponSearch.cshtml" />
+    <Content Include="Views\Home\CouponSearchChild.cshtml" />
+    <Content Include="Views\Home\ThanksDoctor.cshtml" />
+    <Content Include="Views\Home\ThanksAssits.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

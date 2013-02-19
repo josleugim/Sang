@@ -65,7 +65,7 @@ namespace Sang.Controllers
 
             //
             //Si ya existe la cuenta se envía la garantía
-            return RedirectToAction("Create", "Purchase", new { id = users.tempWarranty });
+            //return RedirectToAction("Create", "Purchase", new { id = users.tempWarranty });
             
         }
 
@@ -116,8 +116,8 @@ namespace Sang.Controllers
         public ActionResult Edit(int id)
         {
             SangClient sangclient = _db.SangClients.Find(id);
-            ViewBag.SangUserId = new SelectList(_db.SangUsers, "SangUserID", "Email", sangclient.SangUserId);
-            ViewBag.HospitalId = new SelectList(_db.Hospitals, "HospitalID", "HospitalName", sangclient.HospitalId);
+            //ViewBag.SangUserId = new SelectList(_db.SangUsers, "SangUserID", "Email", sangclient.SangUserId);
+            //ViewBag.HospitalId = new SelectList(_db.Hospitals, "HospitalID", "HospitalName", sangclient.HospitalId);
             return View(sangclient);
         }
 

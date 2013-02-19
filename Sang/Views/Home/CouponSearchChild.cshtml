@@ -1,0 +1,43 @@
+﻿@model IEnumerable<Sang.Models.SangChild>
+@{
+    ViewBag.Title = "CouponSearchChild";
+    Layout = "~/Views/Shared/_AdminMasterPage.cshtml";
+}
+<div class="evaluacion">
+    <br />
+    <h2>
+        Busqueda de cupón</h2>
+    @using (Html.BeginForm("CouponSearch", "Home", FormMethod.Post))
+    {
+        <p>
+            @Html.TextBox("coupon", null, new { style = "background-color: black; border: 1px solid #2F2F2F; color: white; height:25px; font-size: 16px; text-align: center" })
+            <input type="submit" value="buscar" />
+        </p>
+    }
+    <table>
+        <tr>
+            <th>
+                CompleteName
+            </th>
+            <th>
+                CouponNumber
+            </th>
+            <th>
+            </th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CompleteName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CouponNumber)
+                </td>
+                <td>
+                    @Html.ActionLink("Subir sleeping image", "SleepingImageMenor", new { id = item.SangChildID })
+                </td>
+            </tr>
+        }
+    </table>
+</div>

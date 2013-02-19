@@ -103,6 +103,9 @@ namespace Sang.Models
         [DisplayName("Sleeping Image result")]
         public string SleepingImageUrl { get; set; }
 
+        [DisplayName("Sleeping Image Activo")]
+        public bool SleepingImageIsActived { get; set; }
+
         public virtual SangUser SangUser { get; set; }
 
         [DisplayName("Seleccione un hospital")]

@@ -1,9 +1,6 @@
 use sangdbadmin
 go
 
---INSERT INTO Hospitals(HospitalName, RegisterDate)
---Values('Ninguno', getdate())
-
 --INSERT INTO Hospitals(HospitalName, HospitalAddress, HospitalLogo, DoctorName, RegisterDate)
 --Values('Hospital ABC, México, D.F.', 'Tel. (55) 1664-7100 y 04 Centro Médico ABC, Santa Fe, México D.F.', '../../Content/images/ABC.jpg', '../../Content/images/DrABC.jpg', getdate())
 --INSERT INTO Hospitals(HospitalName, HospitalAddress, HospitalLogo, DoctorName, RegisterDate)

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data.Entity;
 using System.Linq;
+using System.Web;
 using System.Web.Mvc;
 using Sang.Models;
 using iTextSharp.text;
@@ -15,29 +16,25 @@ namespace Sang.Controllers
 
         public ViewResult CouponSearch(string coupon)
         {
-            //var infoMayor = from c in _db.SangClients
-            //           where c.CouponNumber.Equals(coupon)
-            //           select c;
+            var infoMayor = from c in _db.SangClients
+                            where c.CouponNumber.Equals(coupon)
+                            select c;
 
-            var infoMayor = _db.SangClients.FirstOrDefault(c => c.CouponNumber.Equals(coupon));
+            var infoMenor = from c in _db.SangChildren
+                            where c.CouponNumber.Equals(coupon)
+                            select c;
 
-            //var infoMenor = from c in _db.SangChildren
-            //                where c.CouponNumber.Equals(coupon)
-            //                select c;
-
-            var infoMenor = _db.SangChildren.Include(c => c.SangClient).Single(c => c.CouponNumber.Equals(coupon));
-
-            if (infoMayor != null)
+            if (Request.HttpMethod == "POST")
             {
-                return View(infoMayor);
+                //var infoMayor = _db.SangClients.FirstOrDefault(c => c.CouponNumber.Equals(coupon));
+                if (infoMayor.Count() != 0)
+                    return View(infoMayor);
+
+                if (infoMenor.Count() != 0)
+                    return View("CouponSearchChild", infoMenor);
             }
 
-            if (infoMenor != null)
-            {
-                return View(infoMenor);
-            }
-
-            return View();
+            return View(infoMayor);
         }
 
         /// <summary>
@@ -86,7 +83,7 @@ namespace Sang.Controllers
                     if (Convert.ToInt32(nCuentas) >= 2)
                     {
                         if (client != null && client.Disorder1 == null)
-                            return RedirectToAction("AdultCuestionary", new {id = client.SangClientID});
+                            return RedirectToAction("AdultCuestionary", new { id = client.SangClientID });
 
                         return View("ThanksAdult");
                     }
@@ -374,6 +371,51 @@ namespace Sang.Controllers
             }
 
             return View(adult);
+        }
+
+        public ViewResult SleepingImageMenor(int id, HttpPostedFileBase document)
+        {
+            if (document != null && document.ContentLength != 0)
+            {
+                var sangchild = _db.SangChildren.Find(id);
+                var reader = new StreamReader(document.InputStream);
+                document.SaveAs(Server.MapPath("/Content/Documents/") + document.FileName + sangchild.SangChildID);
+                UpdateModel(sangchild);
+                sangchild.SleepingImageUrl = "../../Content/Documents/" + document.FileName;
+                _db.SaveChanges();
+
+                return View("ThanksDoctor");
+            }
+
+            return View("Error");
+        }
+
+        public ViewResult SleepingImageMayor(string cid, HttpPostedFileBase document)
+        {
+            if (document != null && document.ContentLength != 0)
+            {
+                var sangclient = _db.SangClients.Find(cid);
+                var reader = new StreamReader(document.InputStream);
+                document.SaveAs(Server.MapPath("/Content/Documents/") + document.FileName + sangclient.SangClientID);
+                UpdateModel(sangclient);
+                sangclient.SleepingImageUrl = "../../Content/Documents/" + document.FileName;
+                _db.SaveChanges();
+
+                return View("ThanksDoctor");
+            }
+
+            return View("Error");
+        }
+
+        public ViewResult SleepingImageAsistMayor(int id)
+        {
+            var sangclient = _db.SangClients.Find(id);
+
+            UpdateModel(sangclient);
+            sangclient.SleepingImageIsActived = true;
+            _db.SaveChanges();
+
+            return View("ThanksAssits");
         }
 
         //
