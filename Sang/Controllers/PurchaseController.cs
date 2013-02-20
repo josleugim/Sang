@@ -56,6 +56,12 @@ namespace Sang.Controllers
                         };
                 ViewBag.estado = new SelectList(estado);
 
+                var tienda = new List<string>
+                    {
+                        "Dormimundo"
+                    };
+                ViewBag.tienda = new SelectList(tienda);
+
                 var warr = db.Warranties.Find(warrant.WarrantyID);
 
                 var model = new Purchase
@@ -73,7 +79,7 @@ namespace Sang.Controllers
         // POST: /Purchase/Create
 
         [HttpPost]
-        public ActionResult Create(Purchase purchase, string MattressId, string Size, string calle, string nExt, string nInt, string colonia, string delMuni, string estado, string cp)
+        public ActionResult Create(Purchase purchase, string MattressId, string Size, string calle, string nExt, string nInt, string colonia, string delMuni, string estado, string cp, string tienda)
         {
             if (ModelState.IsValid)
             {
@@ -81,6 +87,7 @@ namespace Sang.Controllers
                 var matt = db.ModelMattress.FirstOrDefault(m => m.ModelMattressID.Equals(tempId));
                 db.Purchase.Add(purchase);
                 purchase.RegisterDate = DateTime.Now;
+                purchase.Store = tienda;
                 purchase.MattressSize = Size;
                 purchase.ModelMattress = matt;
                 purchase.ModelMattresstId = tempId;
@@ -117,6 +124,12 @@ namespace Sang.Controllers
                             "Veracruz", "Yucatán", "Zacatecas"
                         };
             ViewBag.estado = new SelectList(estado2);
+
+            var tienda2 = new List<string>
+                    {
+                        "Dormimundo"
+                    };
+            ViewBag.tienda = new SelectList(tienda2);
 
             //return View(purchase);
             return View();

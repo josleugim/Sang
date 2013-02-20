@@ -56,7 +56,8 @@
             </tr>
             <tr>
                 <td colspan="3">
-                    <%: Html.EditorFor(model => model.Store) %>
+                    <%--<%: Html.EditorFor(model => model.Store) %>--%>
+                    <%: Html.DropDownList("tienda")%>
                 </td>
             </tr>
             <tr>

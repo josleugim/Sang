@@ -14,27 +14,32 @@ namespace Sang.Controllers
     {
         private readonly SangDBContext _db = new SangDBContext();
 
-        public ViewResult CouponSearch(string coupon)
+        public ActionResult CouponSearch(string coupon)
         {
-            var infoMayor = from c in _db.SangClients
-                            where c.CouponNumber.Equals(coupon)
-                            select c;
-
-            var infoMenor = from c in _db.SangChildren
-                            where c.CouponNumber.Equals(coupon)
-                            select c;
-
-            if (Request.HttpMethod == "POST")
+            if (User.Identity.Name == "abc@sang.mx")
             {
-                //var infoMayor = _db.SangClients.FirstOrDefault(c => c.CouponNumber.Equals(coupon));
-                if (infoMayor.Count() != 0)
-                    return View(infoMayor);
+                var infoMayor = from c in _db.SangClients
+                                where c.CouponNumber.Equals(coupon)
+                                select c;
 
-                if (infoMenor.Count() != 0)
-                    return View("CouponSearchChild", infoMenor);
+                var infoMenor = from c in _db.SangChildren
+                                where c.CouponNumber.Equals(coupon)
+                                select c;
+
+                if (Request.HttpMethod == "POST")
+                {
+                    //var infoMayor = _db.SangClients.FirstOrDefault(c => c.CouponNumber.Equals(coupon));
+                    if (infoMayor.Count() != 0)
+                        return View(infoMayor);
+
+                    if (infoMenor.Count() != 0)
+                        return View("CouponSearchChild", infoMenor);
+                }
+
+                return View(infoMayor);
             }
 
-            return View(infoMayor);
+            return RedirectToAction("Introduction");
         }
 
         /// <summary>
@@ -108,6 +113,11 @@ namespace Sang.Controllers
                 if (client != null && (client.Disorder1 == null && client.nMattressUsers == 1))
                     return View("ThanksAdult");
             }
+            //Validar que la garantía este registrada
+            var warranty = _db.Warranties.FirstOrDefault(c => c.WarrantyCode.Equals(users.tempWarranty));
+            var purchase = _db.Purchase.FirstOrDefault(c => c.WarrantyId.Equals(warranty.WarrantyID));
+            if (purchase == null)
+                return RedirectToAction("Create", "Purchase", new {id = warranty.WarrantyCode});
 
             return View();
         }
@@ -342,7 +352,7 @@ namespace Sang.Controllers
         public ActionResult AdultResult(int id, int d1, int d2, int d3, int d4, int d5, int d7, int d8)
         {
             var adult = _db.SangClients.FirstOrDefault(a => a.SangClientID.Equals(id));
-            //var coupon = _db.Coupons.FirstOrDefault(c => c.SangUserId.Equals(adult.SangUserId));
+            
             //Scale 1 x 4
             ViewData["d1"] = d1 * 4;
             ViewData["d2"] = d2 * 4;
@@ -356,8 +366,8 @@ namespace Sang.Controllers
             else
                 ViewData["d4Low"] = "hidden";
 
-
-            ViewData["d7"] = d7;
+            //Scale 1 x 20
+            ViewData["d7"] = d7 * 20;
 
             if (d8 == 100)
                 ViewData["d8Low"] = "hidden";
@@ -373,15 +383,15 @@ namespace Sang.Controllers
             return View(adult);
         }
 
-        public ViewResult SleepingImageMenor(int id, HttpPostedFileBase document)
+        public ViewResult SleepingImageMenor(string identificador, HttpPostedFileBase document)
         {
             if (document != null && document.ContentLength != 0)
             {
-                var sangchild = _db.SangChildren.Find(id);
+                var sangchild = _db.SangChildren.Find(Convert.ToInt32(identificador));
                 var reader = new StreamReader(document.InputStream);
-                document.SaveAs(Server.MapPath("/Content/Documents/") + document.FileName + sangchild.SangChildID);
+                document.SaveAs(Server.MapPath("/Content/Documents/") + sangchild.SangChildID + document.FileName);
                 UpdateModel(sangchild);
-                sangchild.SleepingImageUrl = "../../Content/Documents/" + document.FileName;
+                sangchild.SleepingImageUrl = "../../Content/Documents/" + sangchild.SangChildID + document.FileName;
                 _db.SaveChanges();
 
                 return View("ThanksDoctor");
@@ -390,15 +400,15 @@ namespace Sang.Controllers
             return View("Error");
         }
 
-        public ViewResult SleepingImageMayor(string cid, HttpPostedFileBase document)
+        public ViewResult SleepingImageMayor(string identificador, HttpPostedFileBase document)
         {
             if (document != null && document.ContentLength != 0)
             {
-                var sangclient = _db.SangClients.Find(cid);
+                var sangclient = _db.SangClients.Find(Convert.ToInt32(identificador));
                 var reader = new StreamReader(document.InputStream);
-                document.SaveAs(Server.MapPath("/Content/Documents/") + document.FileName + sangclient.SangClientID);
+                document.SaveAs(Server.MapPath("/Content/Documents/") + sangclient.SangClientID + document.FileName);
                 UpdateModel(sangclient);
-                sangclient.SleepingImageUrl = "../../Content/Documents/" + document.FileName;
+                sangclient.SleepingImageUrl = "../../Content/Documents/" + sangclient.SangClientID + document.FileName;
                 _db.SaveChanges();
 
                 return View("ThanksDoctor");
@@ -413,6 +423,17 @@ namespace Sang.Controllers
 
             UpdateModel(sangclient);
             sangclient.SleepingImageIsActived = true;
+            _db.SaveChanges();
+
+            return View("ThanksAssits");
+        }
+
+        public ViewResult SleepingImageAsistMenor(int id)
+        {
+            var sangchild = _db.SangChildren.Find(id);
+
+            UpdateModel(sangchild);
+            sangchild.SleepingImageIsActived = true;
             _db.SaveChanges();
 
             return View("ThanksAssits");

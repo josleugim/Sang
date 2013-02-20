@@ -5,8 +5,8 @@
 }
 <div class="evaluacion">
     <br />
-    <h2>
-        Busqueda de cupón</h2>
+    <h2 style="text-align: center">
+        Búsqueda de cupón</h2>
     @using (Html.BeginForm("CouponSearch", "Home", FormMethod.Post))
     {
         <p>
@@ -15,39 +15,43 @@
         </p>
         
     }
-    <table>
-        <tr>
-            <th>
-                Nombre completo
-            </th>
-            <th>
-                Código del cupón
-            </th>
-            <th>
-            </th>
-        </tr>
-        @foreach (var item in Model)
-        {
+    @using (Html.BeginForm("SleepingImageMayor", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <table style="margin: 0 auto; width: 60%">
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CompleteName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CouponNumber)
-                </td>
-                <td>
-                    @using (Html.BeginForm("SleepingImageMayor", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
-                    {
-                        <p>
-                            @Html.TextBox("cid",item.SangClientID)
-                            
-                            <input type="file" id="document" name="Subir archivo" />
-                            <input type="submit" value="Cargar imagen" />
-                        </p>
-                    }
-                    @Html.ActionLink("Cupón canjeado", "SleepingImageAsistMayor", new { id = item.SangClientID })
-                </td>
+                <th>
+                    Nombre completo
+                </th>
+                <th>
+                    Código del cupón
+                </th>
+                <th>
+                </th>
             </tr>
-        }
-    </table>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CompleteName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CouponNumber)
+                    </td>
+                    <td style="text-align: center">@Html.ActionLink("Cupón canjeado", "SleepingImageAsistMayor", new { id = item.SangClientID }, new { style = "font-size: 18px; color: yellow; text-decoration:underline" })
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p>
+                            @Html.TextBox("identificador", item.SangClientID, new { style = "visibility: hidden" })
+                            <input type="file" id="document" name="document" />
+                        </p>
+                    </td>
+                    <td>
+                        <input type="submit" value="Cargar documento" />
+                    </td>
+                </tr>
+            }
+        </table>
+    }
 </div>

@@ -32,7 +32,7 @@
         @Html.ValidationSummary(true)
 
         @Html.HiddenFor(model => model.SangUserId)
-        @Html.HiddenFor(model => model.Gender)
+        @*@Html.HiddenFor(model => model.Gender)*@
     
         <img style="margin: 10px" src="../../Content/images/Registro.png" alt="Imagen" />
         if (ViewBag.nCuentas == 1)
@@ -83,7 +83,7 @@
                 </td>
                 <td>
                     @Html.LabelFor(model => model.Gender)
-                    <strong>* <span style="font-size: 12px;">Requerido</span></strong>
+                    <strong>* @Html.ValidationMessageFor(model => model.Gender)</strong>
                 </td>
             </tr>
             <tr>
@@ -92,10 +92,13 @@
                 </td>
                 <td>
                     <p>
-                        @Html.RadioButton("cGender", "Masculino")
+                        @*@Html.RadioButton("cGender", "Masculino")*@
+                        @Html.RadioButtonFor(model => model.Gender, "Masculino")
                         Masculino
-                        @Html.RadioButton("cGender", "Femenino")
-                        Femenino</p>
+                        @*@Html.RadioButton("cGender", "Femenino")*@
+                        @Html.RadioButtonFor(model => model.Gender, "Femenino")
+                        Femenino
+                        </p>
                 </td>
             </tr>
             <tr>
@@ -146,26 +149,30 @@
         }
                     }
                 </td>
-                <td>
-                    <p>
-                        <u>
-                            <input type="submit" value="Enviar" style="background: transparent; color: White;
-                                border: none; font-weight: lighter; font-size: 24px; cursor: pointer" /></u>
-                    </p>
-                </td>
             </tr>
             <tr>
                 <td colspan="3">
-                    Seleccione el @Html.LabelFor(model => model.HospitalId, "Hospital")de su preferencia:
+                    Seleccione la clínica del sueño para su evaluación:
                     @Html.DropDownList("HospitalId")
                 </td>
             </tr>
             <tr>
-                <td colspan="3">
+                <td colspan="2">
                     <p>
                         @Html.EditorFor(model => model.PrivacyNotice)
                         @Html.LabelFor(model => model.PrivacyNotice) * @Html.ValidationMessageFor(model => model.PrivacyNotice)</p>
                 </td>
+                <td>
+                    <p>
+                        <input type="submit" value="Enviar" style="background: transparent; color: White;
+                            border: none; font-weight: lighter; font-size: 24px; cursor: pointer; text-decoration: underline" />
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td><p style="color: red; font-size: 14px">@ViewData["Aviso"]</p></td>
+                <td></td>
+                <td></td>
             </tr>
         </table>
     }

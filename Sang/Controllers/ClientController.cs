@@ -58,7 +58,7 @@ namespace Sang.Controllers
             {
                 SangUserId = users.SangUserID,
                 SangUser = users,
-                Gender = "Ninguno"
+                //Gender = "Ninguno"
             };
 
             return View(model);
@@ -75,13 +75,12 @@ namespace Sang.Controllers
         [HttpPost]
         public ActionResult Create(SangClient sangclient, string cGender, string nMattress)
         {
-            if (ModelState.IsValid && sangclient.PrivacyNotice != false)
+            if (ModelState.IsValid && sangclient.PrivacyNotice)
             {
                 var users = _db.SangUsers.FirstOrDefault(c => c.Email.Equals(User.Identity.Name));
 
                 _db.SangClients.Add(sangclient);
                 sangclient.CompleteName = sangclient.UserName + " " + sangclient.FirstName + " " + sangclient.LastName;
-                sangclient.Gender = cGender;
                 sangclient.RegisterDate = DateTime.Now;
                 sangclient.SangUser = users;
                 sangclient.nMattressUsers = String.IsNullOrEmpty(nMattress) ? 0 : Convert.ToInt32(nMattress);
@@ -106,6 +105,8 @@ namespace Sang.Controllers
             ViewBag.nMattress = new SelectList(n);
 
             ViewBag.HospitalId = new SelectList(_db.Hospitals, "HospitalID", "HospitalName");
+
+            ViewData["Aviso"] = "* Tiene que aceptar los terminos y condiciones";
 
             return View(sangclient);
         }

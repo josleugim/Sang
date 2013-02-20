@@ -45,9 +45,9 @@ update SangUsers
 set Pass = CONVERT(VARCHAR(32), HashBytes('MD5', '123456'), 2)
 Where SangUserID = 13
 
-update SangUsers
-set IsActived = 1
-Where SangUserID = 14
+--update SangUsers
+--set IsActived = 1
+--Where SangUserID = 4
 
 
 Select * from Warranties
@@ -62,6 +62,7 @@ select * from Purchases
 Select * from Coupons
 
 --Delete from SangUsers
+--where SangUserID = 3
 --Delete From ModelMattresses
 --Delete From Collections
 --Delete from Warranties
@@ -75,4 +76,4 @@ Select * from Coupons
 --drop table Purchases
 
 INSERT INTO Warranties(SangClientId,WarrantyCode, NAttempts, IsActived, ExpirationDate, RegisterDate)
-Values(null,'TEST0009',0,1,getdate(),getdate())
+Values(null,'TEST0005',0,1,getdate(),getdate())

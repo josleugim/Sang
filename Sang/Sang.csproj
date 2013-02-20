@@ -689,6 +689,7 @@
     <Content Include="Content\themes\base\jquery.ui.tabs.css" />
     <Content Include="Content\themes\base\jquery.ui.theme.css" />
     <Content Include="Global.asax" />
+    <Content Include="sangDev\Index.html" />
     <Content Include="Scripts\jquery-1.5.1-vsdoc.js" />
     <Content Include="Scripts\jquery-1.5.1.js" />
     <Content Include="Scripts\jquery-1.5.1.min.js" />
@@ -714,8 +715,6 @@
     <Content Include="Views\Home\AlreadyEmailRegister.aspx" />
     <Content Include="Views\Home\ChildDiagnosis.aspx" />
     <Content Include="Views\Home\ChildResult.aspx" />
-    <Content Include="Views\Home\Create.aspx" />
-    <Content Include="Views\Home\CreateSecond.aspx" />
     <Content Include="Views\Home\CuestionaryChild.aspx" />
     <Content Include="Views\Home\EmailExist.aspx" />
     <Content Include="Views\Home\ErrorEmailRegister.aspx" />
