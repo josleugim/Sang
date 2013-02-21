@@ -1,8 +1,5 @@
 ﻿<RecentFiles>
   <RecentFiles>
-    <File id="525225FD-444E-4087-AAF7-6D490A6AE8ED/d:Models/f:UserRepository.cs" caret="1101" fromTop="33" />
-    <File id="525225FD-444E-4087-AAF7-6D490A6AE8ED/d:Models/f:Hospital.cs" caret="0" fromTop="0" />
-    <File id="525225FD-444E-4087-AAF7-6D490A6AE8ED/d:Models/f:Coupon.cs" caret="0" fromTop="0" />
     <File id="525225FD-444E-4087-AAF7-6D490A6AE8ED/d:Views/d:Coupon/f:Index.cshtml" caret="367" fromTop="25" />
     <File id="525225FD-444E-4087-AAF7-6D490A6AE8ED/d:Models/f:SangDBContext.cs" caret="345" fromTop="13" />
     <File id="525225FD-444E-4087-AAF7-6D490A6AE8ED/f:Global.asax.cs" caret="1224" fromTop="35" />
@@ -24,16 +21,19 @@
     <File id="525225FD-444E-4087-AAF7-6D490A6AE8ED/d:Views/d:Purchase/f:Create.cshtml" caret="0" fromTop="0" />
     <File id="525225FD-444E-4087-AAF7-6D490A6AE8ED/d:Models/f:Purchase.cs" caret="0" fromTop="0" />
     <File id="525225FD-444E-4087-AAF7-6D490A6AE8ED/d:Models/f:Warranty.cs" caret="0" fromTop="0" />
-    <File id="525225FD-444E-4087-AAF7-6D490A6AE8ED/d:Controllers/f:ClientController.cs" caret="3510" fromTop="25" />
     <File id="525225FD-444E-4087-AAF7-6D490A6AE8ED/d:Controllers/f:PurchaseController.cs" caret="1044" fromTop="12" />
     <File id="525225FD-444E-4087-AAF7-6D490A6AE8ED/d:Models/f:SangClient.cs" caret="374" fromTop="0" />
     <File id="525225FD-444E-4087-AAF7-6D490A6AE8ED/d:Views/d:Purchase/f:Create.aspx" caret="2417" fromTop="23" />
-    <File id="525225FD-444E-4087-AAF7-6D490A6AE8ED/d:Controllers/f:HomeController.cs" caret="3422" fromTop="19" />
+    <File id="525225FD-444E-4087-AAF7-6D490A6AE8ED/d:Views/d:Shared/f:_AdminMasterPage.cshtml" caret="0" fromTop="0" />
+    <File id="525225FD-444E-4087-AAF7-6D490A6AE8ED/d:Views/d:Shared/f:Site.Master" caret="2098" fromTop="22" />
+    <File id="525225FD-444E-4087-AAF7-6D490A6AE8ED/d:Views/d:Shared/f:_masterpage.cshtml" caret="1526" fromTop="21" />
+    <File id="525225FD-444E-4087-AAF7-6D490A6AE8ED/d:Models/f:Hospital.cs" caret="568" fromTop="22" />
+    <File id="525225FD-444E-4087-AAF7-6D490A6AE8ED/d:Controllers/f:ClientController.cs" caret="662" fromTop="3" />
+    <File id="525225FD-444E-4087-AAF7-6D490A6AE8ED/d:Controllers/f:HomeController.cs" caret="7591" fromTop="34" />
   </RecentFiles>
   <RecentEdits>
     <File id="525225FD-444E-4087-AAF7-6D490A6AE8ED/d:Views/d:Client/f:Thanks.cshtml" caret="321" fromTop="9" />
     <File id="525225FD-444E-4087-AAF7-6D490A6AE8ED/d:Models/f:Coupon.cs" caret="423" fromTop="15" />
-    <File id="525225FD-444E-4087-AAF7-6D490A6AE8ED/d:Models/f:Hospital.cs" caret="511" fromTop="20" />
     <File id="525225FD-444E-4087-AAF7-6D490A6AE8ED/d:Content/f:Site.css" caret="1072" fromTop="21" />
     <File id="525225FD-444E-4087-AAF7-6D490A6AE8ED/d:Views/d:Home/f:AdultResult.aspx" caret="9144" fromTop="32" />
     <File id="525225FD-444E-4087-AAF7-6D490A6AE8ED/d:Views/d:Coupon/f:Index.cshtml" caret="591" fromTop="33" />
@@ -54,7 +54,10 @@
     <File id="525225FD-444E-4087-AAF7-6D490A6AE8ED/d:Views/d:Client/f:Create.cshtml" caret="3829" fromTop="29" />
     <File id="525225FD-444E-4087-AAF7-6D490A6AE8ED/d:Controllers/f:ClientController.cs" caret="2701" fromTop="18" />
     <File id="525225FD-444E-4087-AAF7-6D490A6AE8ED/d:Controllers/f:PurchaseController.cs" caret="5605" fromTop="23" />
-    <File id="525225FD-444E-4087-AAF7-6D490A6AE8ED/d:Controllers/f:HomeController.cs" caret="4462" fromTop="20" />
     <File id="525225FD-444E-4087-AAF7-6D490A6AE8ED/d:Views/d:Purchase/f:Create.aspx" caret="2417" fromTop="23" />
+    <File id="525225FD-444E-4087-AAF7-6D490A6AE8ED/d:Views/d:Shared/f:_masterpage.cshtml" caret="1505" fromTop="21" />
+    <File id="525225FD-444E-4087-AAF7-6D490A6AE8ED/d:Views/d:Shared/f:Site.Master" caret="2098" fromTop="22" />
+    <File id="525225FD-444E-4087-AAF7-6D490A6AE8ED/d:Models/f:Hospital.cs" caret="568" fromTop="22" />
+    <File id="525225FD-444E-4087-AAF7-6D490A6AE8ED/d:Controllers/f:HomeController.cs" caret="9105" fromTop="16" />
   </RecentEdits>
 </RecentFiles>

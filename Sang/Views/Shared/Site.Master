@@ -43,7 +43,7 @@
             <div class="menus">
                 <a href="../../#news">Newsletter</a></div>
             <div class="menus">
-                <%=Html.ActionLink("Aviso de privacidad","AvisoPrivacidad","Home") %></div>
+                <a href="../../#aviso">Aviso de privacidad</a></div>
             <div class="menubtn">
                 <a href="#">
                     <img width="20" height="20" title="Síguenos en Facebook" style="border: none; margin-left: 10px;"

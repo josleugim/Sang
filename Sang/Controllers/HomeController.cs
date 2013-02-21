@@ -171,7 +171,7 @@ namespace Sang.Controllers
                 var d7 = Convert.ToInt32(adult.Disorder7);
                 var d8 = Convert.ToInt32(adult.Disorder8);
 
-                //Generar resultados en pdf
+                //Generar resultados en pdf del Vale
 
                 //Si 1, 2, 3, 4, 5 es mayor de 40 o 7 > 9 = tiene problemas y
                 //Si tiene problemas cardiacos = pase al doctor
@@ -197,14 +197,7 @@ namespace Sang.Controllers
                         adult.CouponNumber = users.tempWarranty + randomN + client.SangClientID;
                         adult.CouponUrl = "../../Content/Documents/" + adult.CouponNumber + ".pdf";
                         _db.SaveChanges();
-                        //var coupon = new Coupon();
-                        //coupon.SangUserId = id;
-                        //coupon.SangUser = users;
-                        //coupon.CouponNumber = users.tempWarranty + randomN + client.SangClientID;
-                        //coupon.RegisterDate = DateTime.Now;
-                        //coupon.CouponURL = "../../Content/Documents/" + coupon.CouponNumber + ".pdf";
-                        //_db.Coupons.Add(coupon);
-                        //_db.SaveChanges();
+
 
                         var doc = new Document(PageSize.A4);
                         var output = new FileStream(Server.MapPath("../../Content/Documents/" + adult.CouponNumber + ".pdf"), FileMode.Create);
@@ -216,7 +209,7 @@ namespace Sang.Controllers
                         var logoVale = Image.GetInstance(Server.MapPath("../../Content/images/Logo-vale.jpg"));
                         var logoSang = Image.GetInstance(Server.MapPath("../../Content/images/logo-sang.jpg"));
                         var sleepImage = Image.GetInstance(Server.MapPath("../../Content/images/sleep-image.jpg"));
-                        var info = Image.GetInstance(Server.MapPath("../../Content/images/informes.jpg"));
+                        //var info = Image.GetInstance(Server.MapPath("../../Content/images/informes.jpg"));
 
                         var table = new PdfPTable(2);
 
@@ -232,12 +225,12 @@ namespace Sang.Controllers
                         var cellLogoSang = new PdfPCell(logoSang, false) { HorizontalAlignment = 1 };
                         table.AddCell(cellLogoSang);
 
-                        var cellCategoria =
-                            new PdfPCell(new Phrase("No. Vale: " + adult.CouponNumber,
+                        var cellAgendar =
+                            new PdfPCell(new Phrase("Para agendar una cita o si requiere informes: " + adult.CouponNumber,
                                                     new Font(Font.FontFamily.HELVETICA, 8f, Font.NORMAL, BaseColor.WHITE)));
-                        cellCategoria.BackgroundColor = new BaseColor(0, 0, 0);
-                        cellCategoria.HorizontalAlignment = 2;
-                        table.AddCell(cellCategoria);
+                        cellAgendar.BackgroundColor = new BaseColor(0, 0, 0);
+                        cellAgendar.HorizontalAlignment = 2;
+                        table.AddCell(cellAgendar);
 
                         var cellSleepImage = new PdfPCell(sleepImage, true) { HorizontalAlignment = 1 };
                         table.AddCell(cellSleepImage);
@@ -245,8 +238,14 @@ namespace Sang.Controllers
                         var cellNombreCompleto = new PdfPCell(new Phrase(client.CompleteName, new Font(Font.FontFamily.HELVETICA, 11f, Font.NORMAL, BaseColor.WHITE))) { HorizontalAlignment = 1, BackgroundColor = new BaseColor(0, 0, 0) };
                         table.AddCell(cellNombreCompleto);
 
-                        var cellInforme = new PdfPCell(info, true) { HorizontalAlignment = 1 };
-                        table.AddCell(cellInforme);
+                        //var cellInforme = new PdfPCell(info, true) { HorizontalAlignment = 1 };
+                        //table.AddCell(cellInforme);
+                        var cellCategoria =
+                            new PdfPCell(new Phrase("No. Vale: " + adult.CouponNumber,
+                                                    new Font(Font.FontFamily.HELVETICA, 8f, Font.NORMAL, BaseColor.WHITE)));
+                        cellCategoria.BackgroundColor = new BaseColor(0, 0, 0);
+                        cellCategoria.HorizontalAlignment = 2;
+                        table.AddCell(cellCategoria);
 
                         var cellAddress = new PdfPCell(new Phrase(hosp.HospitalAddress, new Font(Font.FontFamily.HELVETICA, 8f, Font.NORMAL, BaseColor.WHITE))) { HorizontalAlignment = 0, BackgroundColor = new BaseColor(0, 0, 0) };
                         table.AddCell(cellAddress);

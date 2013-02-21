@@ -20,6 +20,8 @@ namespace Sang.Models
 
         public string DoctorName { get; set; }
 
+        public string Phone { get; set; }
+
         public DateTime RegisterDate { get; set; }
     }
 }
