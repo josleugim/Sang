@@ -1,14 +1,14 @@
 use sangdbadmin
 go
 
---INSERT INTO Hospitals(HospitalName, HospitalAddress, HospitalLogo, DoctorName, RegisterDate)
---Values('Hospital ABC, México, D.F.', 'Tel. (55) 1664-7100 y 04 Centro Médico ABC, Santa Fe, México D.F.', '../../Content/images/ABC.jpg', '../../Content/images/DrABC.jpg', getdate())
---INSERT INTO Hospitals(HospitalName, HospitalAddress, HospitalLogo, DoctorName, RegisterDate)
---Values('Hospital Angeles Pedregal, D.F.', 'Clínica del Sueño de la Clínica de Neurofisiología, Hospital Ángeles del pedegral, Consultorio 151. Camino a Santa Teresa 1055, Col. Héroes de Padierna, México, D.F., C.P. 10700. uniner@gmail.com', '../../Content/images/Hospital-Angeles.jpg', '../../Content/images/DrAngeles.jpg', getdate())
---INSERT INTO Hospitals(HospitalName, HospitalAddress, HospitalLogo, DoctorName, RegisterDate)
---Values('Hospital Español, México, D.F.','Clínica del Sueño del Laboratorio de Neurofisiología Clínica del Hospital Español. Tel. (55) 5254-0909 Hospital Español. Ejército Nacional 613 PB, Col. Granada, México D.F.', '../../Content/images/Hospital-Espanol.jpg', '../../Content/images/DrEspanol.jpg', getdate())
---INSERT INTO Hospitals(HospitalName, HospitalAddress, HospitalLogo, DoctorName, RegisterDate)
---Values('Clínica del Ronquido y Apnea del Sueño, Guadalajara, Jal.', 'Torre de especialidades del Hospital Ángeles del Carmen. Tel. (33) 3648-3466 Tarascos 3473, piso 8, int. 830, Fracc. Monraz, Guadalajara Jal. www.ronquido.mx', '../../Content/images/Guadalajara.jpg', '../../Content/images/DrGuadalajara.jpg', getdate())
+--INSERT INTO Hospitals(HospitalName, HospitalAddress, HospitalLogo, DoctorName, Phone, RegisterDate)
+--Values('Hospital ABC, México, D.F.', 'Centro Médico ABC, Santa Fe, México D.F.', '../../Content/images/ABC.jpg', '../../Content/images/DrABC.jpg', 'Tel. (55) 1664-7100 y 04', getdate())
+--INSERT INTO Hospitals(HospitalName, HospitalAddress, HospitalLogo, DoctorName, Phone, RegisterDate)
+--Values('Hospital Angeles Pedregal, D.F.', 'Clínica del Sueño de la Clínica de Neurofisiología, Hospital Ángeles del pedegral, Consultorio 151. Camino a Santa Teresa 1055, Col. Héroes de Padierna, México, D.F., C.P. 10700. uniner@gmail.com', '../../Content/images/Hospital-Angeles.jpg', '../../Content/images/DrAngeles.jpg', '', getdate())
+--INSERT INTO Hospitals(HospitalName, HospitalAddress, HospitalLogo, DoctorName, Phone, RegisterDate)
+--Values('Hospital Español, México, D.F.','Clínica del Sueño del Laboratorio de Neurofisiología Clínica del Hospital Español. Ejército Nacional 613 PB, Col. Granada, México D.F.', '../../Content/images/Hospital-Espanol.jpg', '../../Content/images/DrEspanol.jpg', 'Tel. (55) 5254-0909 Hospital Español.', getdate())
+--INSERT INTO Hospitals(HospitalName, HospitalAddress, HospitalLogo, DoctorName, Phone, RegisterDate)
+--Values('Clínica del Ronquido y Apnea del Sueño, Guadalajara, Jal.', 'Torre de especialidades del Hospital Ángeles del Carmen. Tarascos 3473, piso 8, int. 830, Fracc. Monraz, Guadalajara Jal. www.ronquido.mx', '../../Content/images/Guadalajara.jpg', '../../Content/images/DrGuadalajara.jpg', 'Tel. (33) 3648-3466', getdate())
 
 select * from Hospitals
 
@@ -38,12 +38,12 @@ select * from Hospitals
 --Update SangClients
 --Set Email = 'xxxx'
 --Where WarrantyID = 2
-INSERT INTO SangUsers(Email, Pass, SecureCode, IsActived, RegisterDate)
-Values('abc@sang.mx', '123456', '8251634F-3C9C-45EC-9629-F563F93B14A0', 1, getdate())
+--INSERT INTO SangUsers(Email, Pass, SecureCode, IsActived, RegisterDate)
+--Values('abc@sang.mx', '123456', '8251634F-3C9C-45EC-9629-F563F93B14A0', 1, getdate())
 
-update SangUsers
-set Pass = CONVERT(VARCHAR(32), HashBytes('MD5', '123456'), 2)
-Where SangUserID = 13
+--update SangUsers
+--set Pass = CONVERT(VARCHAR(32), HashBytes('MD5', '123456'), 2)
+--Where SangUserID = 13
 
 --update SangUsers
 --set IsActived = 1
@@ -76,4 +76,4 @@ Select * from Coupons
 --drop table Purchases
 
 INSERT INTO Warranties(SangClientId,WarrantyCode, NAttempts, IsActived, ExpirationDate, RegisterDate)
-Values(null,'TEST0005',0,1,getdate(),getdate())
+Values(null,'TEST0006',0,1,getdate(),getdate())

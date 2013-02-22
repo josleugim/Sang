@@ -1,6 +1,5 @@
 ﻿<RecentFiles>
   <RecentFiles>
-    <File id="525225FD-444E-4087-AAF7-6D490A6AE8ED/d:Views/d:Coupon/f:Index.cshtml" caret="367" fromTop="25" />
     <File id="525225FD-444E-4087-AAF7-6D490A6AE8ED/d:Models/f:SangDBContext.cs" caret="345" fromTop="13" />
     <File id="525225FD-444E-4087-AAF7-6D490A6AE8ED/f:Global.asax.cs" caret="1224" fromTop="35" />
     <File id="525225FD-444E-4087-AAF7-6D490A6AE8ED/d:Views/d:Home/f:ThanksAdult.aspx" caret="322" fromTop="6" />
@@ -14,8 +13,6 @@
     <File id="525225FD-444E-4087-AAF7-6D490A6AE8ED/d:Views/d:Home/f:ThanksAssits.cshtml" caret="136" fromTop="5" />
     <File id="525225FD-444E-4087-AAF7-6D490A6AE8ED/d:sangDev/f:Index.html" caret="227" fromTop="6" />
     <File id="525225FD-444E-4087-AAF7-6D490A6AE8ED/f:Web.config" caret="4534" fromTop="28" />
-    <File id="525225FD-444E-4087-AAF7-6D490A6AE8ED/d:Views/d:Home/f:AdultResult.aspx" caret="8052" fromTop="16" />
-    <File id="525225FD-444E-4087-AAF7-6D490A6AE8ED/d:Controllers/f:AccountController.cs" caret="6659" fromTop="33" />
     <File id="525225FD-444E-4087-AAF7-6D490A6AE8ED/d:Models/f:AccountModels.cs" caret="1727" fromTop="16" />
     <File id="525225FD-444E-4087-AAF7-6D490A6AE8ED/d:Views/d:Client/f:Create.cshtml" caret="3829" fromTop="29" />
     <File id="525225FD-444E-4087-AAF7-6D490A6AE8ED/d:Views/d:Purchase/f:Create.cshtml" caret="0" fromTop="0" />
@@ -29,7 +26,10 @@
     <File id="525225FD-444E-4087-AAF7-6D490A6AE8ED/d:Views/d:Shared/f:_masterpage.cshtml" caret="1526" fromTop="21" />
     <File id="525225FD-444E-4087-AAF7-6D490A6AE8ED/d:Models/f:Hospital.cs" caret="568" fromTop="22" />
     <File id="525225FD-444E-4087-AAF7-6D490A6AE8ED/d:Controllers/f:ClientController.cs" caret="662" fromTop="3" />
-    <File id="525225FD-444E-4087-AAF7-6D490A6AE8ED/d:Controllers/f:HomeController.cs" caret="7591" fromTop="34" />
+    <File id="525225FD-444E-4087-AAF7-6D490A6AE8ED/d:Views/d:Home/f:AdultResult.aspx" caret="763" fromTop="13" />
+    <File id="525225FD-444E-4087-AAF7-6D490A6AE8ED/d:Controllers/f:AccountController.cs" caret="6659" fromTop="33" />
+    <File id="525225FD-444E-4087-AAF7-6D490A6AE8ED/d:Controllers/f:HomeController.cs" caret="1688" fromTop="19" />
+    <File id="525225FD-444E-4087-AAF7-6D490A6AE8ED/d:Views/d:Child/f:Edit.cshtml" caret="7382" fromTop="23" />
   </RecentFiles>
   <RecentEdits>
     <File id="525225FD-444E-4087-AAF7-6D490A6AE8ED/d:Views/d:Client/f:Thanks.cshtml" caret="321" fromTop="9" />
@@ -59,5 +59,6 @@
     <File id="525225FD-444E-4087-AAF7-6D490A6AE8ED/d:Views/d:Shared/f:Site.Master" caret="2098" fromTop="22" />
     <File id="525225FD-444E-4087-AAF7-6D490A6AE8ED/d:Models/f:Hospital.cs" caret="568" fromTop="22" />
     <File id="525225FD-444E-4087-AAF7-6D490A6AE8ED/d:Controllers/f:HomeController.cs" caret="9105" fromTop="16" />
+    <File id="525225FD-444E-4087-AAF7-6D490A6AE8ED/d:Views/d:Child/f:Edit.cshtml" caret="7380" fromTop="26" />
   </RecentEdits>
 </RecentFiles>

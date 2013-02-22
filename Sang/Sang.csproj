@@ -253,7 +253,6 @@
     <Content Include="Content\images\Logo-vale.jpg" />
     <Content Include="Content\images\Logoabc_hospital.jpg" />
     <Content Include="Content\images\Registro.png" />
-    <Content Include="Content\images\ResultadosEvaluacion.jpg" />
     <Content Include="Content\images\sleep-image.jpg" />
     <Content Include="Content\images\Texto1.png" />
     <Content Include="Content\images\Texto2.png" />
@@ -660,6 +659,7 @@
     <Content Include="Content\js\xero.forms.js" />
     <Content Include="Content\js\_notes\dwsync.xml" />
     <Content Include="Content\images\logo-sang.jpg" />
+    <Content Include="Content\images\ResultadosEvaluacion.jpg" />
     <Content Include="Content\sliding.form.js" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
@@ -713,9 +713,7 @@
     <Content Include="Views\Home\AdultCuestionary.aspx" />
     <Content Include="Views\Home\AdultResult.aspx" />
     <Content Include="Views\Home\AlreadyEmailRegister.aspx" />
-    <Content Include="Views\Home\ChildDiagnosis.aspx" />
     <Content Include="Views\Home\ChildResult.aspx" />
-    <Content Include="Views\Home\CuestionaryChild.aspx" />
     <Content Include="Views\Home\EmailExist.aspx" />
     <Content Include="Views\Home\ErrorEmailRegister.aspx" />
     <Content Include="Views\Home\Index.aspx" />
