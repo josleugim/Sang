@@ -167,7 +167,7 @@ namespace Sang.Controllers
 
                     table.SetTotalWidth(widths);
 
-                    var cellLogoVale = new PdfPCell(logoVale, false) { Rowspan = 6, HorizontalAlignment = 1 };
+                    var cellLogoVale = new PdfPCell(logoVale, false) { Rowspan = 8, HorizontalAlignment = 1 };
                     table.AddCell(cellLogoVale);
 
                     var cellLogoSang = new PdfPCell(logoSang, false) { HorizontalAlignment = 1 };
@@ -186,11 +186,41 @@ namespace Sang.Controllers
                     var cellNombreCompleto = new PdfPCell(new Phrase(sangchild.CompleteName, new Font(Font.FontFamily.HELVETICA, 11f, Font.NORMAL, BaseColor.WHITE))) { HorizontalAlignment = 1, BackgroundColor = new BaseColor(0, 0, 0) };
                     table.AddCell(cellNombreCompleto);
 
-                    var cellInforme = new PdfPCell(info, true) { HorizontalAlignment = 1 };
-                    table.AddCell(cellInforme);
+                    var cellAgendar =
+                            new PdfPCell(new Phrase("Para agendar una cita o si requiere informes:",
+                                                    new Font(Font.FontFamily.HELVETICA, 8f, Font.NORMAL, BaseColor.WHITE)));
+                    cellAgendar.BackgroundColor = new BaseColor(0, 0, 0);
+                    cellAgendar.HorizontalAlignment = 0;
+                    table.AddCell(cellAgendar);
 
-                    var cellAddress = new PdfPCell(new Phrase(hosp.HospitalAddress, new Font(Font.FontFamily.HELVETICA, 8f, Font.NORMAL, BaseColor.WHITE))) { HorizontalAlignment = 0, BackgroundColor = new BaseColor(0, 0, 0) };
+                    var cellPhone = new PdfPCell(new Phrase(hosp.Phone, new Font(Font.FontFamily.HELVETICA, 11f, Font.NORMAL, BaseColor.WHITE))) { HorizontalAlignment = 0, BackgroundColor = new BaseColor(0, 0, 0) };
+                    table.AddCell(cellPhone);
+
+                    var cellAdrressLabel =
+                        new PdfPCell(new Phrase("La dirección de la clínica es:",
+                                                new Font(Font.FontFamily.HELVETICA, 8f, Font.NORMAL, BaseColor.WHITE)));
+                    cellAdrressLabel.BackgroundColor = new BaseColor(0, 0, 0);
+                    cellAdrressLabel.HorizontalAlignment = 0;
+                    table.AddCell(cellAdrressLabel);
+
+                    var cellAddress = new PdfPCell(new Phrase(hosp.HospitalAddress, new Font(Font.FontFamily.HELVETICA, 11f, Font.NORMAL, BaseColor.WHITE))) { HorizontalAlignment = 0, BackgroundColor = new BaseColor(0, 0, 0) };
                     table.AddCell(cellAddress);
+
+                    var cellPD =
+                    new PdfPCell(new Phrase("* El estudio requiere que vaya a la clínica del sueño asignada en el vale para que recoja la máquina que realizará el Sleep Image.",
+                                            new Font(Font.FontFamily.HELVETICA, 7f, Font.NORMAL, BaseColor.WHITE)));
+                    cellPD.BackgroundColor = new BaseColor(0, 0, 0);
+                    cellPD.HorizontalAlignment = 0;
+                    cellPD.Colspan = 2;
+                    table.AddCell(cellPD);
+
+                    var cellPD2 =
+                        new PdfPCell(new Phrase("En la clínica le mostraran comó usar la máquina y deberá regresarla al día siguiente.",
+                                                new Font(Font.FontFamily.HELVETICA, 7f, Font.NORMAL, BaseColor.WHITE)));
+                    cellPD2.BackgroundColor = new BaseColor(0, 0, 0);
+                    cellPD2.HorizontalAlignment = 0;
+                    cellPD2.Colspan = 2;
+                    table.AddCell(cellPD2);
 
                     doc.Add(table);
 

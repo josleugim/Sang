@@ -10,7 +10,7 @@
     @using (Html.BeginForm("CouponSearch", "Home", FormMethod.Post))
     {
         <p>
-            @Html.TextBox("coupon", null, new { style = "background-color: black; border: 1px solid #2F2F2F; color: white; height:25px; font-size: 16px; text-align: center" })
+            @Html.TextBox("coupon", null, new { style = "background-color: black; border: 1px solid white; color: white; height:25px; font-size: 16px; text-align: center" })
             <input type="submit" value="buscar" />
         </p>
         
@@ -41,6 +41,9 @@
                     </td>
                 </tr>
                 <tr>
+                    <td>
+                        <p>Resultado del exámen @Html.DropDownList("Result")</p>
+                    </td>
                     <td>
                         <p>
                             @Html.TextBox("identificador", item.SangClientID, new { style = "visibility: hidden" })

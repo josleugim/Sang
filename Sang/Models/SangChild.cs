@@ -42,6 +42,9 @@ namespace Sang.Models
         [DisplayName("Sleeping Image result")]
         public string SleepingImageUrl { get; set; }
 
+        [DisplayName("Resultado de la evaluación")]
+        public string SleepingImageResult { get; set; }
+
         [DisplayName("Sleeping Image Activo")]
         public bool SleepingImageIsActived { get; set; }
 

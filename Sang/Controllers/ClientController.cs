@@ -96,9 +96,14 @@ namespace Sang.Controllers
                     warranty.SangClient = sangclient;
                     _db.SaveChanges();
                 }
-                
 
-                return RedirectToAction("Create", "Purchase", new { id = warranty.WarrantyCode });
+                var purchase = _db.Purchase.FirstOrDefault(c => c.WarrantyId.Equals(warranty.WarrantyID));
+                if (purchase == null)
+                    return RedirectToAction("Create", "Purchase", new { id = warranty.WarrantyCode });
+                if (sangclient.IsUser)
+                    return RedirectToAction("AdultCuestionary", "Home", new {id = sangclient.SangClientID});
+
+                return RedirectToAction("Introduction", "Home");
             }
 
             var n = new List<int> { 1, 2 };

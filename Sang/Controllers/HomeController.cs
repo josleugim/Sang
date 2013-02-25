@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web;
@@ -29,6 +30,9 @@ namespace Sang.Controllers
                 if (Request.HttpMethod == "POST")
                 {
                     //var infoMayor = _db.SangClients.FirstOrDefault(c => c.CouponNumber.Equals(coupon));
+                    var res = new List<string> { "Bueno", "Malo" };
+                    ViewBag.Result = new SelectList(res);
+
                     if (infoMayor.Count() != 0)
                         return View(infoMayor);
 
@@ -52,6 +56,9 @@ namespace Sang.Controllers
         {
             ViewBag.Message = "Introducción";
 
+            if (User.Identity.Name == "abc@sang.mx" || User.Identity.Name == "angeles@sang.mx")
+                return RedirectToAction("CouponSearch", "Home");
+
             var nCuentas = 0;
             var users = _db.SangUsers.FirstOrDefault(c => c.Email.Equals(User.Identity.Name));
             var client =
@@ -73,6 +80,7 @@ namespace Sang.Controllers
                 nCuentas = nClient.Count() + nChildren.Count();
             }
 
+            /////////////////////////////////////////POST
             if (Request.HttpMethod == "POST")
             {
                 if (menorEdad == "Si")
@@ -85,20 +93,22 @@ namespace Sang.Controllers
 
                 if (menorEdad == "No")
                 {
-                    if (Convert.ToInt32(nCuentas) >= 2)
+                    if (Convert.ToInt32(nCuentas) >= 3)
                     {
                         if (client != null && client.Disorder1 == null)
                             return RedirectToAction("AdultCuestionary", new { id = client.SangClientID });
 
                         return View("ThanksAdult");
                     }
-
-                    if (client != null && client.Disorder1 == null)
+                    //Solo si el usuario usa el colchón y no contesto la prueba
+                    if (client != null && client.Disorder1 == null && client.IsUser)
                         return RedirectToAction("AdultCuestionary", new { id = client.SangClientID });
 
                     return RedirectToAction("Create", "Client");
                 }
             }
+            ////////////////POST
+
 
             if (nCuentas == 0)
                 return RedirectToAction("Create", "Client");
@@ -106,28 +116,44 @@ namespace Sang.Controllers
             {
                 if (client != null && client.nMattressUsers == 2)
                 {
-                    if (client.Disorder1 == null)
+                    if (client.Disorder1 == null && client.IsUser)
                         return RedirectToAction("AdultCuestionary", new { id = client.SangClientID });
                 }
 
                 if (client != null && (client.Disorder1 == null && client.nMattressUsers == 1))
                     return View("ThanksAdult");
+
+                if (client != null)
+                {
+                    var child = _db.SangChildren.Where(ch => ch.SangClientId == client.SangClientID)
+                .OrderByDescending(o => o.SangChildID)
+                .FirstOrDefault();
+                    if (child != null && child.CuestionaryResult == null)
+                        return RedirectToAction("Edit", "Child", new { id = child.SangChildID });
+                }
             }
+
+            if (nCuentas == 3)
+                return View("ThanksAdult");
+
             //Validar que la garantía este registrada
             var warranty = _db.Warranties.FirstOrDefault(c => c.WarrantyCode.Equals(users.tempWarranty));
             var purchase = _db.Purchase.FirstOrDefault(c => c.WarrantyId.Equals(warranty.WarrantyID));
             if (purchase == null)
-                return RedirectToAction("Create", "Purchase", new {id = warranty.WarrantyCode});
+                return RedirectToAction("Create", "Purchase", new { id = warranty.WarrantyCode });
 
             return View();
         }
 
-        public ActionResult ChildResult(int result, SangChild child)
+        public ActionResult ChildResult(int id)
         {
-            ViewData["waranty"] = result * 10;
-            if (result < 20)
+            var child = _db.SangChildren.FirstOrDefault(a => a.SangChildID.Equals(id));
+
+            ViewData["waranty"] = Convert.ToInt32(child.CuestionaryResult) * 10;
+
+            if (Convert.ToInt32(child.CuestionaryResult) < 20)
                 ViewData["Sugest"] = "El resultado de Grado de Somnolencia Epworth para menores de edad se encuentra dentro de los limites normales, por lo que por el momento no requiere apoyo especializado, si considera que es importante la valoración de un especialista, por favor imprima éste estudio y programe una cita en una de las Clínicas del Sueño cuyos datos se encuentran en los panfletos que venían dentro del folleto de su producto säng y al hacerlo por favor mencione el resultado obtenido a través del portal säng.";
-            if (result >= 20)
+            if (Convert.ToInt32(child.CuestionaryResult) >= 20)
                 ViewData["Sugest"] = "El resultado de Grado de Somnolencia Epworth para menores de edad no se encuentra dentro de límites normales. Lo que sugiere la presencia de un trastorno de sueño, por lo que le sugerimos realizar el Estudio de Calidad del Sueño (Sleep Image).";
 
             return View();
@@ -219,18 +245,19 @@ namespace Sang.Controllers
 
                         table.SetTotalWidth(widths);
 
-                        var cellLogoVale = new PdfPCell(logoVale, false) { Rowspan = 6, HorizontalAlignment = 1 };
+                        var cellLogoVale = new PdfPCell(logoVale, false) { Rowspan = 8, HorizontalAlignment = 1 };
                         table.AddCell(cellLogoVale);
 
                         var cellLogoSang = new PdfPCell(logoSang, false) { HorizontalAlignment = 1 };
                         table.AddCell(cellLogoSang);
 
-                        var cellAgendar =
-                            new PdfPCell(new Phrase("Para agendar una cita o si requiere informes: " + adult.CouponNumber,
+                        var cellCategoria =
+                            new PdfPCell(new Phrase("No. Vale: " + adult.CouponNumber,
                                                     new Font(Font.FontFamily.HELVETICA, 8f, Font.NORMAL, BaseColor.WHITE)));
-                        cellAgendar.BackgroundColor = new BaseColor(0, 0, 0);
-                        cellAgendar.HorizontalAlignment = 2;
-                        table.AddCell(cellAgendar);
+                        cellCategoria.BackgroundColor = new BaseColor(0, 0, 0);
+                        cellCategoria.HorizontalAlignment = 2;
+                        table.AddCell(cellCategoria);
+
 
                         var cellSleepImage = new PdfPCell(sleepImage, true) { HorizontalAlignment = 1 };
                         table.AddCell(cellSleepImage);
@@ -240,15 +267,41 @@ namespace Sang.Controllers
 
                         //var cellInforme = new PdfPCell(info, true) { HorizontalAlignment = 1 };
                         //table.AddCell(cellInforme);
-                        var cellCategoria =
-                            new PdfPCell(new Phrase("No. Vale: " + adult.CouponNumber,
+                        var cellAgendar =
+                            new PdfPCell(new Phrase("Para agendar una cita o si requiere informes:",
                                                     new Font(Font.FontFamily.HELVETICA, 8f, Font.NORMAL, BaseColor.WHITE)));
-                        cellCategoria.BackgroundColor = new BaseColor(0, 0, 0);
-                        cellCategoria.HorizontalAlignment = 2;
-                        table.AddCell(cellCategoria);
+                        cellAgendar.BackgroundColor = new BaseColor(0, 0, 0);
+                        cellAgendar.HorizontalAlignment = 0;
+                        table.AddCell(cellAgendar);
 
-                        var cellAddress = new PdfPCell(new Phrase(hosp.HospitalAddress, new Font(Font.FontFamily.HELVETICA, 8f, Font.NORMAL, BaseColor.WHITE))) { HorizontalAlignment = 0, BackgroundColor = new BaseColor(0, 0, 0) };
+                        var cellPhone = new PdfPCell(new Phrase(hosp.Phone, new Font(Font.FontFamily.HELVETICA, 11f, Font.NORMAL, BaseColor.WHITE))) { HorizontalAlignment = 0, BackgroundColor = new BaseColor(0, 0, 0) };
+                        table.AddCell(cellPhone);
+
+                        var cellAdrressLabel =
+                            new PdfPCell(new Phrase("La dirección de la clínica es:",
+                                                    new Font(Font.FontFamily.HELVETICA, 8f, Font.NORMAL, BaseColor.WHITE)));
+                        cellAdrressLabel.BackgroundColor = new BaseColor(0, 0, 0);
+                        cellAdrressLabel.HorizontalAlignment = 0;
+                        table.AddCell(cellAdrressLabel);
+
+                        var cellAddress = new PdfPCell(new Phrase(hosp.HospitalAddress, new Font(Font.FontFamily.HELVETICA, 11f, Font.NORMAL, BaseColor.WHITE))) { HorizontalAlignment = 0, BackgroundColor = new BaseColor(0, 0, 0) };
                         table.AddCell(cellAddress);
+
+                        var cellPD =
+                        new PdfPCell(new Phrase("* El estudio requiere que vaya a la clínica del sueño asignada en el vale para que recoja la máquina que realizará el Sleep Image.",
+                                                new Font(Font.FontFamily.HELVETICA, 7f, Font.NORMAL, BaseColor.WHITE)));
+                        cellPD.BackgroundColor = new BaseColor(0, 0, 0);
+                        cellPD.HorizontalAlignment = 0;
+                        cellPD.Colspan = 2;
+                        table.AddCell(cellPD);
+
+                        var cellPD2 =
+                            new PdfPCell(new Phrase("En la clínica le mostraran comó usar la máquina y deberá regresarla al día siguiente.",
+                                                    new Font(Font.FontFamily.HELVETICA, 7f, Font.NORMAL, BaseColor.WHITE)));
+                        cellPD2.BackgroundColor = new BaseColor(0, 0, 0);
+                        cellPD2.HorizontalAlignment = 0;
+                        cellPD2.Colspan = 2;
+                        table.AddCell(cellPD2);
 
                         doc.Add(table);
 
@@ -287,8 +340,8 @@ namespace Sang.Controllers
 
                     var logoVale = Image.GetInstance(Server.MapPath("../../Content/images/Logo-vale.jpg"));
                     var logoSang = Image.GetInstance(Server.MapPath("../../Content/images/logo-sang.jpg"));
-                    var sleepImage = Image.GetInstance(Server.MapPath("../../Content/images/vale-consulta.jpg"));
-                    var info = Image.GetInstance(Server.MapPath("../../Content/images/informes.jpg"));
+                    var consulta = Image.GetInstance(Server.MapPath("../../Content/images/vale-consulta.jpg"));
+                    //var info = Image.GetInstance(Server.MapPath("../../Content/images/informes.jpg"));
 
                     var table = new PdfPTable(2);
 
@@ -298,7 +351,7 @@ namespace Sang.Controllers
 
                     table.SetTotalWidth(widths);
 
-                    var cellLogoVale = new PdfPCell(logoVale, false) { Rowspan = 6, HorizontalAlignment = 1 };
+                    var cellLogoVale = new PdfPCell(logoVale, false) { Rowspan = 8, HorizontalAlignment = 1 };
                     table.AddCell(cellLogoVale);
 
                     var cellLogoSang = new PdfPCell(logoSang, false) { HorizontalAlignment = 1 };
@@ -311,16 +364,33 @@ namespace Sang.Controllers
                     cellCategoria.HorizontalAlignment = 2;
                     table.AddCell(cellCategoria);
 
-                    var cellSleepImage = new PdfPCell(sleepImage, true) { HorizontalAlignment = 1 };
+                    var cellSleepImage = new PdfPCell(consulta, true) { HorizontalAlignment = 1 };
                     table.AddCell(cellSleepImage);
 
                     var cellNombreCompleto = new PdfPCell(new Phrase(client.CompleteName, new Font(Font.FontFamily.HELVETICA, 11f, Font.NORMAL, BaseColor.WHITE))) { HorizontalAlignment = 1, BackgroundColor = new BaseColor(0, 0, 0) };
                     table.AddCell(cellNombreCompleto);
 
-                    var cellInforme = new PdfPCell(info, true) { HorizontalAlignment = 1 };
-                    table.AddCell(cellInforme);
+                    //var cellInforme = new PdfPCell(info, true) { HorizontalAlignment = 1 };
+                    //table.AddCell(cellInforme);
 
-                    var cellAddress = new PdfPCell(new Phrase(hosp.HospitalAddress, new Font(Font.FontFamily.HELVETICA, 8f, Font.NORMAL, BaseColor.WHITE))) { HorizontalAlignment = 0, BackgroundColor = new BaseColor(0, 0, 0) };
+                    var cellAgendar =
+                            new PdfPCell(new Phrase("Para agendar una cita o si requiere informes:",
+                                                    new Font(Font.FontFamily.HELVETICA, 8f, Font.NORMAL, BaseColor.WHITE)));
+                    cellAgendar.BackgroundColor = new BaseColor(0, 0, 0);
+                    cellAgendar.HorizontalAlignment = 0;
+                    table.AddCell(cellAgendar);
+
+                    var cellPhone = new PdfPCell(new Phrase(hosp.Phone, new Font(Font.FontFamily.HELVETICA, 11f, Font.NORMAL, BaseColor.WHITE))) { HorizontalAlignment = 0, BackgroundColor = new BaseColor(0, 0, 0) };
+                    table.AddCell(cellPhone);
+
+                    var cellAdrressLabel =
+                        new PdfPCell(new Phrase("La dirección de la clínica es:",
+                                                new Font(Font.FontFamily.HELVETICA, 8f, Font.NORMAL, BaseColor.WHITE)));
+                    cellAdrressLabel.BackgroundColor = new BaseColor(0, 0, 0);
+                    cellAdrressLabel.HorizontalAlignment = 0;
+                    table.AddCell(cellAdrressLabel);
+
+                    var cellAddress = new PdfPCell(new Phrase(hosp.HospitalAddress, new Font(Font.FontFamily.HELVETICA, 11f, Font.NORMAL, BaseColor.WHITE))) { HorizontalAlignment = 0, BackgroundColor = new BaseColor(0, 0, 0) };
                     table.AddCell(cellAddress);
 
                     doc.Add(table);
@@ -348,41 +418,46 @@ namespace Sang.Controllers
             return View();
         }
 
-        public ActionResult AdultResult(int id, int d1, int d2, int d3, int d4, int d5, int d7, int d8)
+        public ActionResult AdultResult(int id)
         {
-            var adult = _db.SangClients.FirstOrDefault(a => a.SangClientID.Equals(id));
             
-            //Scale 1 x 4
-            ViewData["d1"] = d1 * 4;
-            ViewData["d2"] = d2 * 4;
-            ViewData["d3"] = d3 * 4;
-            ViewData["d5"] = d5 * 4;
-
-            ViewData["d4High"] = "yes";
-            ViewData["d4Low"] = "yes";
-            if (d4 <= 40)
-                ViewData["d4High"] = "hidden";
-            else
-                ViewData["d4Low"] = "hidden";
-
-            //Scale 1 x 20
-            ViewData["d7"] = d7 * 20;
-
-            if (d8 == 100)
-                ViewData["d8Low"] = "hidden";
-            else
-                ViewData["d8High"] = "hidden";
-
+            var adult = _db.SangClients.FirstOrDefault(a => a.SangClientID.Equals(id));
             if (adult != null)
             {
-                ViewData["CouponOk"] = "Ver vale";
-                ViewData["Coupon"] = adult.CouponUrl;
+                //Scale 1 x 4
+                ViewData["d1"] = Convert.ToInt32(adult.Disorder1) * 4;
+                ViewData["d2"] = Convert.ToInt32(adult.Disorder2) * 4;
+                ViewData["d3"] = Convert.ToInt32(adult.Disorder3) * 4;
+                ViewData["d5"] = Convert.ToInt32(adult.Disorder5) * 4;
+
+                ViewData["d4High"] = "yes";
+                ViewData["d4Low"] = "yes";
+                if (Convert.ToInt32(adult.Disorder4) <= 40)
+                    ViewData["d4High"] = "hidden";
+                else
+                    ViewData["d4Low"] = "hidden";
+
+                //Scale 1 x 20
+                ViewData["d7"] = Convert.ToInt32(adult.Disorder7) * 20;
+
+                if (Convert.ToInt32(adult.Disorder8) == 100)
+                    ViewData["d8Low"] = "hidden";
+                else
+                    ViewData["d8High"] = "hidden";
+
+                if (adult != null)
+                {
+                    ViewData["CouponOk"] = "Ver vale";
+                    ViewData["Coupon"] = adult.CouponUrl;
+                }
+
+                return View(adult);
             }
 
-            return View(adult);
+            return View("Error");
         }
 
-        public ViewResult SleepingImageMenor(string identificador, HttpPostedFileBase document)
+        public ViewResult SleepingImageMenor(string identificador, HttpPostedFileBase document, string result)
         {
             if (document != null && document.ContentLength != 0)
             {
@@ -390,6 +465,7 @@ namespace Sang.Controllers
                 var reader = new StreamReader(document.InputStream);
                 document.SaveAs(Server.MapPath("/Content/Documents/") + sangchild.SangChildID + document.FileName);
                 UpdateModel(sangchild);
+                sangchild.SleepingImageResult = result;
                 sangchild.SleepingImageUrl = "../../Content/Documents/" + sangchild.SangChildID + document.FileName;
                 _db.SaveChanges();
 
@@ -399,7 +475,7 @@ namespace Sang.Controllers
             return View("Error");
         }
 
-        public ViewResult SleepingImageMayor(string identificador, HttpPostedFileBase document)
+        public ViewResult SleepingImageMayor(string identificador, HttpPostedFileBase document, string result)
         {
             if (document != null && document.ContentLength != 0)
             {
@@ -407,6 +483,7 @@ namespace Sang.Controllers
                 var reader = new StreamReader(document.InputStream);
                 document.SaveAs(Server.MapPath("/Content/Documents/") + sangclient.SangClientID + document.FileName);
                 UpdateModel(sangclient);
+                sangclient.SleepingImageResult = result;
                 sangclient.SleepingImageUrl = "../../Content/Documents/" + sangclient.SangClientID + document.FileName;
                 _db.SaveChanges();
 

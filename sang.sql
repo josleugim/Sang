@@ -47,7 +47,7 @@ select * from Hospitals
 
 --update SangUsers
 --set IsActived = 1
---Where SangUserID = 4
+--Where SangUserID = 8
 
 
 Select * from Warranties
@@ -76,4 +76,4 @@ Select * from Coupons
 --drop table Purchases
 
 INSERT INTO Warranties(SangClientId,WarrantyCode, NAttempts, IsActived, ExpirationDate, RegisterDate)
-Values(null,'TEST0006',0,1,getdate(),getdate())
+Values(null,'TEST02',0,1,getdate(),getdate())

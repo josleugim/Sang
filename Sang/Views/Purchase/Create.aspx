@@ -11,7 +11,7 @@
     </div>
     <div class="cuestionario">
         <% using (Html.BeginForm())
-           { %>
+           {%>
         <%: Html.ValidationSummary(true) %>
         <%: Html.HiddenFor(model => model.WarrantyId) %>
         <img style="margin: 10px" src="../../Content/images/RegistrodeGarantia_small.png"
@@ -26,7 +26,7 @@
                 <td>
                     <%: Html.LabelFor(model => model.BillNumber) %>
                     <strong>*</strong>
-                    <%: Html.ValidationMessageFor(model => model.BillNumber)%>
+                    <%: Html.ValidationMessageFor(model => model.BillNumber) %>
                 </td>
                 <td>
                     <%: Html.LabelFor(model => model.ModelMattress.ModelName) %>
@@ -39,13 +39,13 @@
             </tr>
             <tr>
                 <td>
-                    <%: Html.EditorFor(model => model.BillNumber)%>
+                    <%: Html.EditorFor(model => model.BillNumber) %>
                 </td>
                 <td>
-                    <%: Html.DropDownList("MattressId")%>
+                    <%: Html.DropDownList("MattressId") %>
                 </td>
                 <td>
-                    <%= Html.DropDownList("Size")%>
+                    <%= Html.DropDownList("Size") %>
                 </td>
             </tr>
             <tr>
@@ -57,7 +57,7 @@
             <tr>
                 <td colspan="3">
                     <%--<%: Html.EditorFor(model => model.Store) %>--%>
-                    <%: Html.DropDownList("tienda")%>
+                    <%: Html.DropDownList("tienda") %>
                 </td>
             </tr>
             <tr>
@@ -80,13 +80,13 @@
             </tr>
             <tr>
                 <td colspan="2">
-                    <%: Html.TextBox("calle", null, new { style="width:100%"})%>
+                    <%: Html.TextBox("calle", null, new {style = "width:100%"}) %>
                 </td>
                 <td style="text-align: center">
-                    <%: Html.TextBox("nExt", null, new { style="width:50px"})%>
+                    <%: Html.TextBox("nExt", null, new {style = "width:50px"}) %>
                 </td>
                 <td style="text-align: center">
-                    <%: Html.TextBox("nInt", null, new { style="width:50px"})%>
+                    <%: Html.TextBox("nInt", null, new {style = "width:50px"}) %>
                 </td>
             </tr>
             <tr>
@@ -102,13 +102,13 @@
             </tr>
             <tr>
                 <td>
-                    <%: Html.TextBox("colonia")%>
+                    <%: Html.TextBox("colonia") %>
                 </td>
                 <td>
-                    <%: Html.TextBox("delMuni")%>
+                    <%: Html.TextBox("delMuni") %>
                 </td>
                 <td>
-                    <%: Html.DropDownList("estado")%>
+                    <%: Html.DropDownList("estado") %>
                 </td>
             </tr>
             <tr>
@@ -117,64 +117,23 @@
                 </td>
                 <td rowspan="2">
                     <p>
-                        <u>
+                        <%--<u>
                             <input type="submit" value="Enviar" style="background: transparent; color: White;
                                 border: none; font-weight: lighter; font-size:24px; cursor: pointer" />
-                        </u>
+                        </u>--%>
+                        <input type="image" src="../../Content/images/enviar_btn.png" />
                     </p>
                 </td>
             </tr>
             <tr>
                 <td>
-                    <%: Html.TextBox("cp")%>
+                    <%: Html.TextBox("cp") %>
                 </td>
             </tr>
+            <tr>
+                <td><p style="font-size: 14px">* Campos obligatorios</p></td>
+            </tr>
         </table>
-        <%--<div class="editor-label">
-                <%: Html.LabelFor(model => model.ModelMattress.ModelName) %>
-            </div>
-            <div class="editor-field">
-                <%: Html.DropDownList("MattressId")%>
-                <%: Html.ValidationMessageFor(model => model.ModelMattresstId) %>
-            </div>--%>
-        <%--<div class="editor-label">
-            <%: Html.LabelFor(model => model.WarrantyId) %>
-        </div>
-        <div class="editor-field">
-            <%: Html.EditorFor(model => model.WarrantyId) %>
-            <%: Html.ValidationMessageFor(model => model.WarrantyId) %>
-        </div>--%>
-        <%--<div class="editor-label">
-                <%: Html.LabelFor(model => model.BillNumber) %>
-            </div>
-            <div class="editor-field">
-                <%: Html.EditorFor(model => model.BillNumber) %>
-                <%: Html.ValidationMessageFor(model => model.BillNumber) %>
-            </div>
-            <div class="editor-label">
-                <%: Html.LabelFor(model => model.MattressSize) %>
-            </div>
-            <div class="editor-field">
-                <%= Html.DropDownList("Size")%>
-                <%: Html.ValidationMessageFor(model => model.MattressSize) %>
-            </div>--%>
-        <%--<div class="editor-label">
-                <%: Html.LabelFor(model => model.Store) %>
-            </div>
-            <div class="editor-field">
-                <%: Html.EditorFor(model => model.Store) %>
-                <%: Html.ValidationMessageFor(model => model.Store) %>
-            </div>--%>
-        <%--<div class="editor-label">
-            <%: Html.LabelFor(model => model.RegisterDate) %>
-        </div>
-        <div class="editor-field">
-            <%: Html.EditorFor(model => model.RegisterDate) %>
-            <%: Html.ValidationMessageFor(model => model.RegisterDate) %>
-        </div>--%>
         <% } %>
-        <%--<div>
-            <%: Html.ActionLink("Back to List", "Index") %>
-        </div>--%>
     </div>
 </asp:Content>

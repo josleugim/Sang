@@ -116,6 +116,7 @@
   <ItemGroup>
     <Content Include="Content\css\jquery-ui-1.8.22.custom.css" />
     <Content Include="Content\css\jquery.ui.datepicker.css" />
+    <Content Include="Content\images\enviar_btn.png" />
     <Content Include="Content\images\ABC.jpg" />
     <Content Include="Content\images\Cuestionario.png" />
     <Content Include="Content\images\down_arrow.png" />

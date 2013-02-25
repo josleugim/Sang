@@ -40,6 +40,9 @@ namespace Sang.Models
 
         [DisplayName("Usuarios del colchón")]
         public int? nMattressUsers { get; set; }
+
+        [DisplayName("¿Es usted usuario del colchón?")]
+        public bool IsUser { get; set; }
         
         public int? Disorder1 { get; set; }
         public int? Disorder2 { get; set; }
@@ -100,8 +103,11 @@ namespace Sang.Models
         [DisplayName("Coupon Url")]
         public string CouponUrl { get; set; }
 
-        [DisplayName("Sleeping Image result")]
+        [DisplayName("Archivo con los resultados")]
         public string SleepingImageUrl { get; set; }
+
+        [DisplayName("Resultado de la evaluación")]
+        public string SleepingImageResult { get; set; }
 
         [DisplayName("Sleeping Image Activo")]
         public bool SleepingImageIsActived { get; set; }

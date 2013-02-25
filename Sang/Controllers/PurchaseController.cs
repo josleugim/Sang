@@ -71,7 +71,7 @@ namespace Sang.Controllers
 
                 return View(model);
             }
-            
+
             return RedirectToAction("AdultCuestionary", "Home", warrant.SangClientId);
         }
 
@@ -106,6 +106,9 @@ namespace Sang.Controllers
                 client.ShortState = estado;
                 client.PostalCode = cp;
                 db.SaveChanges();
+
+                if (client.IsUser)
+                    return RedirectToAction("AdultCuestionary", "Home", new {id = client.SangClientID});
 
                 return RedirectToAction("Introduction", "Home");
             }

@@ -1,6 +1,6 @@
 ﻿@model Sang.Models.SangClient
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Registro";
     Layout = "~/Views/Shared/_masterpage.cshtml";
 }
 <script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
@@ -32,7 +32,7 @@
         @Html.ValidationSummary(true)
 
         @Html.HiddenFor(model => model.SangUserId)
-        @*@Html.HiddenFor(model => model.Gender)*@
+@*@Html.HiddenFor(model => model.Gender)*@
     
         <img style="margin: 10px" src="../../Content/images/Registro.png" alt="Imagen" />
         if (ViewBag.nCuentas == 1)
@@ -94,11 +94,10 @@
                     <p>
                         @*@Html.RadioButton("cGender", "Masculino")*@
                         @Html.RadioButtonFor(model => model.Gender, "Masculino")
-                        Masculino
-                        @*@Html.RadioButton("cGender", "Femenino")*@
+                        Masculino @*@Html.RadioButton("cGender", "Femenino")*@
                         @Html.RadioButtonFor(model => model.Gender, "Femenino")
                         Femenino
-                        </p>
+                    </p>
                 </td>
             </tr>
             <tr>
@@ -136,16 +135,14 @@
             </tr>
             <tr>
                 <td>
-                    <p>
-                        @Html.EditorFor(model => model.NewsLetter)
-                        @Html.LabelFor(model => model.NewsLetter)</p>
+                    <p>@Html.EditorFor(model => model.IsUser) @Html.LabelFor(model => model.IsUser) @Html.ValidationMessageFor(model => model.IsUser)</p>
                 </td>
                 <td>
                     @{
         if (ViewBag.nCuentas != 1)
         {
                         <p>
-                            ¿Número de personas que usan el colchon? @Html.DropDownList("nMattress")</p>
+                            ¿Número de personas que usan el colchón? @Html.DropDownList("nMattress")</p>
         }
                     }
                 </td>
@@ -157,22 +154,36 @@
                 </td>
             </tr>
             <tr>
-                <td colspan="2">
+                <td>
+                    <p>
+                        @Html.EditorFor(model => model.NewsLetter)
+                        @Html.LabelFor(model => model.NewsLetter)</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
                     <p>
                         @Html.EditorFor(model => model.PrivacyNotice)
                         @Html.LabelFor(model => model.PrivacyNotice) * @Html.ValidationMessageFor(model => model.PrivacyNotice)</p>
                 </td>
                 <td>
                     <p>
-                        <input type="submit" value="Enviar" style="background: transparent; color: White;
-                            border: none; font-weight: lighter; font-size: 24px; cursor: pointer; text-decoration: underline" />
+                        @*<input type="submit" value="Enviar" style="background: transparent; color: White;
+                            border: none; font-weight: lighter; font-size: 24px; cursor: pointer; text-decoration: underline" />*@
+                            <input type="image" src="../../Content/images/enviar_btn.png" />
                     </p>
                 </td>
             </tr>
             <tr>
-                <td><p style="color: red; font-size: 14px">@ViewData["Aviso"]</p></td>
-                <td></td>
-                <td></td>
+                <td>
+                    <p style="font-size: 14px">
+                        * Campos obligatorios</p>
+                </td>
+                <td>
+                    <p style="color: red; font-size: 14px">@ViewData["Aviso"]</p>
+                </td>
+                <td>
+                </td>
             </tr>
         </table>
     }
