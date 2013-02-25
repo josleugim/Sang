@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Net.Mail;
 using System.Web;
 using System.Web.Mvc;
 using Sang.Models;
@@ -409,6 +410,24 @@ namespace Sang.Controllers
                 //    d7 = Convert.ToInt32(adult.Disorder7),
                 //    d8 = Convert.ToInt32(adult.Disorder8)
                 //});
+
+                //Aquí se enviía mail
+                SmtpClient smtpClient1 = new SmtpClient();
+
+                using (MailMessage message = new MailMessage())
+                {
+                    message.From = new MailAddress("mail@sang.mx", "Säng");
+                    message.To.Add(adult.SangUser.Email);
+                    message.Subject = "Säng - Resultados de la evaluación";
+                    //message.AlternateViews.Add(AlternateView.CreateAlternateViewFromString(" <div style='width:500px; font-size:18px;'> <p>Estimado participante:</p><p style='margin:0;'>Muchas gracias por tu interés en nuestro <u style='color:#005681;'>Concurso de Fotografía Bienestar Cerca de Ti.</u>Tu fotografía y datos han quedado registrados, los cuales son claves para reclamar el premio en caso de que resultes ganador.</p> <p style='margin:0;'>Tu clave de participación es: <b><a target='_blank' href='http://localhost:2317/Home/ValidateCode/" + user.SecureCode + "'>Verificar e-mail</a></b> </p> <p style='margin:0;'>Seguiremos en contacto contigo para comunicarte cuáles son las fotografías ganadoras, una vez que finalice el concurso.</p> <p style='margin:0;'>Atentamente</p> <p style='margin:0; color:#005681;'>Concurso de Fotografía Bienestar Cerca de Ti</p><div style='width:500px; height:2px; background-color:#C32941;'></div> <p style='font-size:11px;'>*Este email fue enviado desde una cuenta de correo electrónico para notificación únicamente, no puede recibir correos. En caso de necesitar asistencia por favor llame desde el interior de la República Mexicana al teléfono 01-800-003-2273 (CARE). Este mensaje y cualquier archivo adjunto son confidenciales y pueden contener información privilegiada o estar protegidos de alguna forma contra su divulgación. Asimismo, te recordamos de nuestra política de privacidad y derechos de autor que aceptaste al inscribirte a este concurso, la cual puedes consultar en: <a href='http://www.merckseronodiabetes.com.mx/concursobienestar/' target='_blank'>http://www.merckseronodiabetes.com.mx/concursobienestar/</a></p> </div>", null, "text/html"));
+                    message.AlternateViews.Add(AlternateView.CreateAlternateViewFromString("<table width='100%' style='text-align: justify; font-family: Arial; font-size: 16px; color: #FFFFFF; background-color: #000000'> " +
+                        "<tr><td><table width='600px' align='center'><tr><th colspan='2'><p style='font-size: 22px'>SÄNG The nordik way of resting</p></th></tr><tr><td rowspan='3' style='width: 250px'>" +
+                        "<img src='http://sang.mx/newsletterImages/a_colecciones.jpg' alt='Logo Säng' />" +
+                    "</td><td><p style='margin:10px'>En Säng nos preocupamos por tu bienestar, por eso hemos creado diferentes evaluaciones del sueño.</p></td></tr><tr><td><p style='margin:10px'>Aquí están los resultados de su evaluación, de clic al siguiente link:</p></td></tr><tr><td>" +
+                        "<p style='margin:10px'>" + "<b><a target='_blank' href='http://sang.mx/Home/AdultResult/" + adult.SangClientID + "'>Ver resultados</a></b>" + "</p></td></tr></table></td></tr></table>", null, "text/html"));
+                    smtpClient1.Send(message);
+                }
+
                 if (adult.nMattressUsers == 1)
                     return View("ThanksAdult");
 

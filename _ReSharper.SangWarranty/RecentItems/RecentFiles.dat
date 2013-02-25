@@ -11,25 +11,25 @@
     <File id="525225FD-444E-4087-AAF7-6D490A6AE8ED/d:Views/d:Child/f:Edit.cshtml" caret="0" fromTop="0" />
     <File id="525225FD-444E-4087-AAF7-6D490A6AE8ED/d:Models/f:SangChild.cs" caret="1361" fromTop="30" />
     <File id="525225FD-444E-4087-AAF7-6D490A6AE8ED/d:Controllers/f:ClientController.cs" caret="2347" fromTop="19" />
-    <File id="525225FD-444E-4087-AAF7-6D490A6AE8ED/d:Controllers/f:ChildController.cs" caret="0" fromTop="0" />
     <File id="525225FD-444E-4087-AAF7-6D490A6AE8ED/d:Views/d:Home/f:ChildResult.aspx" caret="0" fromTop="0" />
     <File id="525225FD-444E-4087-AAF7-6D490A6AE8ED/d:Views/d:Home/f:ThanksAdult.aspx" caret="217" fromTop="3" />
     <File id="525225FD-444E-4087-AAF7-6D490A6AE8ED/d:Views/d:Home/f:ThanksNewsletter.aspx" caret="232" fromTop="3" />
     <File id="525225FD-444E-4087-AAF7-6D490A6AE8ED/d:Views/d:Home/f:ThanksDoctor.cshtml" caret="34" fromTop="1" />
     <File id="525225FD-444E-4087-AAF7-6D490A6AE8ED/d:Views/d:Home/f:ThanksCuestionary.aspx" caret="0" fromTop="0" />
-    <File id="525225FD-444E-4087-AAF7-6D490A6AE8ED/d:Views/d:Account/f:Thanks.aspx" caret="246" fromTop="3" />
-    <File id="525225FD-444E-4087-AAF7-6D490A6AE8ED/f:Web.config" caret="678" fromTop="11" />
-    <File id="525225FD-444E-4087-AAF7-6D490A6AE8ED/d:Controllers/f:AccountController.cs" caret="6475" fromTop="18" />
     <File id="525225FD-444E-4087-AAF7-6D490A6AE8ED/d:Views/d:Purchase/f:Create.cshtml" caret="922" fromTop="0" />
     <File id="525225FD-444E-4087-AAF7-6D490A6AE8ED/d:Views/d:Purchase/f:Create.aspx" caret="5034" fromTop="25" />
     <File id="525225FD-444E-4087-AAF7-6D490A6AE8ED/d:Controllers/f:PurchaseController.cs" caret="536" fromTop="0" />
     <File id="525225FD-444E-4087-AAF7-6D490A6AE8ED/d:Models/f:SangClient.cs" caret="1317" fromTop="7" />
     <File id="525225FD-444E-4087-AAF7-6D490A6AE8ED/d:Views/d:Client/f:Create.cshtml" caret="845" fromTop="0" />
-    <File id="525225FD-444E-4087-AAF7-6D490A6AE8ED/f:Global.asax.cs" caret="656" fromTop="19" />
     <File id="525225FD-444E-4087-AAF7-6D490A6AE8ED/d:Models/f:SangDBContext.cs" caret="339" fromTop="13" />
     <File id="525225FD-444E-4087-AAF7-6D490A6AE8ED/d:Views/d:Home/f:ThanksAssits.cshtml" caret="269" fromTop="8" />
-    <File id="525225FD-444E-4087-AAF7-6D490A6AE8ED/d:Controllers/f:HomeController.cs" caret="449" fromTop="18" />
     <File id="525225FD-444E-4087-AAF7-6D490A6AE8ED/d:Views/d:Home/f:CouponSearch.cshtml" caret="446" fromTop="12" />
+    <File id="525225FD-444E-4087-AAF7-6D490A6AE8ED/f:Global.asax.cs" caret="0" fromTop="0" />
+    <File id="525225FD-444E-4087-AAF7-6D490A6AE8ED/d:Controllers/f:ChildController.cs" caret="13440" fromTop="27" />
+    <File id="525225FD-444E-4087-AAF7-6D490A6AE8ED/d:Views/d:Account/f:Thanks.aspx" caret="668" fromTop="15" />
+    <File id="525225FD-444E-4087-AAF7-6D490A6AE8ED/d:Controllers/f:HomeController.cs" caret="960" fromTop="31" />
+    <File id="525225FD-444E-4087-AAF7-6D490A6AE8ED/f:Web.config" caret="0" fromTop="0" />
+    <File id="525225FD-444E-4087-AAF7-6D490A6AE8ED/d:Controllers/f:AccountController.cs" caret="7380" fromTop="13" />
   </RecentFiles>
   <RecentEdits>
     <File id="525225FD-444E-4087-AAF7-6D490A6AE8ED/d:Content/f:Site.css" caret="1072" fromTop="21" />
@@ -43,12 +43,9 @@
     <File id="525225FD-444E-4087-AAF7-6D490A6AE8ED/d:Views/d:Shared/f:Site.Master" caret="2098" fromTop="22" />
     <File id="525225FD-444E-4087-AAF7-6D490A6AE8ED/d:Models/f:Hospital.cs" caret="568" fromTop="22" />
     <File id="525225FD-444E-4087-AAF7-6D490A6AE8ED/d:Views/d:Child/f:Edit.cshtml" caret="7380" fromTop="26" />
-    <File id="525225FD-444E-4087-AAF7-6D490A6AE8ED/d:Controllers/f:ChildController.cs" caret="6405" fromTop="8" />
     <File id="525225FD-444E-4087-AAF7-6D490A6AE8ED/d:Controllers/f:PurchaseController.cs" caret="4221" fromTop="30" />
     <File id="525225FD-444E-4087-AAF7-6D490A6AE8ED/d:Controllers/f:ClientController.cs" caret="3943" fromTop="29" />
-    <File id="525225FD-444E-4087-AAF7-6D490A6AE8ED/d:Controllers/f:AccountController.cs" caret="1386" fromTop="17" />
     <File id="525225FD-444E-4087-AAF7-6D490A6AE8ED/d:Models/f:SangChild.cs" caret="1375" fromTop="30" />
-    <File id="525225FD-444E-4087-AAF7-6D490A6AE8ED/d:Controllers/f:HomeController.cs" caret="5911" fromTop="21" />
     <File id="525225FD-444E-4087-AAF7-6D490A6AE8ED/d:Views/d:Home/f:ThanksAdult.aspx" caret="217" fromTop="3" />
     <File id="525225FD-444E-4087-AAF7-6D490A6AE8ED/d:Views/d:Home/f:ThanksCuestionary.aspx" caret="217" fromTop="3" />
     <File id="525225FD-444E-4087-AAF7-6D490A6AE8ED/d:Views/d:Home/f:ThanksDoctor.cshtml" caret="32" fromTop="1" />
@@ -62,5 +59,8 @@
     <File id="525225FD-444E-4087-AAF7-6D490A6AE8ED/f:Global.asax.cs" caret="1285" fromTop="36" />
     <File id="525225FD-444E-4087-AAF7-6D490A6AE8ED/d:Views/d:Home/f:CouponSearch.cshtml" caret="446" fromTop="12" />
     <File id="525225FD-444E-4087-AAF7-6D490A6AE8ED/d:Views/d:Home/f:ThanksAssits.cshtml" caret="263" fromTop="8" />
+    <File id="525225FD-444E-4087-AAF7-6D490A6AE8ED/d:Controllers/f:HomeController.cs" caret="21461" fromTop="24" />
+    <File id="525225FD-444E-4087-AAF7-6D490A6AE8ED/d:Controllers/f:ChildController.cs" caret="10591" fromTop="25" />
+    <File id="525225FD-444E-4087-AAF7-6D490A6AE8ED/d:Controllers/f:AccountController.cs" caret="10610" fromTop="30" />
   </RecentEdits>
 </RecentFiles>
